@@ -13,7 +13,7 @@ export default class LongRestDialog extends Dialog {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      template: "systems/dnd5e/templates/apps/long-rest.html",
+      template: "systems/sw5e/templates/apps/long-rest.html",
       classes: ["dnd5e", "dialog"]
     });
   }

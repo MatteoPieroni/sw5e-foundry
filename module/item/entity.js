@@ -285,7 +285,7 @@ export default class Item5e extends Item {
 
     // Render the chat card template
     const templateType = ["tool"].includes(this.data.type) ? this.data.type : "item";
-    const template = `systems/dnd5e/templates/chat/${templateType}-card.html`;
+    const template = `systems/sw5e/templates/chat/${templateType}-card.html`;
     const html = await renderTemplate(template, templateData);
 
     // Basic chat message data
@@ -987,7 +987,7 @@ export default class Item5e extends Item {
     const rollConfig = mergeObject({
       parts: parts,
       data: rollData,
-      template: "systems/dnd5e/templates/chat/tool-roll-dialog.html",
+      template: "systems/sw5e/templates/chat/tool-roll-dialog.html",
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: `${this.name} - ${game.i18n.localize("DND5E.ToolCheck")}`,

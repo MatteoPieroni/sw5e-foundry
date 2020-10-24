@@ -140,7 +140,7 @@ export async function d20Roll({parts=[], data={}, event={}, rollMode=null, templ
 async function _d20RollDialog({template, title, parts, data, rollMode, dialogOptions, roll}={}) {
 
   // Render modal dialog
-  template = template || "systems/dnd5e/templates/chat/roll-dialog.html";
+  template = template || "systems/sw5e/templates/chat/roll-dialog.html";
   let dialogData = {
     formula: parts.join(" + "),
     data: data,
@@ -268,7 +268,7 @@ export async function damageRoll({parts, actor, data, event={}, rollMode=null, t
 async function _damageRollDialog({template, title, parts, data, allowCritical, rollMode, dialogOptions, roll}={}) {
 
   // Render modal dialog
-  template = template || "systems/dnd5e/templates/chat/roll-dialog.html";
+  template = template || "systems/sw5e/templates/chat/roll-dialog.html";
   let dialogData = {
     formula: parts.join(" + "),
     data: data,

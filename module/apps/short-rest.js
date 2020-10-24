@@ -26,7 +26,7 @@ export default class ShortRestDialog extends Dialog {
   /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-	    template: "systems/dnd5e/templates/apps/short-rest.html",
+	    template: "systems/sw5e/templates/apps/short-rest.html",
       classes: ["dnd5e", "dialog"]
     });
   }
