@@ -23,7 +23,7 @@ export default class LongRestDialog extends Dialog {
   /** @override */
   getData() {
     const data = super.getData();
-    const variant = game.settings.get("dnd5e", "restVariant");
+    const variant = game.settings.get("sw5e", "restVariant");
     data.promptNewDay = variant !== "gritty";     // It's always a new day when resting 1 week
     data.newDay = variant === "normal";           // It's probably a new day when resting normally (8 hours)
     return data;
@@ -47,9 +47,9 @@ export default class LongRestDialog extends Dialog {
             label: "Rest",
             callback: html => {
               let newDay = false;
-              if (game.settings.get("dnd5e", "restVariant") === "normal")
+              if (game.settings.get("sw5e", "restVariant") === "normal")
                 newDay = html.find('input[name="newDay"]')[0].checked;
-              else if(game.settings.get("dnd5e", "restVariant") === "gritty")
+              else if(game.settings.get("sw5e", "restVariant") === "gritty")
                 newDay = true;
               resolve(newDay);
             }
