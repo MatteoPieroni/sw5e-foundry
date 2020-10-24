@@ -53,8 +53,8 @@ export default class ActorSheetFlags extends BaseEntitySheet {
       flag.type = v.type.name;
       flag.isCheckbox = v.type === Boolean;
       flag.isSelect = v.hasOwnProperty('choices');
-      flag.value = this.entity.getFlag("dnd5e", k);
-      flags[v.section][`flags.dnd5e.${k}`] = flag;
+      flag.value = this.entity.getFlag("sw5e", k);
+      flags[v.section][`flags.sw5e.${k}`] = flag;
     }
     return flags;
   }
@@ -99,7 +99,7 @@ export default class ActorSheetFlags extends BaseEntitySheet {
 
     // Unset any flags which are "false"
     let unset = false;
-    const flags = updateData.flags.dnd5e;
+    const flags = updateData.flags.sw5e;
     for ( let [k, v] of Object.entries(flags) ) {
       if ( [undefined, null, "", false, 0].includes(v) ) {
         delete flags[k];
