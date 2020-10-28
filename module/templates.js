@@ -9,17 +9,17 @@ export const preloadHandlebarsTemplates = async function() {
   const templatePaths = [
 
     // Actor Sheet Partials
-    "systems/dnd5e/templates/actors/parts/actor-traits.html",
-    "systems/dnd5e/templates/actors/parts/actor-inventory.html",
-    "systems/dnd5e/templates/actors/parts/actor-features.html",
-    "systems/dnd5e/templates/actors/parts/actor-spellbook.html",
-    "systems/dnd5e/templates/actors/parts/actor-effects.html",
+    "systems/sw5e/templates/actors/parts/actor-traits.html",
+    "systems/sw5e/templates/actors/parts/actor-inventory.html",
+    "systems/sw5e/templates/actors/parts/actor-features.html",
+    "systems/sw5e/templates/actors/parts/actor-spellbook.html",
+    "systems/sw5e/templates/actors/parts/actor-effects.html",
 
     // Item Sheet Partials
-    "systems/dnd5e/templates/items/parts/item-action.html",
-    "systems/dnd5e/templates/items/parts/item-activation.html",
-    "systems/dnd5e/templates/items/parts/item-description.html",
-    "systems/dnd5e/templates/items/parts/item-mountable.html"
+    "systems/sw5e/templates/items/parts/item-action.html",
+    "systems/sw5e/templates/items/parts/item-activation.html",
+    "systems/sw5e/templates/items/parts/item-description.html",
+    "systems/sw5e/templates/items/parts/item-mountable.html"
   ];
 
   // Load the template parts
