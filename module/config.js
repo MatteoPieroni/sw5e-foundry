@@ -251,24 +251,21 @@ DND5E.currencies = {
 // Damage Types
 DND5E.damageTypes = {
   "acid": "DND5E.DamageAcid",
-  "bludgeoning": "DND5E.DamageBludgeoning",
   "cold": "DND5E.DamageCold",
+  "energy": "DND5E.DamageEnergy",
   "fire": "DND5E.DamageFire",
   "force": "DND5E.DamageForce",
+  "ion": "DND5E.DamageIon",
+  "kinetic": "DND5E.DamageKinetic",
   "lightning": "DND5E.DamageLightning",
   "necrotic": "DND5E.DamageNecrotic",
-  "piercing": "DND5E.DamagePiercing",
   "poison": "DND5E.DamagePoison",
   "psychic": "DND5E.DamagePsychic",
-  "radiant": "DND5E.DamageRadiant",
-  "slashing": "DND5E.DamageSlashing",
-  "thunder": "DND5E.DamageThunder"
+  "sonic": "DND5E.DamageSonic"
 };
 
 // Damage Resistance Types
-DND5E.damageResistanceTypes = mergeObject(duplicate(DND5E.damageTypes), {
-  "physical": "DND5E.DamagePhysical"
-});
+DND5E.damageResistanceTypes = duplicate(DND5E.damageTypes);
 
 
 /* -------------------------------------------- */
