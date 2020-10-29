@@ -242,23 +242,7 @@ DND5E.consumableTypes = {
  * @type {Object}
  */
 DND5E.currencies = {
-  "pp": "DND5E.CurrencyPP",
-  "gp": "DND5E.CurrencyGP",
-  "ep": "DND5E.CurrencyEP",
-  "sp": "DND5E.CurrencySP",
-  "cp": "DND5E.CurrencyCP",
-};
-
-
-/**
- * Define the upwards-conversion rules for registered currency types
- * @type {{string, object}}
- */
-DND5E.currencyConversion = {
-  cp: {into: "sp", each: 10},
-  sp: {into: "ep", each: 5 },
-  ep: {into: "gp", each: 2 },
-  gp: {into: "pp", each: 10}
+  "cr": "DND5E.CurrencyCr",
 };
 
 /* -------------------------------------------- */

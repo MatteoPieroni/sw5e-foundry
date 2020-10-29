@@ -169,7 +169,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     if ( !this.options.editable ) return;
 
     // Inventory Functions
-    html.find(".currency-convert").click(this._onConvertCurrency.bind(this));
 
     // Item State Toggling
     html.find('.item-toggle').click(this._onToggleItem.bind(this));
@@ -234,22 +233,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     event.preventDefault();
     await this._onSubmit(event);
     return this.actor.longRest();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle mouse click events to convert currency to the highest possible denomination
-   * @param {MouseEvent} event    The originating click event
-   * @private
-   */
-  async _onConvertCurrency(event) {
-    event.preventDefault();
-    return Dialog.confirm({
-      title: `${game.i18n.localize("DND5E.CurrencyConvert")}`,
-      content: `<p>${game.i18n.localize("DND5E.CurrencyConvertHint")}</p>`,
-      yes: () => this.actor.convertCurrency()
-    });
   }
 
   /* -------------------------------------------- */

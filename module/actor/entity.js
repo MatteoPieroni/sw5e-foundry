@@ -1254,24 +1254,6 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
-   * Convert all carried currency to the highest possible denomination to reduce the number of raw coins being
-   * carried by an Actor.
-   * @return {Promise<Actor5e>}
-   */
-  convertCurrency() {
-    const curr = duplicate(this.data.data.currency);
-    const convert = CONFIG.DND5E.currencyConversion;
-    for ( let [c, t] of Object.entries(convert) ) {
-      let change = Math.floor(curr[c] / t.each);
-      curr[c] -= (change * t.each);
-      curr[t.into] += change;
-    }
-    return this.update({"data.currency": curr});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Transform this Actor into another one.
    *
    * @param {Actor} target The target Actor.
