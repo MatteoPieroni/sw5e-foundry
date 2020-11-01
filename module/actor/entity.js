@@ -1257,6 +1257,12 @@ export default class Actor5e extends Actor {
     const pact = data.spells.pact;
     updateData['data.spells.pact.value'] = pact.override || pact.max;
 
+    // Recover power points
+    const forcePoints = data.forcecasting.points;
+    updateData['data.forcecasting.points.value'] = forcePoints.override || forcePoints.max;
+    const techPoints = data.techcasting.points;
+    updateData['data.techcasting.points.value'] = techPoints.override || techPoints.max;
+
     // Determine the number of hit dice which may be recovered
     let recoverHD = Math.max(Math.floor(data.details.level / 2), 1);
     let dhd = 0;
