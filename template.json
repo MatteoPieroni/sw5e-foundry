@@ -77,6 +77,8 @@
       "creature": {
         "attributes": {
           "spellcasting": "int",
+          "forcecasting": "wis",
+          "techcasting": "int",
           "speed": {
             "value": "30 ft",
             "special": ""
@@ -208,6 +210,100 @@
             "value": 0,
             "override": null
           }
+        },
+        "forcepowers": {
+          "power1": {
+            "value": 0,
+            "override": null
+          },
+          "power2": {
+            "value": 0,
+            "override": null
+          },
+          "power3": {
+            "value": 0,
+            "override": null
+          },
+          "power4": {
+            "value": 0,
+            "override": null
+          },
+          "power5": {
+            "value": 0,
+            "override": null
+          },
+          "power6": {
+            "value": 0,
+            "override": null
+          },
+          "power7": {
+            "value": 0,
+            "override": null
+          },
+          "power8": {
+            "value": 0,
+            "override": null
+          },
+          "power9": {
+            "value": 0,
+            "override": null
+          }
+        },
+        "techpowers": {
+          "power1": {
+            "value": 0,
+            "override": null
+          },
+          "power2": {
+            "value": 0,
+            "override": null
+          },
+          "power3": {
+            "value": 0,
+            "override": null
+          },
+          "power4": {
+            "value": 0,
+            "override": null
+          },
+          "power5": {
+            "value": 0,
+            "override": null
+          },
+          "power6": {
+            "value": 0,
+            "override": null
+          },
+          "power7": {
+            "value": 0,
+            "override": null
+          },
+          "power8": {
+            "value": 0,
+            "override": null
+          },
+          "power9": {
+            "value": 0,
+            "override": null
+          }
+        },
+        "forcecasting": {
+          "dc": "",
+          "bonus": "",
+          "points": {
+            "value": 0,
+            "max": 0
+          },
+          "level": 0
+        },
+        "techcasting": {
+          "dc": "",
+          "bonus": "",
+          "points": {
+            "value": 0,
+            "max": 0
+          },
+          "level": 0
         },
         "bonuses": {
           "mwak": {
@@ -383,7 +479,7 @@
     }
   },
   "Item": {
-    "types": ["weapon", "equipment", "consumable", "tool", "loot", "class", "spell", "feat", "backpack"],
+    "types": ["weapon", "equipment", "consumable", "tool", "loot", "class", "spell", "forcepower", "techpower", "feat", "backpack"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -547,6 +643,43 @@
       "preparation": {
         "mode": null,
         "prepared": false
+      },
+      "scaling": {
+        "mode": "none",
+        "formula": null
+      }
+    },
+    "forcepower": {
+      "templates": ["itemDescription", "activatedEffect", "action"],
+      "level": 1,
+      "materials": {
+        "value": "",
+        "consumed": false,
+        "cost": 0,
+        "supply": 0
+      },
+      "scaling": {
+        "mode": "none",
+        "formula": null
+      },
+      "alignment": "",
+      "components": {
+        "value": "",
+        "vocal": false,
+        "somatic": false,
+        "material": false,
+        "ritual": false,
+        "concentration": false
+      }
+    },
+    "techpower": {
+      "templates": ["itemDescription", "activatedEffect", "action"],
+      "level": 1,
+      "materials": {
+        "value": "",
+        "consumed": false,
+        "cost": 0,
+        "supply": 0
       },
       "scaling": {
         "mode": "none",

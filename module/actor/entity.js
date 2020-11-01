@@ -721,6 +721,80 @@ export default class Actor5e extends Actor {
   /* -------------------------------------------- */
 
   /**
+   * Cast a power, consuming a power point
+   * @param {Item5e} item   The power being cast by the actor
+   * @param {Event} event   The originating user interaction which triggered the cast
+   */
+  async usePower(item, {configureDialog=true}={}) {
+    if ( item.data.type !== "techpower" && item.data.type !== "forcepower" ) throw new Error("Wrong Item type");
+    const isTech = item.data.type === "techpower";
+    const itemData = item.data.data;
+
+    // Configure spellcasting data
+    let lvl = itemData.level;
+    const limitedUses = !!itemData.uses.per;
+    let consumeSlot = true;
+    let consumeUse = false;
+    let placeTemplate = false;
+
+    // Configure spell slot consumption and measured template placement from the form
+    if (configureDialog) {
+      const usage = await AbilityUseDialog.create(item);
+      if ( usage === null ) return;
+
+      // Determine consumption preferences
+      consumeSlot = Boolean(usage.get("consumeSlot"));
+      consumeUse = Boolean(usage.get("consumeUse"));
+      placeTemplate = Boolean(usage.get("placeTemplate"));
+
+      // Determine the cast spell level
+      const lvl = parseInt(usage.get("level"));
+      if ( !Number.isNaN(lvl) && lvl !== item.data.data.level ) {
+        const upcastData = mergeObject(item.data, {"data.level": lvl}, {inplace: false});
+        item = item.constructor.createOwned(upcastData, this);
+      }
+    }
+
+    // Update Actor data
+    if ( lvl > 0 ) {
+      const remainingPoints = parseInt(
+        isTech ?
+          this.data.data.techcasting?.points?.value :
+          this.data.data.forcecasting?.points?.value
+      );
+      const cost = parseInt(item.data.data.level + 1);
+      const resultingPoints = consumeSlot ? remainingPoints - cost : remainingPoints;
+
+      if ( remainingPoints === 0 || Number.isNaN(remainingPoints) || Number.isNaN(resultingPoints) || resultingPoints < 0 ) {
+        return ui.notifications.error(game.i18n.localize("DND5E.SpellCastNoSlots"));
+      }
+
+      await this.update({
+        [`data.${isTech ? 'techcasting' : 'forcecasting'}.points.value`]: resultingPoints,
+      });
+    }
+
+    // Update Item data
+    if ( limitedUses && consumeUse ) {
+      const uses = parseInt(itemData.uses.value || 0);
+      if ( uses <= 0 ) ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: item.name}));
+      await item.update({"data.uses.value": Math.max(parseInt(item.data.data.uses.value || 0) - 1, 0)})
+    }
+
+    // Initiate ability template placement workflow if selected
+    if ( placeTemplate && item.hasAreaTarget ) {
+      const template = AbilityTemplate.fromItem(item);
+      if ( template ) template.drawPreview();
+      if ( this.sheet.rendered ) this.sheet.minimize();
+    }
+
+    // Invoke the Item roll
+    return item.roll();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Roll a Skill Check
    * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
    * @param {string} skillId      The skill id (e.g. "ins")

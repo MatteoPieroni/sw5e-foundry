@@ -29,6 +29,12 @@ export default class Item5e extends Item {
       // Spells - Use Actor spellcasting modifier
       if (this.data.type === "spell") return actorData.attributes.spellcasting || "int";
 
+      // Powers - Use Actor powercasting modifier
+      if (this.data.type === "forcepower") return actorData.attributes.forcecasting || "int";
+
+      // Powers - Use Actor techcasting modifier
+      if (this.data.type === "forcepower") return actorData.attributes.forcecasting || "int";
+
       // Tools - default to Intelligence
       else if (this.data.type === "tool") return "int";
 
@@ -163,6 +169,27 @@ export default class Item5e extends Item {
     if ( itemData.type === "spell" ) {
       labels.level = C.spellLevels[data.level];
       labels.school = C.spellSchools[data.school];
+      labels.components = Object.entries(data.components).reduce((arr, c) => {
+        if ( c[1] !== true ) return arr;
+        arr.push(c[0].titleCase().slice(0, 1));
+        return arr;
+      }, []);
+      labels.materials = data?.materials?.value ?? null;
+    }
+
+    else if (itemData.type === 'forcepower') {
+      labels.level = C.powerLevels[data.level];
+      labels.school = C.powerAlignments[data.school];
+      labels.components = Object.entries(data.components).reduce((arr, c) => {
+        if ( c[1] !== true ) return arr;
+        arr.push(c[0].titleCase().slice(0, 1));
+        return arr;
+      }, []);
+      labels.materials = data?.materials?.value ?? null;
+    }
+
+    else if (itemData.type === 'techpower') {
+      labels.level = C.powerLevels[data.level];
       labels.components = Object.entries(data.components).reduce((arr, c) => {
         if ( c[1] !== true ) return arr;
         arr.push(c[0].titleCase().slice(0, 1));

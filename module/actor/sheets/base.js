@@ -19,6 +19,8 @@ export default class ActorSheet5e extends ActorSheet {
     this._filters = {
       inventory: new Set(),
       spellbook: new Set(),
+      forcepowers: new Set(),
+      techpowers: new Set(),
       features: new Set(),
       effects: new Set()
     };
@@ -280,6 +282,110 @@ export default class ActorSheet5e extends ActorSheet {
       // Sections for higher-level spells which the caster "should not" have, but spell items exist for
       else if ( !spellbook[s] ) {
         registerSection(sl, s, CONFIG.DND5E.spellLevels[s], {levels: levels[sl]});
+      }
+
+      // Add the spell to the relevant heading
+      spellbook[s].spells.push(spell);
+    });
+
+    // Sort the spellbook by section level
+    const sorted = Object.values(spellbook);
+    sorted.sort((a, b) => a.order - b.order);
+    return sorted;
+  }
+  
+  /* -------------------------------------------- */
+
+  /**
+   * Insert a power into the forcepowers object when rendering the character sheet
+   * @param {Object} data     The Actor data being prepared
+   * @param {Array} powers    The spell data being prepared
+   * @private
+   */
+  _preparePowers(data, spells, { mode }) {
+    if (!mode) {
+      return new Error('Preparing powers requires specifying power type');
+    };
+
+    const owner = this.actor.owner;
+    const levels = data.data[mode];
+    const spellbook = {};
+
+    // Define some mappings
+    const sections = {
+      "atwill": -20,
+      "innate": -10,
+      "pact": 0.5
+    };
+
+    // Label spell slot uses headers
+    const useLabels = {
+      "-20": "-",
+      "-10": "-",
+      "0": "&infin;"
+    };
+
+    // Format a spellbook entry for a certain indexed level
+    const registerSection = (sl, i, label, {prepMode="prepared", value, max, override}={}) => {
+      spellbook[i] = {
+        order: i,
+        label: label,
+        usesSlots: i > 0,
+        canCreate: owner,
+        canPrepare: (data.actor.type === "character") && (i >= 1),
+        spells: [],
+        uses: useLabels[i] || value || 0,
+        slots: useLabels[i] || max || 0,
+        override: override || 0,
+        dataset: {
+          type: mode === 'techcasting' ? 'techpower' : 'forcepower',
+          level: i
+        },
+        prop: sl
+      };
+    };
+
+    // Determine the maximum spell level which has a slot
+    const maxLevel = Array.fromRange(10).reduce((max, i) => {
+      if ( i === 0 ) return max;
+      const level = levels[`power${i}`];
+      if ( (level.max || level.override ) && ( i > max ) ) max = i;
+      return max;
+    }, 0);
+
+    // Level-based spellcasters have cantrips and leveled slots
+    if ( maxLevel > 0 ) {
+      registerSection("power0", 0, CONFIG.DND5E.powerLevels[0]);
+      for (let lvl = 1; lvl <= maxLevel; lvl++) {
+        const sl = `power${lvl}`;
+        registerSection(sl, lvl, CONFIG.DND5E.spellLevels[lvl], levels[sl]);
+      }
+    }
+
+    // Iterate over every spell item, adding spells to the spellbook by section
+    spells.forEach(spell => {
+      const mode = spell.data.preparation.mode || "prepared";
+      let s = spell.data.level || 0;
+      const sl = `power${s}`;
+
+      // Specialized spellcasting modes (if they exist)
+      if ( mode in sections ) {
+        s = sections[mode];
+        if ( !spellbook[s] ){
+          const l = levels[mode] || {};
+          const config = CONFIG.DND5E.spellPreparationModes[mode];
+          registerSection(mode, s, config, {
+            prepMode: mode,
+            value: l.value,
+            max: l.max,
+            override: l.override
+          });
+        }
+      }
+
+      // Sections for higher-level spells which the caster "should not" have, but spell items exist for
+      else if ( !spellbook[s] ) {
+        registerSection(sl, s, CONFIG.DND5E.powerLevels[s], {levels: levels[sl]});
       }
 
       // Add the spell to the relevant heading
@@ -635,6 +741,11 @@ export default class ActorSheet5e extends ActorSheet {
     // Roll spells through the actor
     if ( item.data.type === "spell" ) {
       return this.actor.useSpell(item, {configureDialog: !event.shiftKey});
+    }
+
+    // Roll power through the actor
+    if ( item.data.type === "techpower" || item.data.type === "forcepower" ) {
+      return this.actor.usePower(item, {configureDialog: !event.shiftKey});
     }
 
     // Otherwise roll the Item directly

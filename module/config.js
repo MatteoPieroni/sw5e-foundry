@@ -508,6 +508,27 @@ DND5E.spellLevels = {
   9: "DND5E.SpellLevel9"
 };
 
+// Power Levels
+DND5E.powerLevels = {
+  0: "DND5E.PowerLevel0",
+  1: "DND5E.PowerLevel1",
+  2: "DND5E.PowerLevel2",
+  3: "DND5E.PowerLevel3",
+  4: "DND5E.PowerLevel4",
+  5: "DND5E.PowerLevel5",
+  6: "DND5E.PowerLevel6",
+  7: "DND5E.PowerLevel7",
+  8: "DND5E.PowerLevel8",
+  9: "DND5E.PowerLevel9"
+};
+
+// Power Alignments
+DND5E.powerAlignments = {
+  "lig": "DND5E.PowerAlignmentLig",
+  "dar": "DND5E.PowerAlignmentDar",
+  "uni": "DND5E.PowerAlignmentUni"
+};
+
 // Spell Scroll Compendium UUIDs
 DND5E.spellScrollIds = {
   0: 'Compendium.sw5e.items.rQ6sO7HDWzqMhSI3',

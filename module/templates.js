@@ -13,6 +13,8 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/sw5e/templates/actors/parts/actor-inventory.html",
     "systems/sw5e/templates/actors/parts/actor-features.html",
     "systems/sw5e/templates/actors/parts/actor-spellbook.html",
+    "systems/sw5e/templates/actors/parts/actor-forcepowers.html",
+    "systems/sw5e/templates/actors/parts/actor-techpowers.html",
     "systems/sw5e/templates/actors/parts/actor-effects.html",
 
     // Item Sheet Partials

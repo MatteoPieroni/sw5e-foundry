@@ -46,6 +46,8 @@ export default class AbilityUseDialog extends Dialog {
       errors: []
     };
     if ( item.data.type === "spell" ) this._getSpellData(actorData, itemData, data);
+    if ( item.data.type === "forcepower" ) this._getPowerData(actorData, itemData, data, { mode: 'force' });
+    if ( item.data.type === "techpower" ) this._getPowerData(actorData, itemData, data, { mode: 'tech' });
 
     // Render the ability usage template
     const html = await renderTemplate("systems/sw5e/templates/apps/ability-use.html", data);
@@ -124,6 +126,48 @@ export default class AbilityUseDialog extends Dialog {
     // Return merged data
     data = mergeObject(data, { isSpell: true, canUpcast, spellLevels });
     if ( !canCast ) data.errors.push("DND5E.SpellCastNoSlots");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get dialog data related to limited spell slots
+   * @private
+   */
+  static _getPowerData(actorData, itemData, data, { mode }) {
+    const isTech = mode === "tech";
+
+    // Determine whether the spell may be up-cast
+    const lvl = itemData.level;
+
+    // Determine the levels which are feasible
+    const remainingPoints = isTech ? actorData.techcasting.points.value : actorData.forcecasting.points.value;
+    let lmax = actorData[(isTech ? 'techcasting' : 'forcecasting')]?.level || 0;
+
+    const canUpcast = lvl > 0 && lvl < lmax;
+
+    // If can't upcast, return early and don't bother calculating available spell slots
+    if (!canUpcast) {
+      data = mergeObject(data, { isSpell: true, canUpcast, hasSlots: remainingPoints - (lvl + 1) > 0 });
+      return;
+    }
+
+    const spellLevels = Array.fromRange(10).reduce((arr, i) => {
+      if ( i < lvl ) return arr;
+      const label = CONFIG.DND5E.powerLevels[i];
+      const potentialRemainingPoints = remainingPoints - (i + 1);
+
+      arr.push({
+        level: i,
+        label,
+        canCast: potentialRemainingPoints > 0,
+        hasSlots: potentialRemainingPoints > 0
+      });
+      return arr;
+    }, []).filter(sl => sl.level <= lmax);
+
+    // Return merged data
+    data = mergeObject(data, { isSpell: true, canUpcast, spellLevels });
   }
 
   /* -------------------------------------------- */
