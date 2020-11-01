@@ -1,12 +1,42 @@
-<input class="forcecasting-level" type="text" name="data.forcecasting.points.value"
-    value="{{data.forcecasting.points.value}}" data-dtype="Number" placeholder="0"/>
-<input class="forcecasting-level" type="text" name="data.forcecasting.level"
-    value="{{data.forcecasting.level}}" data-dtype="Number" placeholder="0"/>
+<ul class="attributes flexrow">
+    <li class="attribute health">
+        <h4 class="attribute-name box-title">{{ localize "DND5E.PowerTechPoints" }}</h4>
+        <div class="attribute-value multiple">
+            <input name="data.forcecasting.points.value" type="text" value="{{data.forcecasting.points.value}}" placeholder="0" data-dtype="Number"/>
+            <span class="sep"> / </span>
+            <input name="data.forcecasting.points.max" type="text" value="{{data.forcecasting.points.max}}" placeholder="0" data-dtype="Number"/>
+        </div>
+    </li>
+
+    <li class="attribute">
+        <h4 class="attribute-name box-title">{{ localize "DND5E.PowerTechLevel" }}</h4>
+        <div class="attribute-value">
+            <input name="data.forcecasting.level" type="text"
+                   value="{{data.forcecasting.level}}" placeholder="0"/>
+        </div>
+    </li>
+
+    <li class="attribute">
+        <h4 class="attribute-name box-title">{{ localize "DND5E.PowerTechDC" }}</h4>
+        <div class="attribute-value">
+            <input name="data.forcecasting.dc" type="text"
+                   value="{{data.forcecasting.dc}}" placeholder="0"/>
+        </div>
+    </li>
+
+    <li class="attribute">
+        <h4 class="attribute-name box-title">{{ localize "DND5E.PowerTechBonus" }}</h4>
+        <div class="attribute-value">
+            <input name="data.forcecasting.bonus" type="text"
+                   value="{{data.forcecasting.bonus}}" placeholder="0"/>
+        </div>
+    </li>
+</ul>
 
 <div class="inventory-filters spellbook-filters flexrow">
     <div class="form-group spellcasting-ability">
         {{#unless isNPC}}
-        <label>{{localize "DND5E.SpellAbility"}}</label>
+        <label>{{localize "DND5E.PowerAbility"}}</label>
         {{else}}
         <label>{{localize "DND5E.Level"}}</label>
         <input class="spellcasting-level" type="text" name="data.details.spellLevel"
@@ -26,9 +56,6 @@
         <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
         <li class="filter-item" data-filter="bonus">{{localize "DND5E.BonusAction"}}</li>
         <li class="filter-item" data-filter="reaction">{{localize "DND5E.Reaction"}}</li>
-        <li class="filter-item" data-filter="concentration">{{localize "DND5E.AbbreviationConc"}}</li>
-        <li class="filter-item" data-filter="ritual">{{localize "DND5E.Ritual"}}</li>
-        <li class="filter-item" data-filter="prepared">{{localize "DND5E.Prepared"}}{{#if preparedSpells}} ({{preparedSpells}}){{/if}}</li>
     </ul>
 </div>
 
@@ -39,13 +66,7 @@
             <h3>{{section.label}}</h3>
         </div>
 
-        <div class="spell-slots">
-            <span>{{{section.uses}}}</span>
-            <span class="sep"> / </span>
-            <span class="spell-max">{{{section.slots}}}</span>
-        </div>
-
-        <div class="spell-school">{{localize "DND5E.SpellSchool"}}</div>
+        <div class="spell-school">{{localize "DND5E.PowerAlignment"}}</div>
         <div class="spell-action">{{localize "DND5E.SpellUsage"}}</div>
         <div class="spell-target">{{localize "DND5E.SpellTarget"}}</div>
 
@@ -86,9 +107,6 @@
 
             {{#if ../../owner}}
             <div class="item-controls">
-                {{#if section.canPrepare}}
-                <a class="item-control item-toggle {{item.toggleClass}}" title="{{item.toggleTitle}}"><i class="fas fa-sun"></i></a>
-                {{/if}}
                 <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                 <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
             </div>
