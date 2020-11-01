@@ -7,7 +7,7 @@
 
     {{#if canUpcast}}
     <div class="form-group">
-        <label>{{ localize "DND5E.SpellCastUpcast" }}</label>
+        <label>{{ localize "DND5E.PowerCastUpcast" }}</label>
         <div class="form-fields">
             <select name="level" {{#unless canUpcast}}disabled{{/unless}}>
                 {{#select item.data.level}}
@@ -21,8 +21,14 @@
     {{/if}}
 
     <div class="form-group">
-        <label class="checkbox"><input type="checkbox" name="consumeSlot" checked/>{{ localize "DND5E.SpellCastConsume" }}</label>
+        <label class="checkbox"><input type="checkbox" name="consumeSlot" checked/>{{ localize "DND5E.PowerCastConsume" }}</label>
     </div>
+
+    {{#if isHigherPower}}
+    <div class="form-group">
+        <label class="checkbox"><input type="checkbox" name="ignoreLevel"/>{{ localize "DND5E.PowerCastIgnoreLevel" }}</label>
+    </div>
+    {{/if}}
 
     {{#if hasLimitedUses}}
     <div class="form-group">

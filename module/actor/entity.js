@@ -727,6 +727,7 @@ export default class Actor5e extends Actor {
    */
   async usePower(item, {configureDialog=true}={}) {
     if ( item.data.type !== "techpower" && item.data.type !== "forcepower" ) throw new Error("Wrong Item type");
+    
     const isTech = item.data.type === "techpower";
     const itemData = item.data.data;
 
@@ -735,6 +736,7 @@ export default class Actor5e extends Actor {
     const limitedUses = !!itemData.uses.per;
     let consumeSlot = true;
     let consumeUse = false;
+    let ignoreLevel = false;
     let placeTemplate = false;
 
     // Configure spell slot consumption and measured template placement from the form
@@ -746,6 +748,7 @@ export default class Actor5e extends Actor {
       consumeSlot = Boolean(usage.get("consumeSlot"));
       consumeUse = Boolean(usage.get("consumeUse"));
       placeTemplate = Boolean(usage.get("placeTemplate"));
+      ignoreLevel = Boolean(usage.get("ignoreLevel"));
 
       // Determine the cast spell level
       const lvl = parseInt(usage.get("level"));
@@ -765,8 +768,17 @@ export default class Actor5e extends Actor {
       const cost = parseInt(item.data.data.level + 1);
       const resultingPoints = consumeSlot ? remainingPoints - cost : remainingPoints;
 
-      if ( remainingPoints === 0 || Number.isNaN(remainingPoints) || Number.isNaN(resultingPoints) || resultingPoints < 0 ) {
-        return ui.notifications.error(game.i18n.localize("DND5E.SpellCastNoSlots"));
+      if (!ignoreLevel && item.data.data.level > this.data.data[isTech ? 'techcasting' : 'forcecasting'].level) {
+        return ui.notifications.error(game.i18n.localize("DND5E.PowerCastHigherLevel"));
+      }
+
+      if (
+        remainingPoints === 0 ||
+        Number.isNaN(remainingPoints) ||
+        Number.isNaN(resultingPoints) ||
+        resultingPoints < 0
+      ) {
+        return ui.notifications.error(game.i18n.localize("DND5E.PowerCastNoSlots"));
       }
 
       await this.update({

@@ -145,10 +145,11 @@ export default class AbilityUseDialog extends Dialog {
     let lmax = actorData[(isTech ? 'techcasting' : 'forcecasting')]?.level || 0;
 
     const canUpcast = lvl > 0 && lvl < lmax;
+    const isHigherPower = lvl > lmax;
 
     // If can't upcast, return early and don't bother calculating available spell slots
     if (!canUpcast) {
-      data = mergeObject(data, { isSpell: true, canUpcast, hasSlots: remainingPoints - (lvl + 1) > 0 });
+      data = mergeObject(data, { isSpell: true, canUpcast, hasSlots: remainingPoints - (lvl + 1) > 0, isHigherPower  });
       return;
     }
 
@@ -167,7 +168,7 @@ export default class AbilityUseDialog extends Dialog {
     }, []).filter(sl => sl.level <= lmax);
 
     // Return merged data
-    data = mergeObject(data, { isSpell: true, canUpcast, spellLevels });
+    data = mergeObject(data, { isSpell: true, canUpcast, spellLevels, isHigherPower });
   }
 
   /* -------------------------------------------- */
