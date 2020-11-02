@@ -39,7 +39,8 @@
 @colorCrimson: #44191A;
 @borderGroove: 2px groove #eeede0;
 @sheetBackground: url("ui/parchment.jpg") repeat;
-@sheetBackground: url("ui/sheet-background.webp") repeat;
+@sheetBackgroundFallback: -webkit-gradient(linear,left top,right top,from(#afc6d6),color-stop(30%,#d6d6d6),color-stop(70%,#d6d6d6),to(#afc6d6));
+@sheetBackground: linear-gradient(90deg,#afc6d6 0,#d6d6d6 30%,#d6d6d6 70%,#afc6d6);
 @sheetBackgroundColor: #020307;
 @primaryColor: #020307;
 @secondaryColor: #11638b;

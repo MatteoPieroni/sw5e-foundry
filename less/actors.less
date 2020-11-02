@@ -2,7 +2,7 @@
 
 @actorNameHeight: 60px;
 
-.dnd5e.sheet.actor:not(.alternative) {
+.dnd5e.sheet.actor {
 
   /* ----------------------------------------- */
   /*  Sheet Header                             */
@@ -489,6 +489,7 @@
       line-height: 24px;
 
       h3 {
+        .modesto();
         margin: 0 -5px 0 0;
         padding-left: 5px;
         font-size: 16px;
@@ -730,7 +731,7 @@
   }
 }
 
-.dnd5e.sheet.actor.alternative {
+.dnd5e.sheet.actor-alternative {
 
   /* ----------------------------------------- */
   /*  Sheet Header                             */
@@ -1140,7 +1141,6 @@
       h3 {
         margin: 0 -5px 0 0;
         padding-left: 5px;
-        .modesto();
         font-size: 16px;
       }
 
