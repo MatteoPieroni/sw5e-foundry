@@ -16,7 +16,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     const isAlternative = false;
 
 	  return mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "sheet", "actor", isAlternative ? "character" : "character-alternative"],
+      classes: ["dnd5e", "sheet", isAlternative ? "actor-alternative" : "actor", "character"],
       width: 720,
       height: 680
     });
