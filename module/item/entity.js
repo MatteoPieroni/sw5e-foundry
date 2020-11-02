@@ -331,7 +331,7 @@ export default class Item5e extends Item {
 
     // If the consumable was destroyed in the process - embed the item data in the surviving message
     if ( (this.data.type === "consumable") && !this.actor.items.has(this.id) ) {
-      chatData.flags["dnd5e.itemData"] = this.data;
+      chatData.flags["sw5e.itemData"] = this.data;
     }
 
     // Toggle default roll mode

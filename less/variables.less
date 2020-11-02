@@ -81,3 +81,21 @@
   .flex3 { flex: 3; }
   .flex4 { flex: 4; }
 }
+
+.flexrow--no-wrap {
+  flex-wrap: nowrap;
+}
+
+.flex--unset {
+  > * {
+    flex: unset;
+  }
+}
+
+.flexrow--space-between {
+  > * {
+    flex: unset;
+  }
+
+  justify-content: space-between;
+}

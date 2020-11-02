@@ -733,15 +733,19 @@
 
 .dnd5e.sheet.actor-alternative {
 
+  .window-content {
+    padding: 0;
+  }
+
   /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
   .sheet-header {
-    display: block;
+    flex: 0 0 auto;
 
     // Character Name
     h1.charname {
-      flex: 1;
+      flex: 1 1 auto;
       padding: 0;
       height: auto;
       
@@ -751,6 +755,11 @@
         line-height: 2rem;
         color: @colorYellow;
       }
+    }
+
+    .attributes {
+      flex: 1 1 2rem;
+
     }
   }
 
@@ -772,6 +781,47 @@
   }
 
   /* ----------------------------------------- */
+  /*  Sheet Navigation                         */
+  /* ----------------------------------------- */
+  .sheet-footer {
+    .sheet-navigation {
+      flex: unset;
+      margin: 0;
+      padding: 5px 0;
+    }
+
+    .item {
+      margin: 0;
+      border: 2px solid #96a4ad;
+      border-left: none;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 15px;
+      padding: 0 0.8rem 0;
+
+      &:first-of-type {
+        border-left: 2px solid #96a4ad;
+      }
+
+      &.active {
+        border-color: #366584;
+        background: #82a9c5;
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Stats                                    */
+  /* ----------------------------------------- */
+
+  .stats {
+    input {
+      max-width: 2rem;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  /* ----------------------------------------- */
   /*  Class                                    */
   /* ----------------------------------------- */
   .character-class {
@@ -786,6 +836,11 @@
   /*  Ability Scores                           */
   /* ----------------------------------------- */
   .character-stats {
+    ul {
+      padding: 0;
+      list-style: none;
+    }
+
     li {
       .flexrow();
       flex-wrap: nowrap;
@@ -797,6 +852,7 @@
 
       .stat-score {
         flex: 0 0 2rem;
+        text-align: right;
       }
 
       .stat-modifiers, .stat-footer {
@@ -804,6 +860,10 @@
         margin-left: .5rem;
         flex-wrap: nowrap;
       }
+    }
+
+    .small {
+      font-size: .8em;
     }
   }
 
@@ -833,7 +893,6 @@
     padding: 0;
 
     li.attribute {
-      height: 60px;
       margin: 0 5px 0 0;
       border: @borderGroove;
       border-radius: 4px;
@@ -847,12 +906,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 28px;
-        line-height: 28px;
 
         > * {
           font-weight: 400;
-          font-size: 24px;
         }
 
         &.multiple input {
