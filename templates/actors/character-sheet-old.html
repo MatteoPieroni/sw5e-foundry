@@ -1,23 +1,15 @@
-<form class="{{cssClass}}" autocomplete="off">
+<form class="{{cssClass}} flexcol" autocomplete="off">
 
     {{!-- Sheet Header --}}
-    <header class="sheet-header">
-        <h1 class="charname">
-            <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'DND5E.Name' }}"/>
-        </h1>
-    </header>
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
 
-    <section class="stats flexrow">
-        <section class="header-details">
+        <section class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'DND5E.Name' }}"/>
+            </h1>
 
-            <section class="character-class">
-                <h2 class="flexrow">
-                    <input type="text" name="data.details.species" value="{{data.details.species}}" placeholder="{{ localize 'DND5E.Species' }}"/> 
-                    <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'DND5E.Background' }}"/>
-                </h2>
-            </section>
-
-            <section class="header-exp flexcol">
+            <aside class="header-exp flexcol">
                 <div class="charlevel">
                     <label>{{ localize "DND5E.Level" }} {{data.details.level}}</label>
                     <span class="levels">{{classLabels}}</span>
@@ -33,29 +25,24 @@
                     <span class="bar" style="width: {{data.details.xp.pct}}%"></span>
                 </div>
                 {{/unless}}
-            </section>
+            </aside>
 
-
-        <div class="character-stats">
-
-            {{!-- Ability Scores --}}
-            <ul class="ability-scores flexcol">
-            {{#each data.abilities as |ability id|}}
-                <li class="ability flexrow {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
-                    <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
-                    <input class="ability-score" name="data.abilities.{{id}}.value" type="number" value="{{ability.value}}" placeholder="10"/>
-                    <div class="ability-modifiers flexrow">
-                        <span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                        <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>
-                        <a class="proficiency-toggle ability-proficiency" title="{{ localize 'DND5E.Proficiency' }}">{{{ability.icon}}}</a>
-                        <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>
-                    </div>
+            {{!-- Character Summary --}}
+            <ul class="summary flexrow">
+                <li>
+                    <input type="text" name="data.details.species" value="{{data.details.species}}" placeholder="{{ localize 'DND5E.Species' }}"/>
                 </li>
-            {{/each}}
+                <li>
+                    <input type="text" name="data.details.background" value="{{data.details.background}}" placeholder="{{ localize 'DND5E.Background' }}"/>
+                </li>
+                <li>
+                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{ localize 'DND5E.Alignment' }}"/>
+                </li>
+                <li class="proficiency">
+                    <span>{{ localize "DND5E.Proficiency" }} {{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
+                </li>
             </ul>
-        </div>
 
-        <div class="character-attributes">
             {{!-- Header Attributes --}}
             <ul class="attributes flexrow">
                 <li class="attribute health">
@@ -118,27 +105,40 @@
                     </footer>
                 </li>
             </ul>
-
-
-
-            {{!-- Character Summary --}}
-            <ul class="summary flexrow">
-                <li>
-                    <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{ localize 'DND5E.Alignment' }}"/>
-                </li>
-                <li class="proficiency">
-                    <span>{{ localize "DND5E.Proficiency" }} {{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
-                </li>
-            </ul>
         </section>
-        <section class="character-image flexcol">
-            <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
-        </section>
-    </section>
+    </header>
+
+    {{!-- NPC Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="attributes">{{ localize "DND5E.Attributes" }}</a>
+        <a class="item" data-tab="inventory">{{ localize "DND5E.Inventory" }}</a>
+        <a class="item" data-tab="features">{{ localize "DND5E.Features" }}</a>
+        <a class="item" data-tab="forcepowers">{{ localize "DND5E.ForcePowers" }}</a>
+        <a class="item" data-tab="techpowers">{{ localize "DND5E.TechPowers" }}</a>
+        <a class="item" data-tab="effects">{{ localize "DND5E.Effects" }}</a>
+        <a class="item" data-tab="biography">{{ localize "DND5E.Biography" }}</a>
+    </nav>
 
     {{!-- NPC Sheet Body --}}
     <section class="sheet-body">
+
         <div class="tab attributes flexrow" data-group="primary" data-tab="attributes">
+
+            {{!-- Ability Scores --}}
+            <ul class="ability-scores flexrow">
+            {{#each data.abilities as |ability id|}}
+                <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
+                    <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
+                    <input class="ability-score" name="data.abilities.{{id}}.value" type="number" value="{{ability.value}}" placeholder="10"/>
+                    <div class="ability-modifiers flexrow">
+                        <span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+                        <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>
+                        <a class="proficiency-toggle ability-proficiency" title="{{ localize 'DND5E.Proficiency' }}">{{{ability.icon}}}</a>
+                        <span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>
+                    </div>
+                </li>
+            {{/each}}
+            </ul>
 
             {{!-- Skills --}}
             <ul class="skills-list">
@@ -259,17 +259,4 @@
             </div>
         </div>
     </section>
-
-    <footer>
-        {{!-- NPC Sheet Navigation --}}
-        <nav class="sheet-navigation tabs" data-group="primary">
-            <a class="item active" data-tab="attributes">{{ localize "DND5E.Attributes" }}</a>
-            <a class="item" data-tab="inventory">{{ localize "DND5E.Inventory" }}</a>
-            <a class="item" data-tab="features">{{ localize "DND5E.Features" }}</a>
-            <a class="item" data-tab="forcepowers">{{ localize "DND5E.ForcePowers" }}</a>
-            <a class="item" data-tab="techpowers">{{ localize "DND5E.TechPowers" }}</a>
-            <a class="item" data-tab="effects">{{ localize "DND5E.Effects" }}</a>
-            <a class="item" data-tab="biography">{{ localize "DND5E.Biography" }}</a>
-        </nav>
-    </footer>
 </form>
