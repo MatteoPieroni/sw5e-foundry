@@ -8,7 +8,7 @@
 /*  All DnD5e Apps                           */
 /* ----------------------------------------- */
 
-.sw5e {
+.dnd5e {
   .window-content {
     background: @sheetBackground;
     font-size: 13px;
@@ -114,6 +114,7 @@
     padding: 2px 0;
     border-top: @borderGroove;
     border-bottom: @borderGroove;
+    .modesto();
   }
 
   /* Tags */
@@ -139,7 +140,8 @@
     overflow-y: hidden;
     padding: 5px;
     background: @sheetBackground;
-    color: @colorWhite;
+    font-size: 13px;
+    color: @colorDark;
 
 
     form {
@@ -217,7 +219,7 @@
     border-bottom: @borderGroove;
 
     .header-details {
-      .title();
+      .modesto();
     }
 
     /* Character Name */
@@ -279,7 +281,7 @@
   .sheet-navigation {
     flex: 0 0 @navHeight;
     margin-bottom: 5px;
-    .title();
+    .modesto();
 
     .item {
       height: 30px;
