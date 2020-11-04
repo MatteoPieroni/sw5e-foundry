@@ -8,8 +8,11 @@
 
         <ul class="attributes flexrow">
 
-            <li class="attribute initiative">
-                <h4 class="attribute-name box-title">{{ localize "DND5E.Rest" }}</h4>
+            <li class="attribute hit-dice">
+                <h4 class="attribute-name">{{ localize "DND5E.HitDice" }}</h4>
+                <div class="attribute-value multiple">
+                    <label class="hit-dice">{{data.attributes.hd}} <span class="sep"> / </span> {{data.details.level}}</label>
+                </div>
                 <div class="attribute-value">
                     <a class="rest short-rest">{{ localize "DND5E.RestS" }}</a>
                     <a class="rest long-rest">{{ localize "DND5E.RestL" }}</a>
@@ -17,7 +20,7 @@
             </li>
 
             <li class="attribute initiative">
-                <h4 class="attribute-name box-title">{{ localize "DND5E.Initiative" }}</h4>
+                <h4 class="attribute-name">{{ localize "DND5E.Initiative" }}</h4>
                 <div class="attribute-value">
                     <span>{{numberFormat data.attributes.init.total decimals=0 sign=true}}</span>
                 </div>
@@ -53,7 +56,7 @@
 
                             {{#unless disableExperience}}
                             <div class="experience flexrow flexrow--space-between">
-                                <label>{{ localize "DND5E.Experience" }}</label>
+                                <label>{{ localize "DND5E.XP" }}</label>
                                 <div class="flexrow flex--unset flexrow--no-wrap">
                                     <input name="data.details.xp.value" type="text" value="{{data.details.xp.value}}" placeholder="0" data-dtype="Number"/>
                                     <span class="sep">/</span>
@@ -67,7 +70,7 @@
                         </section>
 
                         <section class="header-health flexcol">
-                            <div class="flexrow">
+                            <div class="flexrow flexrow--space-between">
                                 <h4 class="">{{ localize "DND5E.HP" }}</h4>
                                 <div class="flexrow">
                                     <input name="data.attributes.hp.value" type="text" value="{{data.attributes.hp.value}}" placeholder="10" data-dtype="Number"/>
@@ -84,78 +87,88 @@
                         </section>
 
 
-                    <div class="character-stats">
+                        <section class="character-stats">
 
-                        {{!-- Ability Scores --}}
-                        <ul class="ability-scores flexcol">
-                        {{#each data.abilities as |ability id|}}
-                            <li class="ability flexrow {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
-                                <h4 class="stat-name rollable">
-                                    {{ability.label}} <span class="small">
-                                        (<span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>/<span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>)
-                                    </span>
-                                </h4>
-                                <input class="stat-score" name="data.abilities.{{id}}.value" type="number" value="{{ability.value}}" placeholder="10"/>
-                                <div class="stat-modifiers flexrow">
-                                    <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>
-                                    <a class="proficiency-toggle ability-proficiency" title="{{ localize 'DND5E.Proficiency' }}">{{{ability.icon}}}</a>
-                                </div>
-                            </li>
-                        {{/each}}
-                        </ul>
-                        
-                        <ul class="flexcol">
+                            {{!-- Ability Scores --}}
+                            <ul class="ability-scores flexcol">
+                            {{#each data.abilities as |ability id|}}
+                                <li class="ability flexrow {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
+                                    <h4 class="stat-name rollable">
+                                        {{ability.label}} <span class="small">
+                                            (<span class="ability-mod" title="Modifier">{{numberFormat ability.mod decimals=0 sign=true}}</span>/<span class="ability-save" title="Saving Throw">{{numberFormat ability.save decimals=0 sign=true}}</span>)
+                                        </span>
+                                    </h4>
+                                    <input class="stat-score" name="data.abilities.{{id}}.value" type="number" value="{{ability.value}}" placeholder="10"/>
+                                    <div class="stat-modifiers flexrow">
+                                        <input type="hidden" name="data.abilities.{{id}}.proficient" value="{{ability.proficient}}" data-dtype="Number"/>
+                                        <a class="proficiency-toggle ability-proficiency" title="{{ localize 'DND5E.Proficiency' }}">{{{ability.icon}}}</a>
+                                    </div>
+                                </li>
+                            {{/each}}
+                            </ul>
+                        </section>
 
-                            <li class="flexrow">
-                                <h4 class="stat-name">{{ localize "DND5E.HitDice" }}</h4>
-                                <div class="stat-score">
-                                    <label class="hit-dice">{{data.attributes.hd}} <span class="sep"> / </span> {{data.details.level}}</label>
-                                </div>
-                            </li>
+                        <section class="other-stats flexcol">
+                            <ul class="flexcol">
+                                <li class="flexrow flexrow--space-between">
+                                    <h4 class="stat-name">{{ localize "DND5E.ArmorClass" }}</h4>
+                                    <div class="stat-score">
+                                        <input name="data.attributes.ac.value" type="number" value="{{data.attributes.ac.value}}" placeholder="10"/>
+                                    </div>
+                                </li>
 
-                            <li class="flexrow">
-                                <h4 class="stat-name">{{ localize "DND5E.ArmorClass" }}</h4>
-                                <div class="stat-score">
-                                    <input name="data.attributes.ac.value" type="number" value="{{data.attributes.ac.value}}" placeholder="10"/>
-                                </div>
-                            </li>
+                                <li class="flexrow flexrow--space-between">
+                                    <h4 class="stat-name">{{ localize "DND5E.Proficiency" }}</h4>
+                                    <div class="stat-score">
+                                        <span>{{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
+                                    </div>
+                                </li>
 
-                            <li class="flexrow">
-                                <h4 class="stat-name">{{ localize "DND5E.Speed" }}</h4>
-                                <div class="stat-score">
-                                    <input name="data.attributes.speed.value" type="text"
-                                        value="{{data.attributes.speed.value}}" placeholder="0"/>
-                                </div>
-                                <footer class="stat-footer">
-                                    <input type="text" class="speed" name="data.attributes.speed.special"
-                                        value="{{data.attributes.speed.special}}" placeholder="{{ localize 'DND5E.SpeedSpecial' }}"/>
-                                </footer>
-                            </li>
+                                <li class="flexcol flex--unset">
+                                    <div class="flexrow flexrow--space-between">
+                                        <h4 class="stat-name">{{ localize "DND5E.Speed" }}</h4>
+                                        <div class="stat-score">
+                                            <input name="data.attributes.speed.value" type="text"
+                                                value="{{data.attributes.speed.value}}" placeholder="0"/>
+                                        </div>
+                                    </div>
+                                    <footer class="stat-footer">
+                                        <input type="text" class="speed" name="data.attributes.speed.special"
+                                            value="{{data.attributes.speed.special}}" placeholder="{{ localize 'DND5E.SpeedSpecial' }}"/>
+                                    </footer>
+                                </li>
+                            </ul>
+                        </section>
 
-                            <li class="flexrow">
-                                <h4 class="stat-name">{{ localize "DND5E.Proficiency" }}</h4>
-                                <div class="stat-score">
-                                    <span>{{numberFormat data.attributes.prof decimals=0 sign=true}}</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="character-attributes">
-                        {{!-- Header Attributes --}}
-
-
-
-                        {{!-- Character Summary --}}
-                        <ul class="summary flexrow">
-                            <li>
-                                <input type="text" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{ localize 'DND5E.Alignment' }}"/>
-                            </li>
-                        </ul>
                     </section>
                 </section>
+
                 <section class="character-image flexcol">
-                    <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
+
+                    <aside class="alignment flexrow" id="sheet-alignment">
+                        <input type="text" class="visually-hidden" name="data.details.alignment" value="{{data.details.alignment}}" placeholder="{{ localize 'DND5E.Alignment' }}"/>
+                        <div class="flexcol">
+                            <label for="orientation" class="visually-hidden">
+                                Alignment orientation
+                            </label>
+                            <input type="radio" name="orientation" value="chaotic" title="Chaotic" {{isChecked sheetAlignment.orientation.chaotic}} />
+                            <input type="radio" name="orientation" value="neutral" title="Neutral" {{isChecked sheetAlignment.orientation.neutral}} />
+                            <input type="radio" name="orientation" value="lawful" title="Lawful" {{isChecked sheetAlignment.orientation.lawful}} />
+                        </div>
+                        <div class="flexcol">
+                            <label for="morals" class="visually-hidden">
+                                Alignment morals
+                            </label>
+                            <input type="radio" name="morals" value="good" title="Good" {{isChecked sheetAlignment.morals.good}} />
+                            <input type="radio" name="morals" value="neutral" title="Neutral" {{isChecked sheetAlignment.morals.neutral}} />
+                            <input type="radio" name="morals" value="evil" title="Evil" {{isChecked sheetAlignment.morals.evil}} />
+                        </div>
+                    </aside>
+
+                    <div class="img-wrapper">
+                        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
+                    </div>
+
                 </section>
             </section>
 

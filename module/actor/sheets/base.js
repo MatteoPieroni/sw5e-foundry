@@ -105,6 +105,9 @@ export default class ActorSheet5e extends ActorSheet {
     // Prepare active effects
     this._prepareEffects(data);
 
+    // Prepare alignment
+    this._prepareAlignment(data);
+
     // Return data to the sheet
     return data
   }
@@ -401,6 +404,33 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
+   * Insert a power into the forcepowers object when rendering the character sheet
+   * @param {Object} data     The Actor data being prepared
+   * @param {Array} powers    The spell data being prepared
+   * @private
+   */
+  _prepareAlignment(data) {
+    const alignment = this.actor.data.data.details.alignment || '';
+
+    if (!alignment.replace(/\s/g, '')) {
+      return;
+    }
+
+    const [orientation, morals] = alignment.split(' ');
+
+    data.sheetAlignment = {
+      orientation: {
+        ...(orientation ? { [orientation]: true } : {}),
+      },
+      morals: {
+        ...(morals ? { [morals]: true } : {}),
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Determine whether an Owned Item will be shown based on the current set of filters
    * @return {boolean}
    * @private
@@ -507,7 +537,7 @@ export default class ActorSheet5e extends ActorSheet {
     if ( this.actor.owner ) {
 
       // Ability Checks
-      html.find('.ability-name').click(this._onRollAbilityTest.bind(this));
+      html.find('.stat-name.rollable').click(this._onRollAbilityTest.bind(this));
 
 
       // Roll Skill Checks
@@ -516,6 +546,8 @@ export default class ActorSheet5e extends ActorSheet {
       // Item Rolling
       html.find('.item .item-image').click(event => this._onItemRoll(event));
       html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
+
+      html.find('#sheet-alignment input[type="radio"]').click(this._onSelectAlignment.bind(this));
     }
 
     // Otherwise remove rollable classes
@@ -932,6 +964,31 @@ export default class ActorSheet5e extends ActorSheet {
     const choices = CONFIG.DND5E[a.dataset.options];
     const options = { name: a.dataset.target, title: label.innerText, choices };
     new TraitSelector(this.actor, options).render(true)
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle selection of alignment
+   * @param {Event} event   The click event which originated the selection
+   * @private
+   */
+  _onSelectAlignment(event) {
+    event.preventDefault();
+    
+    const [currentOrientation = '', currentMorals = ''] = this.actor.data.data.details.alignment.split(' ');
+
+    const element = event.target;
+    const name = element.name;
+
+    const type = name;
+    const value = element.value;
+
+    console.log({ type, value })
+
+    this.actor.update({
+      ['data.details.alignment']: 
+        `${type === 'orientation' ? value : currentOrientation} ${type === 'morals' ? value : currentMorals}` });
   }
 
   /* -------------------------------------------- */
