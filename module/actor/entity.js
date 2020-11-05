@@ -419,7 +419,7 @@ export default class Actor5e extends Actor {
    */
   _computeSpellcastingProgression (actorData) {
     if (actorData.type === 'vehicle') return;
-    const spells = actorData.data.spells;
+    const spells = actorData.data.spells || {};
     const isNPC = actorData.type === 'npc';
 
     // Translate the list of classes into spell-casting progression

@@ -9,10 +9,108 @@
   "styles": ["dnd5e.css"],
   "packs": [
     {
+      "name": "adventuringgear",
+      "label": "Adventuring Gear",
+      "system": "sw5e",
+      "path": "./packs/adventuring-gear.db",
+      "entity": "Item"
+    },
+    {
+      "name": "archetypes",
+      "label": "Archetypes",
+      "system": "sw5e",
+      "path": "./packs/archetypes.db",
+      "entity": "Item"
+    },
+    {
+      "name": "armour",
+      "label": "Armour",
+      "system": "sw5e",
+      "path": "./packs/armour.db",
+      "entity": "Item"
+    },
+    {
+      "name": "classes",
+      "label": "Classes",
+      "system": "sw5e",
+      "path": "./packs/classes.db",
+      "entity": "Item"
+    },
+    {
+      "name": "classfeatures",
+      "label": "Class Features",
+      "system": "sw5e",
+      "path": "./packs/class-features.db",
+      "entity": "Item"
+    },
+    {
+      "name": "enhanceditems",
+      "label": "Enhanced Items",
+      "system": "sw5e",
+      "path": "./packs/enhanced-items.db",
+      "entity": "Item"
+    },
+    {
       "name": "feats",
-      "label": "feats",
+      "label": "Feats",
       "system": "sw5e",
       "path": "./packs/feats.db",
+      "entity": "Item"
+    },
+    {
+      "name": "forcepowers",
+      "label": "Force Powers",
+      "system": "sw5e",
+      "path": "./packs/force-powers.db",
+      "entity": "Item"
+    },
+    {
+      "name": "gamingsets",
+      "label": "Gaming Sets",
+      "system": "sw5e",
+      "path": "./packs/gaming-sets.db",
+      "entity": "Item"
+    },
+    {
+      "name": "lightsaberforms",
+      "label": "Lightsaber Forms",
+      "system": "sw5e",
+      "path": "./packs/lightsaber-forms.db",
+      "entity": "Item"
+    },
+    {
+      "name": "enemies",
+      "label": "Enemies",
+      "system": "sw5e",
+      "path": "./packs/enemies.db",
+      "entity": "Actor"
+    },
+    {
+      "name": "speciesfeats",
+      "label": "Species Traits",
+      "system": "sw5e",
+      "path": "./packs/species-feats.db",
+      "entity": "Item"
+    },
+    {
+      "name": "techpowers",
+      "label": "Tech Powers",
+      "system": "sw5e",
+      "path": "./packs/tech-powers.db",
+      "entity": "Item"
+    },
+    {
+      "name": "tradegoods",
+      "label": "Trade Goods",
+      "system": "sw5e",
+      "path": "./packs/trade-goods.db",
+      "entity": "Item"
+    },
+    {
+      "name": "weapons",
+      "label": "Weapons",
+      "system": "sw5e",
+      "path": "./packs/weapons.db",
       "entity": "Item"
     }
   ],
