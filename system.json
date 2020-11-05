@@ -79,6 +79,13 @@
       "entity": "Item"
     },
     {
+      "name": "enemies",
+      "label": "Enemies",
+      "system": "sw5e",
+      "path": "./packs/enemies.db",
+      "entity": "Actor"
+    },
+    {
       "name": "speciesfeats",
       "label": "Species Traits",
       "system": "sw5e",
