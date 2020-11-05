@@ -16,6 +16,13 @@
       "entity": "Item"
     },
     {
+      "name": "archetypes",
+      "label": "Archetypes",
+      "system": "sw5e",
+      "path": "./packs/archetypes.db",
+      "entity": "Item"
+    },
+    {
       "name": "feats",
       "label": "Feats",
       "system": "sw5e",
