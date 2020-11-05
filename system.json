@@ -91,6 +91,13 @@
       "system": "sw5e",
       "path": "./packs/tech-powers.db",
       "entity": "Item"
+    },
+    {
+      "name": "tradegoods",
+      "label": "Trade Goods",
+      "system": "sw5e",
+      "path": "./packs/trade-goods.db",
+      "entity": "Item"
     }
   ],
   "languages": [
