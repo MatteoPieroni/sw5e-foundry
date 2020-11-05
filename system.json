@@ -84,6 +84,13 @@
       "system": "sw5e",
       "path": "./packs/species-feats.db",
       "entity": "Item"
+    },
+    {
+      "name": "techpowers",
+      "label": "Tech Powers",
+      "system": "sw5e",
+      "path": "./packs/tech-powers.db",
+      "entity": "Item"
     }
   ],
   "languages": [
