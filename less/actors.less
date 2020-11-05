@@ -887,6 +887,20 @@
   /*  Stats                                    */
   /* ----------------------------------------- */
 
+  .char-level {
+    font-size: 1.25rem;
+  }
+
+  .header-health {
+    .char-hp {
+      font-size: 1.25rem;
+    }
+
+    h4 {
+      margin: 0;
+    }
+  }
+
   .stats {
     > * {
       position: relative;
@@ -922,12 +936,6 @@
 
     input.speed:not(.full-input) {
       max-width: 2.25rem;
-    }
-  }
-
-  .header-health {
-    h4 {
-      margin: 0;
     }
   }
 
@@ -1061,18 +1069,46 @@
     left: 0;
     z-index: 10;
 
-    input[type="radio"] {
-      &:checked {
-        &:after {
-          font-family: "Font Awesome 5 Free";
-          -webkit-font-smoothing: antialiased;
-          display: inline-block;
-          font-style: normal;
-          font-variant: normal;
-          text-rendering: auto;
-          line-height: 1;
-          content: "\f00c";
-        }
+    .alignment-icons {
+      max-width: 30px;
+    };
+
+    .icon {
+      position: relative;
+      display: block;
+      width: 30px;
+      height: 30px;
+
+      input[type="radio"] {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        box-shadow: none;
+        z-index: 1;
+        cursor: pointer;
+      }
+
+      .icon-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-height: 30px;
+        max-width: 100%;
+        fill: currentColor;
+        stroke: currentColor;
+        color: @secondaryColor;
+        z-index: 0;
+      }
+
+      input[type="radio"]:checked + .icon-img {
+        color: @colorWhite;
+      }
+
+      &:hover .icon-img {
+        border-radius: 50%;
+        color: @colorWhite;
+        box-shadow: 0 0 10px @lightColor;
       }
     }
   }
@@ -1083,12 +1119,92 @@
   .inspiration {
     position: absolute;
     top: 0;
-    right: 0;
+    right: .5rem;
     z-index: 10;
 
     input[type="checkbox"] {
-      &:checked {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 0;
+      padding: 0;
+      max-width: none;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: 1;
+      cursor: pointer;
+    }
+
+    .lightsaber {
+      transform: rotate(180deg);
+      z-index: 0;
+
+      svg {
+        max-width: 18px;
+        height: auto;
+        fill: #fff;
       }
+      
+      /* diamond shape */
+      .glow {
+        position: relative;
+        margin: 0 auto;
+        margin-bottom: -3px;
+        border-radius: 10px 10px 0 10px;
+        width: 9px;
+        height: 140px;
+        background: #35ea43;
+        box-shadow: 1px 1px 0 #1D8758, 0 0 20px 5px #35ea43, inset 2px 2px 0 #a8e4a0;
+        transition: height .3s ease;
+        animation: glow 2s infinite ease;
+      }
+      .glow:after {
+        content: '';
+        display: block;
+        position: absolute;
+      }
+      .glow:after {
+        left: 0;
+        width: 4px;
+        height: 180px;
+        background: #fff;
+        z-index: 5;
+        animation: sheen 5s infinite;
+      }
+      
+      /* animates box shadow glow effect */
+      @keyframes glow {
+        0%,100% {
+          box-shadow: 1px 1px #1D8758, 0 0 20px 5px #8FFFCF, inset 2px 2px #a8e4a0;
+        }
+        50% {
+          box-shadow: 1px 1px #1D8758, 0 0 16px 8px #8FFFCF, inset 2px 2px #a8e4a0;
+        }
+      }
+      /* animates light across diamond */
+      @keyframes sheen {
+        0%,100% {
+          left: 0;
+          opacity: 0;
+        }
+        1% {
+          opacity: 1;
+        }
+        10% {
+          left: calc(100% - 4px);
+        }
+        11%,98% {
+          left: 100%;
+          opacity: 0;
+        }
+      }
+    }
+    
+    input[type="checkbox"]:not(:checked) ~ .lightsaber .glow {
+      height: 0px;
+      box-shadow: none;
+      animation: none;
     }
   }
 
