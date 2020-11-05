@@ -475,7 +475,7 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _getProficiencyIcon(level) {
     const icons = {
-      0: '<i class="far fa-circle"></i>',
+      0: '<i class="far fa-square"></i>',
       0.5: '<i class="fas fa-adjust"></i>',
       1: '<i class="fas fa-check"></i>',
       2: '<i class="fas fa-check-double"></i>'
@@ -537,7 +537,7 @@ export default class ActorSheet5e extends ActorSheet {
     if ( this.actor.owner ) {
 
       // Ability Checks
-      html.find('.stat-name.rollable').click(this._onRollAbilityTest.bind(this));
+      html.find('.ability-name.rollable').click(this._onRollAbilityTest.bind(this));
 
 
       // Roll Skill Checks

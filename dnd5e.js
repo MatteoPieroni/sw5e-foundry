@@ -212,7 +212,3 @@ Hooks.on('getActorDirectoryEntryContext', Actor5e.addDirectoryContextOptions);
 Handlebars.registerHelper('getProperty', function (data, property) {
   return getProperty(data, property);
 });
-
-Handlebars.registerHelper('isChecked', function (value) {
-  return value ? 'checked' : '';
-});

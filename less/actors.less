@@ -748,6 +748,12 @@
         box-shadow: 0 0 8px @lightColor;
       }
 
+      &:disabled {
+        border: 1px solid transparent;
+        background: none;
+        box-shadow: none;
+      }
+
       &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
         color: @lightGrey;
       }
@@ -780,10 +786,12 @@
   /* ----------------------------------------- */
   .sheet-header {
     flex: 0 0 auto;
+    border: none;
 
     // Character Name
     h1.charname {
       flex: 1 1 auto;
+      margin: 0 1rem;
       padding: 0;
       height: auto;
       
@@ -816,17 +824,6 @@
   
   .character-image {
     min-width: 60%;
-  }
-
-  /* ----------------------------------------- */
-  /*  General Styles                           */
-  /* ----------------------------------------- */
-
-  // Box Headers
-  h4.box-title {
-    line-height: 16px;
-    font-size: 18px;
-    border-bottom: 1px solid @colorFaint;
   }
 
   /* ----------------------------------------- */
@@ -875,10 +872,14 @@
   /*  Class                                    */
   /* ----------------------------------------- */
   .character-class {
-    background: @secondaryColor;
+    margin: 0 1rem;
+
+    h2 {
+      border: none;
+    }
 
     input {
-      color: @primaryColor;
+      border-bottom: 1px solid @secondaryColor;
     }
   }
 
@@ -888,13 +889,39 @@
 
   .stats {
     > * {
-      margin: 0 1rem;
+      position: relative;
+      margin: 0 1rem 1rem 1rem;
+
+      &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -.25rem;
+        width: 100%;
+        height: 1px;
+        background: @secondaryColor;
+      }
     }
 
+    .line {
+      *:last-of-type {
+        min-width: 2rem;
+        max-width: 2rem;
+      }
+    } 
+
     input {
-      max-width: 2rem;
       padding-top: 0;
       padding-bottom: 0;
+      
+      &:not(.full-input) {
+        max-width: 2rem;
+      }
+    }
+
+
+    input.speed:not(.full-input) {
+      max-width: 2.25rem;
     }
   }
 
@@ -917,9 +944,15 @@
       .flexrow();
       flex-wrap: nowrap;
       align-items: center;
+      margin-bottom: .2rem;
+
+      > * {
+        align-items: center;
+      }
 
       .stat-name {
         flex: 2 1 100%;
+        margin-bottom: 0;
       }
 
       .stat-score {
@@ -927,10 +960,8 @@
         text-align: right;
       }
 
-      .stat-modifiers, .stat-footer {
-        flex: 1 1 2rem;
-        margin-left: .5rem;
-        flex-wrap: nowrap;
+      .stat-modifiers {
+        margin-right: .5rem;
       }
     }
 
@@ -946,16 +977,28 @@
     ul {
       padding: 0;
       list-style: none;
+
+      li {
+        margin-bottom: .2rem;
+
+        .stat-name {
+          margin-bottom: 0;
+        }
+      }
     }
+  }
+
+  input.proficiency {
+    text-align: right;
   }
 
   // Proficiency Toggle Buttons
   .proficiency-toggle {
-    color: @colorBeige;
+    color: @colorWhite;
     font-size: 12px;
   }
   .proficient .proficiency-toggle {
-    color: @colorOlive;
+    color: @lightColor;
   }
 
   .locked .proficiency-toggle {
@@ -976,7 +1019,7 @@
 
     li.attribute {
       margin: 0 5px 0 0;
-      border: @borderGroove;
+      border: none;
       border-radius: 4px;
       text-align: center;
 
@@ -1010,51 +1053,132 @@
   }
 
   /* ----------------------------------------- */
+  /*  Alignment                                */
+  /* ----------------------------------------- */
+  .alignment {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    input[type="radio"] {
+      &:checked {
+        &:after {
+          font-family: "Font Awesome 5 Free";
+          -webkit-font-smoothing: antialiased;
+          display: inline-block;
+          font-style: normal;
+          font-variant: normal;
+          text-rendering: auto;
+          line-height: 1;
+          content: "\f00c";
+        }
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Inspiration                              */
+  /* ----------------------------------------- */
+  .inspiration {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+
+    input[type="checkbox"] {
+      &:checked {
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Image                                    */
+  /* ----------------------------------------- */
+  .character-image {
+    position: relative;
+    padding: 2rem;
+
+    .img-wrapper {
+      position: relative;
+      padding: 10%;
+      background: @variationPrimaryColor;
+      box-shadow: inset 0 0 30px #000000;
+      clip-path: polygon(10% 100%, 0 90%, 0% 10%, 10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%);
+
+      &:after {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 76%;
+        height: 0.1px;
+        background: rgba(255, 255, 255, .19);
+        box-shadow: 0px 0px 5px #fff;
+        transform: translateX(-50%);
+      }
+    }
+
+    img {
+      margin: 0 auto;
+      border: none;
+      max-height: 300px;
+    }
+  }
+
+  /* ----------------------------------------- */
   /*  Skills                                   */
   /* ----------------------------------------- */
+  .skills-section {
+    flex: 0;
 
-  ul.skills-list {
-    flex: 0 0 180px;
-    height: 440px;
-    list-style: none;
-    margin: 0 5px 0;
-    padding: 3px 0 2px;
-    border: @borderGroove;
-    border-radius: 3px;
-
-    li.skill {
-      height: 24px;
-      padding: 3px 2px;
-
-      &:nth-child(even) {
-        background: rgba(0, 0, 0, 0.05);
-      }
-
-      h4 {
-        flex: 1px;
-        margin: 0;
-        font-size: 11px;
-        line-height: 18px;
-      }
-
-      .skill-proficiency {
-        flex: 0 0 16px;
-        line-height: 18px;
-      }
-
-      .skill-ability {
-        flex: 0 0 26px;
-        text-transform: capitalize;
-      }
-
-      .skill-mod {
-        flex: 0 0 20px;
-      }
-
-      .skill-passive {
-        flex: 0 0 26px;
-        text-align: center;
-        color: @colorTan;
+    ul.skills-list {
+      margin: .5rem;
+      margin-top: 0;
+      border-top: 3px solid #3bc1e56e;
+      padding: .5rem;
+      -webkit-columns: 3;
+      -moz-columns: 3;
+      columns: 3;
+      -webkit-column-rule: 1px solid black;
+      -moz-column-rule: 1px solid black;
+      column-rule: 3px solid #3bc1e56e;
+      width: 100%;
+      list-style: none;
+      
+      li.skill {
+        margin: 0 .5rem;
+        padding: 0;
+        
+        &:nth-child(even) {
+          background: rgba(0, 0, 0, 0.05);
+        }
+        
+        h4 {
+          flex: 1px;
+          margin: 0;
+          font-size: 11px;
+          line-height: 18px;
+        }
+        
+        .skill-proficiency {
+          flex: 0 0 16px;
+          line-height: 18px;
+        }
+        
+        .skill-ability {
+          flex: 0 0 26px;
+          text-transform: capitalize;
+        }
+        
+        .skill-mod {
+          flex: 0 0 20px;
+        }
+        
+        .skill-passive {
+          flex: 0 0 26px;
+          text-align: center;
+          color: @colorTan;
+        }
       }
     }
   }
@@ -1158,61 +1282,6 @@
 
     .inactive {
       color: @colorTan;
-    }
-  }
-
-  /* ----------------------------------------- */
-  /*  Alignment                                */
-  /* ----------------------------------------- */
-  .alignment {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-
-    input[type="radio"] {
-      &:checked {
-        &:after {
-          font-family: "Font Awesome 5 Free";
-          -webkit-font-smoothing: antialiased;
-          display: inline-block;
-          font-style: normal;
-          font-variant: normal;
-          text-rendering: auto;
-          line-height: 1;
-          content: "\f00c";
-        }
-      }
-    }
-  }
-
-  /* ----------------------------------------- */
-  /*  Image                                    */
-  /* ----------------------------------------- */
-  .character-image {
-    position: relative;
-    padding: 2rem;
-    box-shadow: inset 0 0 10px #000000;
-
-    .img-wrapper {
-      position: relative;
-
-      &:after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        width: 76%;
-        height: 0.1px;
-        background: rgba(255, 255, 255, .19);
-        box-shadow: 0px 0px 5px #fff;
-        transform: translateX(-50%);
-      }
-    }
-
-    img {
-      margin: 0 auto;
-      max-height: 300px;
     }
   }
 
