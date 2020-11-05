@@ -44,6 +44,13 @@
       "entity": "Item"
     },
     {
+      "name": "enhanceditems",
+      "label": "Enhanced Items",
+      "system": "sw5e",
+      "path": "./packs/enhanced-items.db",
+      "entity": "Item"
+    },
+    {
       "name": "feats",
       "label": "Feats",
       "system": "sw5e",
