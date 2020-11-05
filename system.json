@@ -58,6 +58,13 @@
       "entity": "Item"
     },
     {
+      "name": "gamingsets",
+      "label": "Gaming Sets",
+      "system": "sw5e",
+      "path": "./packs/gaming-sets.db",
+      "entity": "Item"
+    },
+    {
       "name": "feats",
       "label": "Feats",
       "system": "sw5e",
