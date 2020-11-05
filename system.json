@@ -51,6 +51,13 @@
       "entity": "Item"
     },
     {
+      "name": "feats",
+      "label": "Feats",
+      "system": "sw5e",
+      "path": "./packs/feats.db",
+      "entity": "Item"
+    },
+    {
       "name": "forcepowers",
       "label": "Force Powers",
       "system": "sw5e",
@@ -72,10 +79,10 @@
       "entity": "Item"
     },
     {
-      "name": "feats",
-      "label": "Feats",
+      "name": "speciesfeats",
+      "label": "Species Traits",
       "system": "sw5e",
-      "path": "./packs/feats.db",
+      "path": "./packs/species-feats.db",
       "entity": "Item"
     }
   ],
