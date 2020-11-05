@@ -1140,32 +1140,56 @@
   background: #031121;
   color: #3bc1e5;
 }
-.dnd5e.sheet.actor-alternative .window-content input {
+.dnd5e.sheet.actor-alternative .window-content h1,
+.dnd5e.sheet.actor-alternative .window-content h2,
+.dnd5e.sheet.actor-alternative .window-content h3,
+.dnd5e.sheet.actor-alternative .window-content h4,
+.dnd5e.sheet.actor-alternative .window-content h5,
+.dnd5e.sheet.actor-alternative .window-content h6 {
+  border-bottom-color: #d3ae3f;
+}
+.dnd5e.sheet.actor-alternative .window-content input,
+.dnd5e.sheet.actor-alternative .window-content textarea,
+.dnd5e.sheet.actor-alternative .window-content select {
   color: #3bc1e5;
 }
 .dnd5e.sheet.actor-alternative .window-content input:hover,
-.dnd5e.sheet.actor-alternative .window-content input:focus {
+.dnd5e.sheet.actor-alternative .window-content textarea:hover,
+.dnd5e.sheet.actor-alternative .window-content select:hover,
+.dnd5e.sheet.actor-alternative .window-content input:focus,
+.dnd5e.sheet.actor-alternative .window-content textarea:focus,
+.dnd5e.sheet.actor-alternative .window-content select:focus {
   border: 1px solid #3bc1e5;
   box-shadow: 0 0 8px #3bc1e5;
 }
-.dnd5e.sheet.actor-alternative .window-content input:disabled {
+.dnd5e.sheet.actor-alternative .window-content input:disabled,
+.dnd5e.sheet.actor-alternative .window-content textarea:disabled,
+.dnd5e.sheet.actor-alternative .window-content select:disabled {
   border: 1px solid transparent;
   background: none;
   box-shadow: none;
 }
-.dnd5e.sheet.actor-alternative .window-content input::-webkit-input-placeholder {
+.dnd5e.sheet.actor-alternative .window-content input::-webkit-input-placeholder,
+.dnd5e.sheet.actor-alternative .window-content textarea::-webkit-input-placeholder,
+.dnd5e.sheet.actor-alternative .window-content select::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
   color: #9e9c9c;
 }
-.dnd5e.sheet.actor-alternative .window-content input::-moz-placeholder {
+.dnd5e.sheet.actor-alternative .window-content input::-moz-placeholder,
+.dnd5e.sheet.actor-alternative .window-content textarea::-moz-placeholder,
+.dnd5e.sheet.actor-alternative .window-content select::-moz-placeholder {
   /* Firefox 19+ */
   color: #9e9c9c;
 }
-.dnd5e.sheet.actor-alternative .window-content input:-ms-input-placeholder {
+.dnd5e.sheet.actor-alternative .window-content input:-ms-input-placeholder,
+.dnd5e.sheet.actor-alternative .window-content textarea:-ms-input-placeholder,
+.dnd5e.sheet.actor-alternative .window-content select:-ms-input-placeholder {
   /* IE 10+ */
   color: #9e9c9c;
 }
-.dnd5e.sheet.actor-alternative .window-content input:-moz-placeholder {
+.dnd5e.sheet.actor-alternative .window-content input:-moz-placeholder,
+.dnd5e.sheet.actor-alternative .window-content textarea:-moz-placeholder,
+.dnd5e.sheet.actor-alternative .window-content select:-moz-placeholder {
   /* Firefox 18- */
   color: #9e9c9c;
 }
@@ -1179,6 +1203,16 @@
 .dnd5e.sheet.actor-alternative .window-content .rollable:focus {
   color: #fff;
   text-shadow: 0 0 10px #3bc1e5;
+}
+.dnd5e.sheet.actor-alternative .window-content label {
+  color: #3bc1e5;
+}
+.dnd5e.sheet.actor-alternative::-webkit-scrollbar-thumb {
+  background: #d3ae3f;
+  border: 1px solid #031121;
+}
+.dnd5e.sheet.actor-alternative::-webkit-scrollbar-track {
+  box-shadow: 0 1px #9e9c9c inset;
 }
 .dnd5e.sheet.actor-alternative .sheet-header {
   flex: 0 0 auto;
@@ -1713,21 +1747,19 @@
   padding: 0 5px;
   overflow-y: auto;
   scrollbar-width: thin;
-  color: #7a7971;
+  color: #3bc1e5;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item {
   line-height: 30px;
-  padding: 0 2px;
-  border-bottom: 1px solid #c9c7b8;
+  padding: 0.125rem 0px;
 }
-.dnd5e.sheet.actor-alternative .inventory-list .item:last-child {
-  border-bottom: none;
+.dnd5e.sheet.actor-alternative .inventory-list .item:nth-child(even) {
+  background: #06243a;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item .item-name {
   cursor: pointer;
   max-height: 30px;
   overflow: hidden;
-  color: #191813;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item .item-name .item-image {
   flex: 0 0 30px;
@@ -1743,7 +1775,7 @@
   background-image: url("../../icons/svg/d20-grey.svg") !important;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item .item-name.rollable .item-image:hover {
-  background-image: url("../../icons/svg/d20-black.svg") !important;
+  background-image: url("../../icons/svg/d20.svg") !important;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item .item-name i.attuned {
   color: #7a7971;
@@ -1753,7 +1785,10 @@
   text-align: center;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item .item-properties {
-  margin-top: 3px;
+  margin-top: 0.75rem;
+}
+.dnd5e.sheet.actor-alternative .inventory-list .item .item-properties .tag {
+  font-size: 0.8rem;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item .item-recharge {
   flex: 0 0 80px;
@@ -1762,13 +1797,13 @@
   white-space: nowrap;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .inventory-header {
-  margin: 2px 0;
+  margin: 5px 0;
   padding: 0;
   align-items: center;
-  background: rgba(0, 0, 0, 0.05);
-  border: 2px groove #eeede0;
+  border-bottom: 2px solid #11638b;
   font-weight: bold;
   line-height: 24px;
+  color: #d3ae3f;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .inventory-header h3 {
   margin: 0 -5px 0 0;
@@ -1782,21 +1817,15 @@
   flex: 0 0 70px;
   font-size: 12px;
   text-align: center;
-  border-right: 1px solid #c9c7b8;
   word-break: break-word;
   white-space: nowrap;
   overflow: hidden;
-}
-.dnd5e.sheet.actor-alternative .inventory-list .item-detail:last-child {
-  border-right: none;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item-detail.item-action {
   flex: 0 0 100px;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item-weight {
   flex: 0 0 60px;
-  border-left: 1px solid #c9c7b8;
-  border-right: 1px solid #c9c7b8;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item-list {
   list-style: none;
@@ -1833,11 +1862,11 @@
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item-summary {
   flex: 0 0 100%;
-  font-size: 12px;
-  line-height: 16px;
-  padding: 0.25em 0.5em;
-  color: #191813;
-  border-top: 1px solid #c9c7b8;
+  font-size: 0.9rem;
+  line-height: 1.3rem;
+  padding: 0.5em 0.5em;
+  color: #fff;
+  border-top: 1px solid #0f233a;
 }
 .dnd5e.sheet.actor-alternative .encumbrance {
   flex: 0 0 12px;
@@ -1923,8 +1952,6 @@
   padding-right: 5px;
   text-align: right;
   font-size: 12px;
-  color: #7a7971;
-  border-right: 1px solid #c9c7b8;
 }
 .dnd5e.sheet.actor-alternative .spell-slots input {
   display: inline;
@@ -1943,9 +1970,7 @@
 .dnd5e.sheet.actor-alternative .spell-target {
   flex: 0 0 100px;
   font-size: 12px;
-  color: #7a7971;
   text-align: center;
-  border-right: 1px solid #c9c7b8;
 }
 .dnd5e.sheet.actor-alternative .spell-component {
   line-height: 14px;
@@ -1956,7 +1981,6 @@
   text-align: center;
   padding-top: 1px;
   width: 16px;
-  color: #c9c7b8;
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid transparent;
   border-radius: 8px;

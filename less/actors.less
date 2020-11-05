@@ -739,8 +739,12 @@
     padding: 0;
     background: @primaryColor;
     color: @lightColor;
+
+    h1, h2, h3, h4, h5, h6 {
+      border-bottom-color: @colorYellow;
+    }
     
-    input {
+    input, textarea, select {
       color: @lightColor;
 
       &:hover, &:focus {
@@ -779,6 +783,19 @@
         text-shadow: 0 0 10px @lightColor;
       }
     }
+
+    label {
+      color: @lightColor;
+    }
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: @colorYellow;
+    border: 1px solid @primaryColor;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: 0 1px @lightGrey inset;
   }
 
   /* ----------------------------------------- */
@@ -1446,21 +1463,22 @@
     padding: 0 5px;
     overflow-y: auto;
     scrollbar-width: thin;
-    color: @colorTan;
+    color: @lightColor;
 
     // Inventory Item
     .item {
       line-height: 30px;
-      padding: 0 2px; // to align with the header border
-      border-bottom: 1px solid @colorFaint;
-      &:last-child { border-bottom: none; }
+      padding: .125rem 0px;
+
+      &:nth-child(even) {
+        background: #06243a;
+      }
 
       // Item Header Name
       .item-name {
         cursor: pointer;
         max-height: 30px;
         overflow: hidden;
-        color: @colorDark;
 
         .item-image {
           flex: 0 0 30px;
@@ -1478,7 +1496,7 @@
           background-image: url("../../icons/svg/d20-grey.svg") !important;
         }
         &.rollable .item-image:hover {
-          background-image: url("../../icons/svg/d20-black.svg") !important;
+          background-image: url("../../icons/svg/d20.svg") !important;
         }
 
         i.attuned {
@@ -1494,7 +1512,11 @@
 
       // Item Dropdown Properties
       .item-properties {
-        margin-top: 3px;
+        margin-top: .75rem;
+        
+        .tag {
+          font-size: .8rem;
+        }
       }
 
       // Charged
@@ -1508,13 +1530,13 @@
 
     // Inventory Header
     .inventory-header {
-      margin: 2px 0;
+      margin: 5px 0;
       padding: 0;
       align-items: center;
-      background: rgba(0, 0, 0, 0.05);
-      border: @borderGroove;
+      border-bottom: 2px solid @secondaryColor;
       font-weight: bold;
       line-height: 24px;
+      color: @colorYellow;
 
       h3 {
         margin: 0 -5px 0 0;
@@ -1532,18 +1554,16 @@
       flex: 0 0 70px;
       font-size: 12px;
       text-align: center;
-      border-right: 1px solid @colorFaint;
       word-break: break-word;
       white-space: nowrap;
       overflow: hidden;
-      &:last-child { border-right: none; }
-      &.item-action {flex: 0 0 100px}
+      &.item-action {
+        flex: 0 0 100px;
+      }
     }
 
     .item-weight {
       flex: 0 0 60px;
-      border-left: 1px solid @colorFaint;
-      border-right: 1px solid @colorFaint;
     }
 
     .item-list {
@@ -1567,12 +1587,13 @@
     // Item Dropdown Summary
     .item-summary {
       flex: 0 0 100%;
-      font-size: 12px;
-      line-height: 16px;
-      padding: 0.25em 0.5em;
-      color: @colorDark;
-      border-top: 1px solid @colorFaint;
+      font-size: .9rem;
+      line-height: 1.3rem;
+      padding: 0.5em 0.5em;
+      color: @colorWhite;
+      border-top: 1px solid @variationPrimaryColor;
     }
+
   }
 
   /* Encumbrance Bar */
@@ -1666,8 +1687,6 @@
     padding-right: 5px;
     text-align: right;
     font-size: 12px;
-    color: @colorTan;
-    border-right: 1px solid @colorFaint;
   }
 
   .spell-slots {
@@ -1689,9 +1708,7 @@
   .spell-school, .spell-action, .spell-target {
     flex: 0 0 100px;
     font-size: 12px;
-    color: @colorTan;
     text-align: center;
-    border-right: 1px solid @colorFaint;
   }
 
   .spell-component {
@@ -1701,7 +1718,6 @@
       text-align: center;
       padding-top: 1px;
       width: 16px;
-      color: @colorFaint;
       background: rgba(0, 0, 0, 0.4);
       border: 1px solid transparent;
       border-radius: 8px;
