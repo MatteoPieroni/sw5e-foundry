@@ -39,6 +39,16 @@
 @colorCrimson: #44191A;
 @borderGroove: 2px groove #eeede0;
 @sheetBackground: url("ui/parchment.jpg") repeat;
+@sheetBackgroundFallback: -webkit-gradient(linear,left top,right top,from(#afc6d6),color-stop(30%,#d6d6d6),color-stop(70%,#d6d6d6),to(#afc6d6));
+@sheetBackground: linear-gradient(90deg,#afc6d6 0,#d6d6d6 30%,#d6d6d6 70%,#afc6d6);
+@primaryColor: #031121;
+@variationPrimaryColor: #0f233a;
+@lighterPrimaryColor: #182f40;
+@secondaryColor: #11638b;
+@lightColor: #3bc1e5;
+@lightGrey: #9e9c9c;
+@colorWhite: #fff;
+@colorYellow: #d3ae3f;
 
 /* ----------------------------------------- */
 /*  Flexbox                                  */
@@ -73,4 +83,22 @@
   .flex2 { flex: 2; }
   .flex3 { flex: 3; }
   .flex4 { flex: 4; }
+}
+
+.flexrow--no-wrap {
+  flex-wrap: nowrap;
+}
+
+.flex--unset {
+  > * {
+    flex: unset;
+  }
+}
+
+.flexrow--space-between {
+  > * {
+    flex: unset;
+  }
+
+  justify-content: space-between;
 }

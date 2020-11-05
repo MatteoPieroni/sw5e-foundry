@@ -112,7 +112,7 @@ export const registerSystemSettings = function() {
   /**
    * Option to allow GMs to restrict polymorphing to GMs only.
    */
-  game.settings.register('dnd5e', 'allowPolymorphing', {
+  game.settings.register('sw5e', 'allowPolymorphing', {
     name: 'SETTINGS.5eAllowPolymorphingN',
     hint: 'SETTINGS.5eAllowPolymorphingL',
     scope: 'world',
@@ -124,7 +124,7 @@ export const registerSystemSettings = function() {
   /**
    * Remember last-used polymorph settings.
    */
-  game.settings.register('dnd5e', 'polymorphSettings', {
+  game.settings.register('sw5e', 'polymorphSettings', {
     scope: 'client',
     default: {
       keepPhysical: false,

@@ -13,8 +13,10 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
    * @return {Object}
    */
 	static get defaultOptions() {
+    const isAlternative = false;
+
 	  return mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "sheet", "actor", "character"],
+      classes: ["dnd5e", "sheet", isAlternative ? "actor-alternative" : "actor", "character"],
       width: 720,
       height: 680
     });
@@ -70,7 +72,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     };
 
     // Partition items by category
-    let [items, spells, feats, classes] = data.items.reduce((arr, item) => {
+    let [items, spells, feats, classes, forcepowers, techpowers] = data.items.reduce((arr, item) => {
 
       // Item details
       item.img = item.img || DEFAULT_TOKEN;
@@ -87,15 +89,19 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
       // Classify items into types
       if ( item.type === "spell" ) arr[1].push(item);
+      else if ( item.type === "forcepower" ) arr[4].push(item);
+      else if ( item.type === "techpower" ) arr[5].push(item);
       else if ( item.type === "feat" ) arr[2].push(item);
       else if ( item.type === "class" ) arr[3].push(item);
       else if ( Object.keys(inventory).includes(item.type ) ) arr[0].push(item);
       return arr;
-    }, [[], [], [], []]);
+    }, [[], [], [], [], [], []]);
 
     // Apply active item filters
     items = this._filterItems(items, this._filters.inventory);
     spells = this._filterItems(spells, this._filters.spellbook);
+    forcepowers = this._filterItems(forcepowers, this._filters.forcepowers);
+    techpowers = this._filterItems(techpowers, this._filters.techpowers);
     feats = this._filterItems(feats, this._filters.features);
 
     // Organize items
@@ -108,6 +114,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Organize Spellbook and count the number of prepared spells (excluding always, at will, etc...)
     const spellbook = this._prepareSpellbook(data, spells);
+    const forcePowerBook = this._preparePowers(data, forcepowers, { mode: 'forcepowers' });
+    const techPowerBook = this._preparePowers(data, techpowers, { mode: 'techpowers' });
     const nPrepared = spells.filter(s => {
       return (s.data.level > 0) && (s.data.preparation.mode === "prepared") && s.data.preparation.prepared;
     }).length;
@@ -128,6 +136,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     // Assign and return
     data.inventory = Object.values(inventory);
     data.spellbook = spellbook;
+    data.forcePowerBook = forcePowerBook;
+    data.techPowerBook = techPowerBook;
     data.preparedSpells = nPrepared;
     data.features = Object.values(features);
   }
@@ -169,7 +179,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     if ( !this.options.editable ) return;
 
     // Inventory Functions
-    html.find(".currency-convert").click(this._onConvertCurrency.bind(this));
 
     // Item State Toggling
     html.find('.item-toggle').click(this._onToggleItem.bind(this));
@@ -234,22 +243,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     event.preventDefault();
     await this._onSubmit(event);
     return this.actor.longRest();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle mouse click events to convert currency to the highest possible denomination
-   * @param {MouseEvent} event    The originating click event
-   * @private
-   */
-  async _onConvertCurrency(event) {
-    event.preventDefault();
-    return Dialog.confirm({
-      title: `${game.i18n.localize("DND5E.CurrencyConvert")}`,
-      content: `<p>${game.i18n.localize("DND5E.CurrencyConvertHint")}</p>`,
-      yes: () => this.actor.convertCurrency()
-    });
   }
 
   /* -------------------------------------------- */

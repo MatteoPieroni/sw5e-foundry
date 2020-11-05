@@ -84,23 +84,23 @@ Hooks.once("init", function() {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("dnd5e", ActorSheet5eCharacter, {
+  Actors.registerSheet("sw5e", ActorSheet5eCharacter, {
     types: ["character"],
     makeDefault: true,
     label: "DND5E.SheetClassCharacter"
   });
-  Actors.registerSheet("dnd5e", ActorSheet5eNPC, {
+  Actors.registerSheet("sw5e", ActorSheet5eNPC, {
     types: ["npc"],
     makeDefault: true,
     label: "DND5E.SheetClassNPC"
   });
-  Actors.registerSheet('dnd5e', ActorSheet5eVehicle, {
+  Actors.registerSheet('sw5e', ActorSheet5eVehicle, {
     types: ['vehicle'],
     makeDefault: true,
     label: "DND5E.SheetClassVehicle"
   });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("dnd5e", ItemSheet5e, {
+  Items.registerSheet("sw5e", ItemSheet5e, {
     makeDefault: true,
     label: "DND5E.SheetClassItem"
   });
@@ -124,7 +124,7 @@ Hooks.once("setup", function() {
     "abilities", "abilityAbbreviations", "alignments", "conditionTypes", "consumableTypes", "currencies",
     "damageTypes", "damageResistanceTypes", "distanceUnits", "equipmentTypes", "healingTypes", "itemActionTypes",
     "limitedUsePeriods", "senses", "skills", "spellComponents", "spellLevels", "spellPreparationModes", "spellSchools",
-    "spellScalingModes", "targetTypes", "timePeriods", "weaponProperties", "weaponTypes", "languages",
+    "spellScalingModes", "powerLevels", "powerAlignments", "targetTypes", "timePeriods", "weaponProperties", "weaponTypes", "languages",
     "polymorphSettings", "armorProficiencies", "weaponProficiencies", "toolProficiencies", "abilityActivationTypes",
     "abilityConsumptionTypes", "actorSizes", "proficiencyLevels", "cover"
   ];

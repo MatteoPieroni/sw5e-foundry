@@ -19,6 +19,8 @@ export default class ActorSheet5e extends ActorSheet {
     this._filters = {
       inventory: new Set(),
       spellbook: new Set(),
+      forcepowers: new Set(),
+      techpowers: new Set(),
       features: new Set(),
       effects: new Set()
     };
@@ -102,6 +104,9 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Prepare active effects
     this._prepareEffects(data);
+
+    // Prepare alignment
+    this._prepareAlignment(data);
 
     // Return data to the sheet
     return data
@@ -291,6 +296,137 @@ export default class ActorSheet5e extends ActorSheet {
     sorted.sort((a, b) => a.order - b.order);
     return sorted;
   }
+  
+  /* -------------------------------------------- */
+
+  /**
+   * Insert a power into the forcepowers object when rendering the character sheet
+   * @param {Object} data     The Actor data being prepared
+   * @param {Array} powers    The spell data being prepared
+   * @private
+   */
+  _preparePowers(data, spells, { mode }) {
+    if (!mode) {
+      return new Error('Preparing powers requires specifying power type');
+    };
+
+    const owner = this.actor.owner;
+    const levels = data.data[mode];
+    const spellbook = {};
+
+    // Define some mappings
+    const sections = {
+      "atwill": -20,
+      "innate": -10,
+      "pact": 0.5
+    };
+
+    // Label spell slot uses headers
+    const useLabels = {
+      "-20": "-",
+      "-10": "-",
+      "0": "&infin;"
+    };
+
+    // Format a spellbook entry for a certain indexed level
+    const registerSection = (sl, i, label, {prepMode="prepared", value, max, override}={}) => {
+      spellbook[i] = {
+        order: i,
+        label: label,
+        usesSlots: i > 0,
+        canCreate: owner,
+        canPrepare: (data.actor.type === "character") && (i >= 1),
+        spells: [],
+        uses: useLabels[i] || value || 0,
+        slots: useLabels[i] || max || 0,
+        override: override || 0,
+        dataset: {
+          type: mode === 'techcasting' ? 'techpower' : 'forcepower',
+          level: i
+        },
+        prop: sl
+      };
+    };
+
+    // Determine the maximum spell level which has a slot
+    const maxLevel = Array.fromRange(10).reduce((max, i) => {
+      if ( i === 0 ) return max;
+      const level = levels[`power${i}`];
+      if ( (level.max || level.override ) && ( i > max ) ) max = i;
+      return max;
+    }, 0);
+
+    // Level-based spellcasters have cantrips and leveled slots
+    if ( maxLevel > 0 ) {
+      registerSection("power0", 0, CONFIG.DND5E.powerLevels[0]);
+      for (let lvl = 1; lvl <= maxLevel; lvl++) {
+        const sl = `power${lvl}`;
+        registerSection(sl, lvl, CONFIG.DND5E.spellLevels[lvl], levels[sl]);
+      }
+    }
+
+    // Iterate over every spell item, adding spells to the spellbook by section
+    spells.forEach(spell => {
+      const mode = spell.data.preparation.mode || "prepared";
+      let s = spell.data.level || 0;
+      const sl = `power${s}`;
+
+      // Specialized spellcasting modes (if they exist)
+      if ( mode in sections ) {
+        s = sections[mode];
+        if ( !spellbook[s] ){
+          const l = levels[mode] || {};
+          const config = CONFIG.DND5E.spellPreparationModes[mode];
+          registerSection(mode, s, config, {
+            prepMode: mode,
+            value: l.value,
+            max: l.max,
+            override: l.override
+          });
+        }
+      }
+
+      // Sections for higher-level spells which the caster "should not" have, but spell items exist for
+      else if ( !spellbook[s] ) {
+        registerSection(sl, s, CONFIG.DND5E.powerLevels[s], {levels: levels[sl]});
+      }
+
+      // Add the spell to the relevant heading
+      spellbook[s].spells.push(spell);
+    });
+
+    // Sort the spellbook by section level
+    const sorted = Object.values(spellbook);
+    sorted.sort((a, b) => a.order - b.order);
+    return sorted;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Insert a power into the forcepowers object when rendering the character sheet
+   * @param {Object} data     The Actor data being prepared
+   * @param {Array} powers    The spell data being prepared
+   * @private
+   */
+  _prepareAlignment(data) {
+    const alignment = this.actor.data.data.details.alignment || '';
+
+    if (!alignment.replace(/\s/g, '')) {
+      return;
+    }
+
+    const [orientation, morals] = alignment.split(' ');
+
+    data.sheetAlignment = {
+      orientation: {
+        ...(orientation ? { [orientation]: true } : {}),
+      },
+      morals: {
+        ...(morals ? { [morals]: true } : {}),
+      }
+    }
+  }
 
   /* -------------------------------------------- */
 
@@ -339,7 +475,7 @@ export default class ActorSheet5e extends ActorSheet {
    */
   _getProficiencyIcon(level) {
     const icons = {
-      0: '<i class="far fa-circle"></i>',
+      0: '<i class="far fa-square"></i>',
       0.5: '<i class="fas fa-adjust"></i>',
       1: '<i class="fas fa-check"></i>',
       2: '<i class="fas fa-check-double"></i>'
@@ -401,7 +537,7 @@ export default class ActorSheet5e extends ActorSheet {
     if ( this.actor.owner ) {
 
       // Ability Checks
-      html.find('.ability-name').click(this._onRollAbilityTest.bind(this));
+      html.find('.ability-name.rollable').click(this._onRollAbilityTest.bind(this));
 
 
       // Roll Skill Checks
@@ -410,6 +546,8 @@ export default class ActorSheet5e extends ActorSheet {
       // Item Rolling
       html.find('.item .item-image').click(event => this._onItemRoll(event));
       html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
+
+      html.find('#sheet-alignment input[type="radio"]').click(this._onSelectAlignment.bind(this));
     }
 
     // Otherwise remove rollable classes
@@ -496,7 +634,7 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @override */
   async _onDropActor(event, data) {
-    const canPolymorph = game.user.isGM || (this.actor.owner && game.settings.get('dnd5e', 'allowPolymorphing'));
+    const canPolymorph = game.user.isGM || (this.actor.owner && game.settings.get('sw5e', 'allowPolymorphing'));
     if ( !canPolymorph ) return false;
 
     // Get the target actor
@@ -515,8 +653,8 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('input').each((i, el) => {
         options[el.name] = el.checked;
       });
-      const settings = mergeObject(game.settings.get('dnd5e', 'polymorphSettings') || {}, options);
-      game.settings.set('dnd5e', 'polymorphSettings', settings);
+      const settings = mergeObject(game.settings.get('sw5e', 'polymorphSettings') || {}, options);
+      game.settings.set('sw5e', 'polymorphSettings', settings);
       return settings;
     };
 
@@ -524,7 +662,7 @@ export default class ActorSheet5e extends ActorSheet {
     return new Dialog({
       title: game.i18n.localize('DND5E.PolymorphPromptTitle'),
       content: {
-        options: game.settings.get('dnd5e', 'polymorphSettings'),
+        options: game.settings.get('sw5e', 'polymorphSettings'),
         i18n: DND5E.polymorphSettings,
         isToken: this.actor.isToken
       },
@@ -558,7 +696,7 @@ export default class ActorSheet5e extends ActorSheet {
         }
       }
     }, {
-      classes: ['dialog', 'dnd5e'],
+      classes: ['dialog', 'sw5e'],
       width: 600,
       template: 'systems/sw5e/templates/apps/polymorph-prompt.html'
     }).render(true);
@@ -635,6 +773,11 @@ export default class ActorSheet5e extends ActorSheet {
     // Roll spells through the actor
     if ( item.data.type === "spell" ) {
       return this.actor.useSpell(item, {configureDialog: !event.shiftKey});
+    }
+
+    // Roll power through the actor
+    if ( item.data.type === "techpower" || item.data.type === "forcepower" ) {
+      return this.actor.usePower(item, {configureDialog: !event.shiftKey});
     }
 
     // Otherwise roll the Item directly
@@ -821,6 +964,31 @@ export default class ActorSheet5e extends ActorSheet {
     const choices = CONFIG.DND5E[a.dataset.options];
     const options = { name: a.dataset.target, title: label.innerText, choices };
     new TraitSelector(this.actor, options).render(true)
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle selection of alignment
+   * @param {Event} event   The click event which originated the selection
+   * @private
+   */
+  _onSelectAlignment(event) {
+    event.preventDefault();
+    
+    const [currentOrientation = '', currentMorals = ''] = this.actor.data.data.details.alignment.split(' ');
+
+    const element = event.target;
+    const name = element.name;
+
+    const type = name;
+    const value = element.value;
+
+    console.log({ type, value })
+
+    this.actor.update({
+      ['data.details.alignment']: 
+        `${type === 'orientation' ? value : currentOrientation} ${type === 'morals' ? value : currentMorals}` });
   }
 
   /* -------------------------------------------- */

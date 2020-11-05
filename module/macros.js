@@ -24,7 +24,7 @@ export async function create5eMacro(data, slot) {
       type: "script",
       img: item.img,
       command: command,
-      flags: {"dnd5e.itemMacro": true}
+      flags: {"sw5e.itemMacro": true}
     });
   }
   game.user.assignHotbarMacro(macro, slot);
@@ -56,5 +56,6 @@ export function rollItemMacro(itemName) {
 
   // Trigger the item roll
   if ( item.data.type === "spell" ) return actor.useSpell(item);
+  if ( item.data.type === "forcepower" || item.data.type === "techpower" ) return actor.usePower(item);
   return item.roll();
 }

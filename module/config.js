@@ -242,23 +242,7 @@ DND5E.consumableTypes = {
  * @type {Object}
  */
 DND5E.currencies = {
-  "pp": "DND5E.CurrencyPP",
-  "gp": "DND5E.CurrencyGP",
-  "ep": "DND5E.CurrencyEP",
-  "sp": "DND5E.CurrencySP",
-  "cp": "DND5E.CurrencyCP",
-};
-
-
-/**
- * Define the upwards-conversion rules for registered currency types
- * @type {{string, object}}
- */
-DND5E.currencyConversion = {
-  cp: {into: "sp", each: 10},
-  sp: {into: "ep", each: 5 },
-  ep: {into: "gp", each: 2 },
-  gp: {into: "pp", each: 10}
+  "cr": "DND5E.CurrencyCr",
 };
 
 /* -------------------------------------------- */
@@ -267,24 +251,21 @@ DND5E.currencyConversion = {
 // Damage Types
 DND5E.damageTypes = {
   "acid": "DND5E.DamageAcid",
-  "bludgeoning": "DND5E.DamageBludgeoning",
   "cold": "DND5E.DamageCold",
+  "energy": "DND5E.DamageEnergy",
   "fire": "DND5E.DamageFire",
   "force": "DND5E.DamageForce",
+  "ion": "DND5E.DamageIon",
+  "kinetic": "DND5E.DamageKinetic",
   "lightning": "DND5E.DamageLightning",
   "necrotic": "DND5E.DamageNecrotic",
-  "piercing": "DND5E.DamagePiercing",
   "poison": "DND5E.DamagePoison",
   "psychic": "DND5E.DamagePsychic",
-  "radiant": "DND5E.DamageRadiant",
-  "slashing": "DND5E.DamageSlashing",
-  "thunder": "DND5E.DamageThunder"
+  "sonic": "DND5E.DamageSonic"
 };
 
 // Damage Resistance Types
-DND5E.damageResistanceTypes = mergeObject(duplicate(DND5E.damageTypes), {
-  "physical": "DND5E.DamagePhysical"
-});
+DND5E.damageResistanceTypes = duplicate(DND5E.damageTypes);
 
 
 /* -------------------------------------------- */
@@ -399,22 +380,22 @@ DND5E.senses = {
 DND5E.skills = {
   "acr": "DND5E.SkillAcr",
   "ani": "DND5E.SkillAni",
-  "arc": "DND5E.SkillArc",
   "ath": "DND5E.SkillAth",
   "dec": "DND5E.SkillDec",
-  "his": "DND5E.SkillHis",
   "ins": "DND5E.SkillIns",
   "itm": "DND5E.SkillItm",
   "inv": "DND5E.SkillInv",
+  "lor": "DND5E.SkillLor",
   "med": "DND5E.SkillMed",
   "nat": "DND5E.SkillNat",
+  "pil": "DND5E.SkillPil",
   "prc": "DND5E.SkillPrc",
   "prf": "DND5E.SkillPrf",
   "per": "DND5E.SkillPer",
-  "rel": "DND5E.SkillRel",
   "slt": "DND5E.SkillSlt",
   "ste": "DND5E.SkillSte",
-  "sur": "DND5E.SkillSur"
+  "sur": "DND5E.SkillSur",
+  "tec": "DND5E.SkillTec",
 };
 
 
@@ -525,6 +506,27 @@ DND5E.spellLevels = {
   7: "DND5E.SpellLevel7",
   8: "DND5E.SpellLevel8",
   9: "DND5E.SpellLevel9"
+};
+
+// Power Levels
+DND5E.powerLevels = {
+  0: "DND5E.PowerLevel0",
+  1: "DND5E.PowerLevel1",
+  2: "DND5E.PowerLevel2",
+  3: "DND5E.PowerLevel3",
+  4: "DND5E.PowerLevel4",
+  5: "DND5E.PowerLevel5",
+  6: "DND5E.PowerLevel6",
+  7: "DND5E.PowerLevel7",
+  8: "DND5E.PowerLevel8",
+  9: "DND5E.PowerLevel9"
+};
+
+// Power Alignments
+DND5E.powerAlignments = {
+  "lig": "DND5E.PowerAlignmentLig",
+  "dar": "DND5E.PowerAlignmentDar",
+  "uni": "DND5E.PowerAlignmentUni"
 };
 
 // Spell Scroll Compendium UUIDs
