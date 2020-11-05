@@ -98,6 +98,13 @@
       "system": "sw5e",
       "path": "./packs/trade-goods.db",
       "entity": "Item"
+    },
+    {
+      "name": "weapons",
+      "label": "Weapons",
+      "system": "sw5e",
+      "path": "./packs/weapons.db",
+      "entity": "Item"
     }
   ],
   "languages": [
