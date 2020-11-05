@@ -9,8 +9,15 @@
   "styles": ["dnd5e.css"],
   "packs": [
     {
+      "name": "adventuringgear",
+      "label": "Adventuring Gear",
+      "system": "sw5e",
+      "path": "./packs/adventuring-gear.db",
+      "entity": "Item"
+    },
+    {
       "name": "feats",
-      "label": "feats",
+      "label": "Feats",
       "system": "sw5e",
       "path": "./packs/feats.db",
       "entity": "Item"
