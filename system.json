@@ -23,6 +23,13 @@
       "entity": "Item"
     },
     {
+      "name": "armour",
+      "label": "Armour",
+      "system": "sw5e",
+      "path": "./packs/armour.db",
+      "entity": "Item"
+    },
+    {
       "name": "feats",
       "label": "Feats",
       "system": "sw5e",
