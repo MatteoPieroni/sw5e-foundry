@@ -51,6 +51,13 @@
       "entity": "Item"
     },
     {
+      "name": "forcepowers",
+      "label": "Force Powers",
+      "system": "sw5e",
+      "path": "./packs/force-powers.db",
+      "entity": "Item"
+    },
+    {
       "name": "feats",
       "label": "Feats",
       "system": "sw5e",
