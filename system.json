@@ -37,6 +37,13 @@
       "entity": "Item"
     },
     {
+      "name": "classfeatures",
+      "label": "Class Features",
+      "system": "sw5e",
+      "path": "./packs/class-features.db",
+      "entity": "Item"
+    },
+    {
       "name": "feats",
       "label": "Feats",
       "system": "sw5e",
