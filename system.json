@@ -65,6 +65,13 @@
       "entity": "Item"
     },
     {
+      "name": "lightsaberforms",
+      "label": "Lightsaber Forms",
+      "system": "sw5e",
+      "path": "./packs/lightsaber-forms.db",
+      "entity": "Item"
+    },
+    {
       "name": "feats",
       "label": "Feats",
       "system": "sw5e",
