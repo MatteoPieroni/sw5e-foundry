@@ -602,7 +602,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
 
       // Item Rolling
-      html.find('.item .item-image').click(event => this._onItemRoll(event));
+      html.find('.item .item-roll-js').click(event => this._onItemRoll(event));
       html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
 
       html.find('#sheet-alignment input[type="radio"]').click(this._onSelectAlignment.bind(this));

@@ -1128,6 +1128,9 @@
   /* Inventory List Filters */
   /* Encumbrance Bar */
   /* ----------------------------------------- */
+  /*  Inventory Alternative                    */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Spellbook                                */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
@@ -1991,6 +1994,41 @@
 }
 .dnd5e.sheet.actor-alternative .encumbrance.encumbered .arrow-down {
   border-top: 4px solid #000;
+}
+.dnd5e.sheet.actor-alternative .inventory-alternative .item-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  margin: 0.5rem 0 1rem 0;
+  padding: 0;
+}
+.dnd5e.sheet.actor-alternative .inventory-alternative .item {
+  text-align: center;
+}
+.dnd5e.sheet.actor-alternative .inventory-alternative .item-image {
+  position: relative;
+}
+.dnd5e.sheet.actor-alternative .inventory-alternative .item-equipped {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.dnd5e.sheet.actor-alternative .inventory-alternative .item-add {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+.dnd5e.sheet.actor-alternative .inventory-alternative .item-name {
+  font-size: 1rem;
+}
+.dnd5e.sheet.actor-alternative .inventory-alternative .item-uses .uses-current {
+  text-align: right;
+  padding-right: 0;
+}
+.dnd5e.sheet.actor-alternative .inventory-alternative .item-uses .uses-total {
+  text-align: left;
+  padding-left: 0;
 }
 .dnd5e.sheet.actor-alternative .spellcasting-ability {
   flex: 0 0 240px;
