@@ -18,6 +18,7 @@ export default class ActorSheet5e extends ActorSheet {
      */
     this._filters = {
       inventory: new Set(),
+      equippedItems: new Set(),
       spellbook: new Set(),
       forcepowers: new Set(),
       techpowers: new Set(),
@@ -79,6 +80,16 @@ export default class ActorSheet5e extends ActorSheet {
     data.labels = this.actor.labels || {};
     data.filters = this._filters;
 
+    // Experience required for next level
+    const hp = data.data.attributes.hp;
+    const hpValue = hp.value;
+    const hpMax = hp.tempMax ? hp.tempMax : hp.max;
+    const pct = Math.round(hpValue * 100 / hpMax);
+    const statuses = ['red','orange', 'yellow', 'green'];
+    const status = Math.floor(pct / 30);
+    hp.pct = Math.clamped(pct, 0, 100);
+    hp.status = statuses[status];
+
     // Ability Scores
     for ( let [a, abl] of Object.entries(data.actor.data.abilities)) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
@@ -107,6 +118,9 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Prepare alignment
     this._prepareAlignment(data);
+
+    // Prepare equipped items
+    this._prepareEquippedItems(data);
 
     // Return data to the sheet
     return data
@@ -404,9 +418,8 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Insert a power into the forcepowers object when rendering the character sheet
+   * Compute the alignment value and shape it as an object to be consumed
    * @param {Object} data     The Actor data being prepared
-   * @param {Array} powers    The spell data being prepared
    * @private
    */
   _prepareAlignment(data) {
@@ -426,6 +439,51 @@ export default class ActorSheet5e extends ActorSheet {
         ...(morals ? { [morals]: true } : {}),
       }
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Make a collection of equipped items to show on the actor image
+   * @param {Object} data     The Actor data being prepared
+   * @private
+   */
+  _prepareEquippedItems(data) {
+    const items = [...data.inventory];
+    const filteredItems = items.reduce((acc, group) => (
+      group.dataset &&
+      (
+        group.dataset.type === 'weapon' ||
+        group.dataset.type === 'equipment'
+      ) ?
+        [
+          ...acc,
+          ...group.items
+        ] :
+        acc
+    ), []);
+
+    const [weapons, armour] = filteredItems.reduce((acc, item) => {
+      const isWeapon = item.type === 'weapon';
+      const isArmour = item.type === 'equipment';
+
+      if (item.data && !item.data.equipped) {
+        return acc;
+      }
+
+      return [
+        [
+          ...acc[0],
+          ...(isWeapon ? [item] : []),
+        ],
+        [
+          ...acc[1],
+          ...(isArmour ? [item] : []),
+        ],
+      ]
+    }, [[], []]);
+    
+    data.equippedItems = [weapons, armour];
   }
 
   /* -------------------------------------------- */

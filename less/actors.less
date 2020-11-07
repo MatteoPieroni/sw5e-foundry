@@ -772,6 +772,14 @@
       }
     }
 
+    select {
+      background: @primaryColor;
+    }
+
+    textarea {
+      color: @colorWhite;
+    }
+
     input[type="number"],
     input[data-dtype="Number"] {
       text-align: right;
@@ -787,16 +795,22 @@
     label {
       color: @lightColor;
     }
+
+    *::-webkit-scrollbar-thumb {
+      background: @colorYellow;
+      border: 1px solid @primaryColor;
+    }
+  
+    *::-webkit-scrollbar-track {
+      box-shadow: 0 1px @lightGrey inset;
+    }
+  }
+  
+  .tab > * {
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 
-  &::-webkit-scrollbar-thumb {
-    background: @colorYellow;
-    border: 1px solid @primaryColor;
-  }
-
-  &::-webkit-scrollbar-track {
-    box-shadow: 0 1px @lightGrey inset;
-  }
 
   /* ----------------------------------------- */
   /*  Sheet Header                             */
@@ -830,6 +844,17 @@
     input.temphp {
       width: 48%;
     }
+  }
+
+  /* ----------------------------------------- */
+  /*  Character General                        */
+  /* ----------------------------------------- */
+  .sheet-body {
+    overflow: auto;
+  }
+
+  .tag {
+    font-size: .8rem;
   }
 
   /* ----------------------------------------- */
@@ -915,6 +940,36 @@
 
     h4 {
       margin: 0;
+    }
+  }
+
+
+  .percentage-bar {
+    display: block;
+    margin: .5rem 0 .25rem;
+    border: 1px solid @colorWhite;
+    border-radius: 0 5px 5px 0;
+    width: 100%;
+    min-height: 5px;
+    height: 4px;
+
+    .bar {
+      display: block;
+      height: 100%;
+      background: @lightColor;
+
+      &.green {
+        background: #56f000;
+      }
+      &.orange {
+        background: #ffb302;
+      }
+      &.yellow {
+        background: #fce83a;
+      }
+      &.red {
+        background: #ff3838;
+      }
     }
   }
 
@@ -1033,7 +1088,11 @@
   }
 
   .tab.attributes {
-    overflow: hidden;
+    overflow: auto;
+    
+    > * {
+      margin: 0;
+    }
   }
 
   ul.attributes {
@@ -1263,6 +1322,7 @@
   /* ----------------------------------------- */
   .skills-section {
     flex: 0;
+    min-width: 560px;
 
     ul.skills-list {
       margin: .5rem;
@@ -1379,9 +1439,15 @@
 
   .traits {
     .form-group, .form-group-stacked {
-      margin: 0 0 3px 0;
       justify-content: space-between;
+      margin: 0;
+      margin-bottom: .5rem;
     }
+
+    .traits-list {
+      margin-top: .25rem;
+    }
+
     .configure-flags {
       flex: 1;
     }
@@ -1408,7 +1474,7 @@
       color: #999;
 
       &:hover {
-        color: #111;
+        color: @colorWhite;
         text-shadow: 0 0 10px red;
       }
     }
@@ -1430,7 +1496,7 @@
 
   /* Inventory List Filters */
   .inventory-filters {
-    margin: 0 8px;
+    margin: 0 1rem;
     flex: 0 0 20px;
     justify-content: flex-end;
 
@@ -1455,11 +1521,24 @@
         border-bottom: @borderGroove;
       }
     }
+
+    .filter-list .filter-item {
+      border-bottom: 3px solid @lighterPrimaryColor;
+
+      &:hover {
+        border-bottom: 3px solid @lighterPrimaryColor;
+        box-shadow: 0 3px 8px @lightColor;
+      }
+
+      &.active {
+        border-bottom: 3px solid @colorWhite;
+      }
+    }
   }
 
   .inventory-list {
     list-style: none;
-    margin: 0;
+    margin: 0 1rem;
     padding: 0 5px;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -1513,10 +1592,6 @@
       // Item Dropdown Properties
       .item-properties {
         margin-top: .75rem;
-        
-        .tag {
-          font-size: .8rem;
-        }
       }
 
       // Charged
@@ -1577,10 +1652,15 @@
       flex: 0 0 44px;
       .flexrow();
       justify-content: flex-end;
+
       a {
         flex: 0 0 22px;
         font-size: 12px;
         text-align: center;
+
+        &.active {
+          color: @colorWhite;
+        }
       }
     }
 
@@ -1735,7 +1815,6 @@
     .effect-name{
       flex: 2;
       align-items: center;
-      color: @colorDark;
       h4 { margin: 0; }
     }
 
@@ -1749,8 +1828,6 @@
     .effect-source,
     .effect-duration {
       text-align: center;
-      border-left: 1px solid @colorFaint;
-      border-right: 1px solid @colorFaint;
     }
 
     .effect-controls {
@@ -1760,7 +1837,6 @@
 
     .effect {
       align-items: center;
-      border-bottom: 1px solid @colorFaint;
       &:last-child { border-bottom: none; }
     }
   }
@@ -1770,6 +1846,35 @@
   /* ----------------------------------------- */
 
   .editor {
-    padding: 0 8px;
+    padding: .5rem;
+    border: 1px solid @secondaryColor;
+
+    .editor-edit {
+      background: none;
+      color: @colorWhite;
+    }
+
+    .editor-content {
+      color: @colorWhite;
+    }
+
+    iframe {
+      background: @colorWhite;
+    }
+
+    .tox-tbtn {
+      color: @colorWhite;
+
+      svg {
+        fill: @colorWhite;
+      }
+
+      &:hover {
+        color: @primaryColor;
+        svg {
+          fill: @primaryColor;
+        }
+      }
+    }
   }
 }
