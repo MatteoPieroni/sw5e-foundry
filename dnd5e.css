@@ -2113,6 +2113,9 @@
   text-align: left;
   padding-left: 0;
 }
+.dnd5e.sheet.actor-alternative .inventory-alternative .item-control.active i.fas {
+  color: #fff;
+}
 .dnd5e.sheet.actor-alternative .spellcasting-ability {
   flex: 0 0 240px;
   margin: 0;
