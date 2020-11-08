@@ -1,3 +1,76 @@
+.tippy-box[data-animation=fade][data-state=hidden] {
+  opacity: 0;
+}
+[data-tippy-root] {
+  max-width: calc(100vw - 10px);
+}
+.tippy-box {
+  position: relative;
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.4;
+  outline: 0;
+  transition-property: transform, visibility, opacity;
+}
+.tippy-box[data-placement^=top] > .tippy-arrow {
+  bottom: 0;
+}
+.tippy-box[data-placement^=top] > .tippy-arrow:before {
+  bottom: -7px;
+  left: 0;
+  border-width: 8px 8px 0;
+  border-top-color: initial;
+  transform-origin: center top;
+}
+.tippy-box[data-placement^=bottom] > .tippy-arrow {
+  top: 0;
+}
+.tippy-box[data-placement^=bottom] > .tippy-arrow:before {
+  top: -7px;
+  left: 0;
+  border-width: 0 8px 8px;
+  border-bottom-color: initial;
+  transform-origin: center bottom;
+}
+.tippy-box[data-placement^=left] > .tippy-arrow {
+  right: 0;
+}
+.tippy-box[data-placement^=left] > .tippy-arrow:before {
+  border-width: 8px 0 8px 8px;
+  border-left-color: initial;
+  right: -7px;
+  transform-origin: center left;
+}
+.tippy-box[data-placement^=right] > .tippy-arrow {
+  left: 0;
+}
+.tippy-box[data-placement^=right] > .tippy-arrow:before {
+  left: -7px;
+  border-width: 8px 8px 8px 0;
+  border-right-color: initial;
+  transform-origin: center right;
+}
+.tippy-box[data-inertia][data-state=visible] {
+  transition-timing-function: cubic-bezier(0.54, 1.5, 0.38, 1.11);
+}
+.tippy-arrow {
+  width: 16px;
+  height: 16px;
+  color: #333;
+}
+.tippy-arrow:before {
+  content: "";
+  position: absolute;
+  border-color: transparent;
+  border-style: solid;
+}
+.tippy-content {
+  position: relative;
+  padding: 5px 9px;
+  z-index: 1;
+}
 /* Deprecated vars */
 /* ----------------------------------------- */
 /*  Fonts                                    */
@@ -1995,13 +2068,26 @@
 .dnd5e.sheet.actor-alternative .encumbrance.encumbered .arrow-down {
   border-top: 4px solid #000;
 }
+.dnd5e.sheet.actor-alternative .inventory-alternative .inventory-filters {
+  flex: unset;
+}
+.dnd5e.sheet.actor-alternative .inventory-alternative .inventory-filters .filter-list {
+  max-width: none;
+  margin-bottom: 0.5rem;
+}
+.dnd5e.sheet.actor-alternative .inventory-alternative .inventory-filters .subfilters {
+  max-width: 70%;
+  margin-right: 0;
+  margin-left: auto;
+}
 .dnd5e.sheet.actor-alternative .inventory-alternative .item-list {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   margin: 0.5rem 0 1rem 0;
   padding: 0;
 }
 .dnd5e.sheet.actor-alternative .inventory-alternative .item {
+  margin: 0 0.5rem 0.5rem;
   text-align: center;
 }
 .dnd5e.sheet.actor-alternative .inventory-alternative .item-image {
@@ -2018,9 +2104,6 @@
   top: 0;
   right: 0;
   z-index: 10;
-}
-.dnd5e.sheet.actor-alternative .inventory-alternative .item-name {
-  font-size: 1rem;
 }
 .dnd5e.sheet.actor-alternative .inventory-alternative .item-uses .uses-current {
   text-align: right;
@@ -2141,6 +2224,42 @@
 }
 .dnd5e.sheet.actor-alternative .editor .tox-tbtn:hover svg {
   fill: #031121;
+}
+.tippy-box[data-theme="item"] {
+  background-color: tomato;
+  color: yellow;
+}
+.tippy-box[data-theme="item"] .tippy-content {
+  padding: 1rem;
+  background: #0f233a;
+  color: #fff;
+}
+.tippy-box[data-theme="item"] .item-title {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #d3ae3f;
+}
+.tippy-box[data-theme="item"] .item-weight,
+.tippy-box[data-theme="item"] .item-uses {
+  margin: 0;
+}
+.tippy-box[data-theme="item"] .item-summary {
+  margin-bottom: 1.5rem;
+}
+.tippy-box[data-theme="item"] .tags-list .tag {
+  display: inline-block;
+  margin: 0 0.25rem 0 0;
+  padding: 0 3px;
+  font-size: 0.8rem;
+  line-height: 16px;
+  border: 1px solid #3bc1e5;
+  border-radius: 3px;
+}
+.tippy-box[data-theme="item"] .tags-list .tag:last-of-type {
+  margin-right: 0;
+}
+.tippy-box[data-theme="item"] .tippy-arrow {
+  color: #0f233a;
 }
 .dnd5e.sheet.item {
   min-height: 420px;

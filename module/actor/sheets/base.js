@@ -521,6 +521,13 @@ export default class ActorSheet5e extends ActorSheet {
       if ( filters.has("equipped") ) {
         if ( data.equipped !== true ) return false;
       }
+
+      for ( let f of ["weapon", "backpack", "consumable", "equipment", "loot", "tool"] ) {
+        if ( filters.has(f) ) {
+          if ((item.type !== f)) return false;
+        }
+      }
+
       return true;
     });
   }
@@ -557,7 +564,7 @@ export default class ActorSheet5e extends ActorSheet {
     filterLists.on("click", ".filter-item", this._onToggleFilter.bind(this));
 
     // Item summaries
-    html.find('.item .item-name h4').click(event => this._onItemSummary(event));
+    html.find('.item .item-name h4').each((_, el) => this._onItemSummary(el));
 
     // Editable Only Listeners
     if ( this.isEditable ) {
@@ -862,25 +869,31 @@ export default class ActorSheet5e extends ActorSheet {
    * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
    * @private
    */
-  _onItemSummary(event) {
-    event.preventDefault();
-    let li = $(event.currentTarget).parents(".item"),
+  _onItemSummary(el) {
+    const li = $(el).parents(".item"),
         item = this.actor.getOwnedItem(li.data("item-id")),
+        specificData = item.data.data,
         chatData = item.getChatData({secrets: this.actor.owner});
+    const title = `<h4 class="item-title">${item.data.name}</h4>`;
+    const weight = item.data.totalWeight ? `<p class="item-weight">${item.data.totalWeight} ${game.i18n.localize("DND5E.AbbreviationLbs")}</p>` : '';
+    const uses = specificData.uses && specificData.uses.value ?
+      `<p class="item-uses">${specificData.uses.value}/${specificData.uses.max} ${game.i18n.localize("DND5E.LimitedUses")}</p>` :
+      '';
+    const summary = chatData.description.value && `<div class="item-summary">${chatData.description.value}</div>`;
+    const propsArray = chatData.properties.map(p => `<span class="tag">${p}</span>`).join('');
+    const props = propsArray ? `<p class="tags-list">${propsArray}</p>` : '';
 
-    // Toggle summary
-    if ( li.hasClass("expanded") ) {
-      let summary = li.children(".item-summary");
-      summary.slideUp(200, () => summary.remove());
-    } else {
-      let div = $(`<div class="item-summary">${chatData.description.value}</div>`);
-      let props = $(`<div class="item-properties"></div>`);
-      chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
-      div.append(props);
-      li.append(div.hide());
-      div.slideDown(200);
-    }
-    li.toggleClass("expanded");
+    const content = `${title}${weight}${uses}${summary}${props}`;
+
+    tippy(el, {
+      content,
+      allowHTML: true,
+      trigger: 'mouseenter focus click',
+      theme: 'item',
+      placement: 'right',
+      interactive: true,
+      appendTo: $(el).parents('.item-list')[0],
+    });
   }
 
   /* -------------------------------------------- */

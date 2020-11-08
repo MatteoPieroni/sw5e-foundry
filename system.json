@@ -4,7 +4,7 @@
   "description": "A system for playing the Star Wars 5e RPG based on the fifth edition system in the Foundry Virtual Tabletop environment.",
   "version": 0.020,
   "author": "Matteo Pieroni",
-  "scripts": [],
+  "scripts": ["module/modules/popper-2.5.4.js", "module/modules/tippy-6.2.7.js"],
   "esmodules": ["dnd5e.js"],
   "styles": ["dnd5e.css"],
   "packs": [
