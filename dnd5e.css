@@ -2239,9 +2239,13 @@
   margin-bottom: 0.5rem;
   color: #d3ae3f;
 }
+.tippy-box[data-theme="item"] .item-type,
 .tippy-box[data-theme="item"] .item-weight,
 .tippy-box[data-theme="item"] .item-uses {
   margin: 0;
+}
+.tippy-box[data-theme="item"] .item-type {
+  text-transform: capitalize;
 }
 .tippy-box[data-theme="item"] .item-summary {
   margin-bottom: 1.5rem;

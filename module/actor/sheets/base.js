@@ -875,6 +875,7 @@ export default class ActorSheet5e extends ActorSheet {
         specificData = item.data.data,
         chatData = item.getChatData({secrets: this.actor.owner});
     const title = `<h4 class="item-title">${item.data.name}</h4>`;
+    const type = item.data.type ? `<p class="item-type">${game.i18n.localize("DND5E.Type")}: ${item.data.type}</p>` : '';
     const weight = item.data.totalWeight ? `<p class="item-weight">${item.data.totalWeight} ${game.i18n.localize("DND5E.AbbreviationLbs")}</p>` : '';
     const uses = specificData.uses && specificData.uses.value ?
       `<p class="item-uses">${specificData.uses.value}/${specificData.uses.max} ${game.i18n.localize("DND5E.LimitedUses")}</p>` :
@@ -883,7 +884,7 @@ export default class ActorSheet5e extends ActorSheet {
     const propsArray = chatData.properties.map(p => `<span class="tag">${p}</span>`).join('');
     const props = propsArray ? `<p class="tags-list">${propsArray}</p>` : '';
 
-    const content = `${title}${weight}${uses}${summary}${props}`;
+    const content = `${title}${type}${weight}${uses}${summary}${props}`;
 
     tippy(el, {
       content,
