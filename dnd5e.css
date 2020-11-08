@@ -1705,6 +1705,7 @@
   transform: translateX(-50%);
 }
 .dnd5e.sheet.actor-alternative .character-image img {
+  display: block;
   margin: 0 auto;
   border: none;
   max-height: 300px;
@@ -2092,6 +2093,16 @@
 }
 .dnd5e.sheet.actor-alternative .inventory-alternative .item-image {
   position: relative;
+  cursor: pointer;
+}
+.dnd5e.sheet.actor-alternative .inventory-alternative .item-image:hover {
+  background-image: url("../../icons/svg/d20.svg") !important;
+  background-size: 75%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.dnd5e.sheet.actor-alternative .inventory-alternative .item-image:hover img {
+  opacity: 0.25;
 }
 .dnd5e.sheet.actor-alternative .inventory-alternative .item-equipped {
   position: absolute;
