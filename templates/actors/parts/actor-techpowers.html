@@ -1,4 +1,4 @@
-<ul class="attributes flexrow">
+<ul class="power-attributes attributes flexrow">
     <li class="attribute health">
         <h4 class="attribute-name box-title">{{ localize "DND5E.PowerTechPoints" }}</h4>
         <div class="attribute-value multiple">
@@ -39,8 +39,8 @@
         <label>{{localize "DND5E.PowerAbility"}}</label>
         {{else}}
         <label>{{localize "DND5E.Level"}}</label>
-        <input class="spellcasting-level" type="text" name="data.details.spellLevel"
-               value="{{data.details.spellLevel}}" data-dtype="Number" placeholder="0"/>
+        <input class="spellcasting-level" type="text" name="data.details.powerLevel"
+               value="{{data.details.powerLevel}}" data-dtype="Number" placeholder="0"/>
         {{/unless}}
         <select name="data.attributes.techcasting" data-type="String">
             {{#select data.attributes.techcasting}}
@@ -52,7 +52,7 @@
         </select>
     </div>
 
-    <ul class="filter-list flexrow" data-filter="spellbook">
+    <ul class="filter-list flexrow" data-filter="techpowers">
         <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
         <li class="filter-item" data-filter="bonus">{{localize "DND5E.BonusAction"}}</li>
         <li class="filter-item" data-filter="reaction">{{localize "DND5E.Reaction"}}</li>
@@ -66,12 +66,12 @@
             <h3>{{section.label}}</h3>
         </div>
 
-        <div class="spell-action">{{localize "DND5E.SpellUsage"}}</div>
-        <div class="spell-target">{{localize "DND5E.SpellTarget"}}</div>
+        <div class="spell-action">{{localize "DND5E.PowerUsage"}}</div>
+        <div class="spell-target">{{localize "DND5E.PowerTarget"}}</div>
 
         <div class="item-controls">
             {{#if section.canCreate}}
-            <a class="item-control item-create" title="{{localize 'DND5E.SpellCreate'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+            <a class="item-control item-create" title="{{localize 'DND5E.PowerCreate'}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
                 <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
             </a>
             {{/if}}
@@ -79,10 +79,10 @@
     </li>
 
     <ol class="item-list">
-    {{#each section.spells as |item i|}}
+    {{#each section.powers as |item i|}}
         <li class="item flexrow" data-item-id="{{item._id}}">
             <div class="item-name flexrow rollable">
-                <div class="item-image" style="background-image: url('{{item.img}}')"></div>
+                <div class="item-image item-roll-js" style="background-image: url('{{item.img}}')"></div>
                 <h4>{{item.name}}</h4>
                 {{#if item.data.uses.per }}
                 <div class="item-detail spell-uses">Uses {{item.data.uses.value}} / {{item.data.uses.max}}</div>
@@ -114,16 +114,16 @@
     </ol>
 {{else}}
     {{#if owner}}
-    {{#if filters.spellbook.size}}
-    <li class="item flexrow"><p class="notes">{{localize "DND5E.FilterNoSpells"}}</p></li>
+    {{#if filters.techpowers.size}}
+    <li class="item flexrow"><p class="notes">{{localize "DND5E.FilterNoPowers"}}</p></li>
     {{else}}
     <li class="item flexrow inventory-header spellbook-header spellbook-empty">
         <div class="item-controls">
-            <a class="item-control item-create" title="{{localize 'DND5E.SpellCreate'}}" data-type="spell"
-               data-level="{{lvl}}"><i class="fas fa-plus"></i> {{localize "DND5E.SpellAdd"}}</a>
+            <a class="item-control item-create" title="{{localize 'DND5E.PowerCreate'}}" data-type="techpower"
+               data-level="{{lvl}}"><i class="fas fa-plus"></i> {{localize "DND5E.PowerAdd"}}</a>
         </div>
     </li>
-    <li class="item flexrow"><p class="notes">{{localize "DND5E.NoSpellLevels"}}</p></li>
+    <li class="item flexrow"><p class="notes">{{localize "DND5E.NoPowerLevels"}}</p></li>
     {{/if}}
     {{/if}}
 {{/each}}

@@ -18,6 +18,7 @@ export default class ActorSheet5e extends ActorSheet {
      */
     this._filters = {
       inventory: new Set(),
+      equippedItems: new Set(),
       spellbook: new Set(),
       forcepowers: new Set(),
       techpowers: new Set(),
@@ -79,6 +80,16 @@ export default class ActorSheet5e extends ActorSheet {
     data.labels = this.actor.labels || {};
     data.filters = this._filters;
 
+    // Experience required for next level
+    const hp = data.data.attributes.hp;
+    const hpValue = hp.value;
+    const hpMax = hp.tempMax ? hp.tempMax : hp.max;
+    const pct = Math.round(hpValue * 100 / hpMax);
+    const statuses = ['red','orange', 'yellow', 'green'];
+    const status = Math.floor(pct / 30);
+    hp.pct = Math.clamped(pct, 0, 100);
+    hp.status = statuses[status];
+
     // Ability Scores
     for ( let [a, abl] of Object.entries(data.actor.data.abilities)) {
       abl.icon = this._getProficiencyIcon(abl.proficient);
@@ -107,6 +118,9 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Prepare alignment
     this._prepareAlignment(data);
+
+    // Prepare equipped items
+    this._prepareEquippedItems(data);
 
     // Return data to the sheet
     return data
@@ -305,7 +319,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @param {Array} powers    The spell data being prepared
    * @private
    */
-  _preparePowers(data, spells, { mode }) {
+  _preparePowers(data, powers, { mode }) {
     if (!mode) {
       return new Error('Preparing powers requires specifying power type');
     };
@@ -336,7 +350,7 @@ export default class ActorSheet5e extends ActorSheet {
         usesSlots: i > 0,
         canCreate: owner,
         canPrepare: (data.actor.type === "character") && (i >= 1),
-        spells: [],
+        powers: [],
         uses: useLabels[i] || value || 0,
         slots: useLabels[i] || max || 0,
         override: override || 0,
@@ -349,26 +363,21 @@ export default class ActorSheet5e extends ActorSheet {
     };
 
     // Determine the maximum spell level which has a slot
-    const maxLevel = Array.fromRange(10).reduce((max, i) => {
-      if ( i === 0 ) return max;
-      const level = levels[`power${i}`];
-      if ( (level.max || level.override ) && ( i > max ) ) max = i;
-      return max;
-    }, 0);
+    const maxLevel = data.data[mode].level;
 
     // Level-based spellcasters have cantrips and leveled slots
     if ( maxLevel > 0 ) {
       registerSection("power0", 0, CONFIG.DND5E.powerLevels[0]);
       for (let lvl = 1; lvl <= maxLevel; lvl++) {
         const sl = `power${lvl}`;
-        registerSection(sl, lvl, CONFIG.DND5E.spellLevels[lvl], levels[sl]);
+        registerSection(sl, lvl, CONFIG.DND5E.powerLevels[lvl], levels[sl]);
       }
     }
 
     // Iterate over every spell item, adding spells to the spellbook by section
-    spells.forEach(spell => {
-      const mode = spell.data.preparation.mode || "prepared";
-      let s = spell.data.level || 0;
+    powers.forEach(power => {
+      const mode = power.data.preparation && power.data.preparation.mode || "prepared";
+      let s = power.data.level || 0;
       const sl = `power${s}`;
 
       // Specialized spellcasting modes (if they exist)
@@ -392,7 +401,7 @@ export default class ActorSheet5e extends ActorSheet {
       }
 
       // Add the spell to the relevant heading
-      spellbook[s].spells.push(spell);
+      spellbook[s].powers.push(power);
     });
 
     // Sort the spellbook by section level
@@ -404,9 +413,8 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Insert a power into the forcepowers object when rendering the character sheet
+   * Compute the alignment value and shape it as an object to be consumed
    * @param {Object} data     The Actor data being prepared
-   * @param {Array} powers    The spell data being prepared
    * @private
    */
   _prepareAlignment(data) {
@@ -426,6 +434,51 @@ export default class ActorSheet5e extends ActorSheet {
         ...(morals ? { [morals]: true } : {}),
       }
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Make a collection of equipped items to show on the actor image
+   * @param {Object} data     The Actor data being prepared
+   * @private
+   */
+  _prepareEquippedItems(data) {
+    const items = [...data.inventory];
+    const filteredItems = items.reduce((acc, group) => (
+      group.dataset &&
+      (
+        group.dataset.type === 'weapon' ||
+        group.dataset.type === 'equipment'
+      ) ?
+        [
+          ...acc,
+          ...group.items
+        ] :
+        acc
+    ), []);
+
+    const [weapons, armour] = filteredItems.reduce((acc, item) => {
+      const isWeapon = item.type === 'weapon';
+      const isArmour = item.type === 'equipment';
+
+      if (item.data && !item.data.equipped) {
+        return acc;
+      }
+
+      return [
+        [
+          ...acc[0],
+          ...(isWeapon ? [item] : []),
+        ],
+        [
+          ...acc[1],
+          ...(isArmour ? [item] : []),
+        ],
+      ]
+    }, [[], []]);
+    
+    data.equippedItems = { weapons, armour };
   }
 
   /* -------------------------------------------- */
@@ -463,6 +516,13 @@ export default class ActorSheet5e extends ActorSheet {
       if ( filters.has("equipped") ) {
         if ( data.equipped !== true ) return false;
       }
+
+      for ( let f of ["weapon", "backpack", "consumable", "equipment", "loot", "tool"] ) {
+        if ( filters.has(f) ) {
+          if ((item.type !== f)) return false;
+        }
+      }
+
       return true;
     });
   }
@@ -499,7 +559,8 @@ export default class ActorSheet5e extends ActorSheet {
     filterLists.on("click", ".filter-item", this._onToggleFilter.bind(this));
 
     // Item summaries
-    html.find('.item .item-name h4').click(event => this._onItemSummary(event));
+    html.find('.item .item-name h4').each((_, el) => this._onItemSummary(el));
+    html.find('.equipped-items .item .item-preview-js').each((_, el) => this._onEquippedItemSummary(el));
 
     // Editable Only Listeners
     if ( this.isEditable ) {
@@ -544,7 +605,7 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
 
       // Item Rolling
-      html.find('.item .item-image').click(event => this._onItemRoll(event));
+      html.find('.item .item-roll-js').click(event => this._onItemRoll(event));
       html.find('.item .item-recharge').click(event => this._onItemRecharge(event));
 
       html.find('#sheet-alignment input[type="radio"]').click(this._onSelectAlignment.bind(this));
@@ -801,28 +862,66 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
+   * Handle preview of an item when hovered or clicked
    * @private
    */
-  _onItemSummary(event) {
-    event.preventDefault();
-    let li = $(event.currentTarget).parents(".item"),
+  _onItemSummary(el) {
+    const li = $(el).parents(".item"),
         item = this.actor.getOwnedItem(li.data("item-id")),
+        specificData = item.data.data,
         chatData = item.getChatData({secrets: this.actor.owner});
+    const title = `<h4 class="item-title">${item.data.name}</h4>`;
+    const type = item.data.type ? `<p class="item-type">${game.i18n.localize("DND5E.Type")}: ${item.data.type}</p>` : '';
+    const weight = item.data.totalWeight ? `<p class="item-weight">${item.data.totalWeight} ${game.i18n.localize("DND5E.AbbreviationLbs")}</p>` : '';
+    const uses = specificData.uses && specificData.uses.value ?
+      `<p class="item-uses">${specificData.uses.value}/${specificData.uses.max} ${game.i18n.localize("DND5E.LimitedUses")}</p>` :
+      '';
+    const summary = chatData.description.value && `<div class="item-summary">${chatData.description.value}</div>`;
+    const propsArray = chatData.properties.map(p => `<span class="tag">${p}</span>`).join('');
+    const props = propsArray ? `<p class="tags-list">${propsArray}</p>` : '';
 
-    // Toggle summary
-    if ( li.hasClass("expanded") ) {
-      let summary = li.children(".item-summary");
-      summary.slideUp(200, () => summary.remove());
-    } else {
-      let div = $(`<div class="item-summary">${chatData.description.value}</div>`);
-      let props = $(`<div class="item-properties"></div>`);
-      chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
-      div.append(props);
-      li.append(div.hide());
-      div.slideDown(200);
-    }
-    li.toggleClass("expanded");
+    const content = `${title}${type}${weight}${uses}${summary}${props}`;
+
+    tippy(el, {
+      content,
+      allowHTML: true,
+      trigger: 'mouseenter focus click',
+      theme: 'item',
+      placement: 'right',
+      interactive: true,
+      appendTo: $(el).parents('.item-list')[0],
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle preview of an equipped item
+   * @private
+   */
+  _onEquippedItemSummary(el) {
+    const li = $(el).parents(".item"),
+        item = this.actor.getOwnedItem(li.data("item-id")),
+        specificData = item.data.data,
+        chatData = item.getChatData({secrets: this.actor.owner});
+    const title = `<h4 class="item-title">${item.data.name}</h4>`;
+    const uses = specificData.uses && specificData.uses.value ?
+      `<p class="item-uses">${specificData.uses.value}/${specificData.uses.max} ${game.i18n.localize("DND5E.LimitedUses")}</p>` :
+      '';
+    const propsArray = chatData.properties.map(p => `<span class="tag">${p}</span>`).join('');
+    const props = propsArray ? `<p class="tags-list">${propsArray}</p>` : '';
+
+    const content = `${title}${uses}${props}`;
+
+    tippy(el, {
+      content,
+      allowHTML: true,
+      trigger: 'mouseenter focus',
+      theme: 'item',
+      placement: 'right',
+      interactive: true,
+      appendTo: $(el).parents('.equipped-items-list')[0],
+    });
   }
 
   /* -------------------------------------------- */
@@ -943,7 +1042,8 @@ export default class ActorSheet5e extends ActorSheet {
   _onToggleFilter(event) {
     event.preventDefault();
     const li = event.currentTarget;
-    const set = this._filters[li.parentElement.dataset.filter];
+    const parentElement = li.closest('ul');
+    const set = this._filters[parentElement.dataset.filter];
     const filter = li.dataset.filter;
     if ( set.has(filter) ) set.delete(filter);
     else set.add(filter);

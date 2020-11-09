@@ -190,7 +190,7 @@ export default class Item5e extends Item {
 
     else if (itemData.type === 'techpower') {
       labels.level = C.powerLevels[data.level];
-      labels.components = Object.entries(data.components).reduce((arr, c) => {
+      labels.components = Object.entries(data.components || {}).reduce((arr, c) => {
         if ( c[1] !== true ) return arr;
         arr.push(c[0].titleCase().slice(0, 1));
         return arr;

@@ -13,10 +13,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
    * @return {Object}
    */
 	static get defaultOptions() {
-    const isAlternative = false;
-
 	  return mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "sheet", isAlternative ? "actor-alternative" : "actor", "character"],
+      classes: ["dnd5e", "sheet", "actor-alternative", "character"],
       width: 720,
       height: 680
     });
@@ -114,8 +112,8 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Organize Spellbook and count the number of prepared spells (excluding always, at will, etc...)
     const spellbook = this._prepareSpellbook(data, spells);
-    const forcePowerBook = this._preparePowers(data, forcepowers, { mode: 'forcepowers' });
-    const techPowerBook = this._preparePowers(data, techpowers, { mode: 'techpowers' });
+    const forcePowerBook = this._preparePowers(data, forcepowers, { mode: 'forcecasting' });
+    const techPowerBook = this._preparePowers(data, techpowers, { mode: 'techcasting' });
     const nPrepared = spells.filter(s => {
       return (s.data.level > 0) && (s.data.preparation.mode === "prepared") && s.data.preparation.prepared;
     }).length;
