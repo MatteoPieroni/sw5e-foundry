@@ -1047,7 +1047,8 @@ export default class ActorSheet5e extends ActorSheet {
   _onToggleFilter(event) {
     event.preventDefault();
     const li = event.currentTarget;
-    const set = this._filters[li.parentElement.dataset.filter];
+    const parentElement = li.closest('ul');
+    const set = this._filters[parentElement.dataset.filter];
     const filter = li.dataset.filter;
     if ( set.has(filter) ) set.delete(filter);
     else set.add(filter);
