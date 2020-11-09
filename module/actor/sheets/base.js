@@ -319,7 +319,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @param {Array} powers    The spell data being prepared
    * @private
    */
-  _preparePowers(data, spells, { mode }) {
+  _preparePowers(data, powers, { mode }) {
     if (!mode) {
       return new Error('Preparing powers requires specifying power type');
     };
@@ -350,7 +350,7 @@ export default class ActorSheet5e extends ActorSheet {
         usesSlots: i > 0,
         canCreate: owner,
         canPrepare: (data.actor.type === "character") && (i >= 1),
-        spells: [],
+        powers: [],
         uses: useLabels[i] || value || 0,
         slots: useLabels[i] || max || 0,
         override: override || 0,
@@ -363,26 +363,21 @@ export default class ActorSheet5e extends ActorSheet {
     };
 
     // Determine the maximum spell level which has a slot
-    const maxLevel = Array.fromRange(10).reduce((max, i) => {
-      if ( i === 0 ) return max;
-      const level = levels[`power${i}`];
-      if ( (level.max || level.override ) && ( i > max ) ) max = i;
-      return max;
-    }, 0);
+    const maxLevel = data.data[mode].level;
 
     // Level-based spellcasters have cantrips and leveled slots
     if ( maxLevel > 0 ) {
       registerSection("power0", 0, CONFIG.DND5E.powerLevels[0]);
       for (let lvl = 1; lvl <= maxLevel; lvl++) {
         const sl = `power${lvl}`;
-        registerSection(sl, lvl, CONFIG.DND5E.spellLevels[lvl], levels[sl]);
+        registerSection(sl, lvl, CONFIG.DND5E.powerLevels[lvl], levels[sl]);
       }
     }
 
     // Iterate over every spell item, adding spells to the spellbook by section
-    spells.forEach(spell => {
-      const mode = spell.data.preparation.mode || "prepared";
-      let s = spell.data.level || 0;
+    powers.forEach(power => {
+      const mode = power.data.preparation && power.data.preparation.mode || "prepared";
+      let s = power.data.level || 0;
       const sl = `power${s}`;
 
       // Specialized spellcasting modes (if they exist)
@@ -406,7 +401,7 @@ export default class ActorSheet5e extends ActorSheet {
       }
 
       // Add the spell to the relevant heading
-      spellbook[s].spells.push(spell);
+      spellbook[s].powers.push(power);
     });
 
     // Sort the spellbook by section level
