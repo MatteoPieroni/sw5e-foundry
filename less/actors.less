@@ -1293,7 +1293,7 @@
 
     .img-wrapper {
       position: relative;
-      padding: 10%;
+      padding: 10% 3%;
       background: @variationPrimaryColor;
       box-shadow: inset 0 0 30px #000000;
       clip-path: polygon(10% 100%, 0 90%, 0% 10%, 10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%);
@@ -1310,11 +1310,57 @@
       }
     }
 
+    .equipped-items {
+      max-width: 40px;
+
+    }
+
+    .equipped-items-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      height: 100%;
+      justify-content: center;
+
+      .item {
+        margin-bottom: 2rem;
+      }
+
+      .rollable {
+        position: relative;
+        cursor: pointer;
+  
+        &:hover {
+          background-image: url("../../icons/svg/d20.svg") !important;
+          background-size: 75%;
+          background-repeat: no-repeat;
+          background-position: center;
+  
+          img {
+            opacity: 0.25;
+          }
+        }
+      }
+
+      [data-tippy-root] {
+        max-width: 75% !important;
+      }
+
+      .tippy-box[data-theme="item"] .tippy-content {
+        max-height: 200px;
+        background: @primaryColor;
+
+        .item-title {
+          background: inherit;
+        }
+      }
+    }
+
     img {
       display: block;
       margin: 0 auto;
       border: none;
-      max-height: 300px;
+      max-height: 280px;
     }
   }
 
@@ -1821,6 +1867,68 @@
   }
 
   /* ----------------------------------------- */
+  /*  Tooltip styles                           */
+  /* ----------------------------------------- */
+
+  .tippy-box[data-theme="item"] {
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  
+    .tippy-content {
+      padding: 1rem;
+      padding-top: 3rem;
+      background: @variationPrimaryColor;
+      color: @colorWhite;
+      max-height: 500px;
+      overflow: auto;
+    }
+  
+    .item-title {
+      position: fixed;
+      top: 0;
+      margin-bottom: .5rem;
+      padding-top: 1rem;
+      min-width: calc(100% ~"-" 2rem);
+      background: @variationPrimaryColor;
+      font-size: 1rem;
+      color: @colorYellow;
+    }
+  
+    .item-type, .item-weight, .item-uses {
+      margin: 0;
+    }
+  
+    .item-type {
+      text-transform: capitalize;
+    }
+  
+    .item-summary {
+      margin-bottom: 1.5rem;
+      padding: 0;
+    }
+  
+    .tags-list {
+      .tag {
+        display: inline-block;
+        margin: 0 .25rem 0 0;
+        padding: 0 3px;
+        font-size: .8rem;
+        line-height: 16px;
+        border: 1px solid @lightColor;
+        border-radius: 3px;
+  
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
+  
+    .tippy-arrow {
+      color: @variationPrimaryColor;
+      box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    }
+  }
+
+  /* ----------------------------------------- */
   /*  Spellbook                                */
   /* ----------------------------------------- */
 
@@ -1957,54 +2065,5 @@
         }
       }
     }
-  }
-}
-
-.tippy-box[data-theme="item"] {
-  background-color: tomato;
-  color: yellow;
-
-  .tippy-content {
-    padding: 1rem;
-    background: @variationPrimaryColor;
-    color: @colorWhite;
-  }
-
-  .item-title {
-    font-size: 1rem;
-    margin-bottom: .5rem;
-    color: @colorYellow;
-  }
-
-  .item-type, .item-weight, .item-uses {
-    margin: 0;
-  }
-
-  .item-type {
-    text-transform: capitalize;
-  }
-
-  .item-summary {
-    margin-bottom: 1.5rem;
-  }
-
-  .tags-list {
-    .tag {
-      display: inline-block;
-      margin: 0 .25rem 0 0;
-      padding: 0 3px;
-      font-size: .8rem;
-      line-height: 16px;
-      border: 1px solid @lightColor;
-      border-radius: 3px;
-
-      &:last-of-type {
-        margin-right: 0;
-      }
-    }
-  }
-
-  .tippy-arrow {
-    color: @variationPrimaryColor;
   }
 }

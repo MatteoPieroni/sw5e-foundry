@@ -483,7 +483,7 @@ export default class ActorSheet5e extends ActorSheet {
       ]
     }, [[], []]);
     
-    data.equippedItems = [weapons, armour];
+    data.equippedItems = { weapons, armour };
   }
 
   /* -------------------------------------------- */
@@ -565,6 +565,7 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Item summaries
     html.find('.item .item-name h4').each((_, el) => this._onItemSummary(el));
+    html.find('.equipped-items .item .item-preview-js').each((_, el) => this._onEquippedItemSummary(el));
 
     // Editable Only Listeners
     if ( this.isEditable ) {
@@ -866,7 +867,7 @@ export default class ActorSheet5e extends ActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
+   * Handle preview of an item when hovered or clicked
    * @private
    */
   _onItemSummary(el) {
@@ -894,6 +895,37 @@ export default class ActorSheet5e extends ActorSheet {
       placement: 'right',
       interactive: true,
       appendTo: $(el).parents('.item-list')[0],
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle preview of an equipped item
+   * @private
+   */
+  _onEquippedItemSummary(el) {
+    const li = $(el).parents(".item"),
+        item = this.actor.getOwnedItem(li.data("item-id")),
+        specificData = item.data.data,
+        chatData = item.getChatData({secrets: this.actor.owner});
+    const title = `<h4 class="item-title">${item.data.name}</h4>`;
+    const uses = specificData.uses && specificData.uses.value ?
+      `<p class="item-uses">${specificData.uses.value}/${specificData.uses.max} ${game.i18n.localize("DND5E.LimitedUses")}</p>` :
+      '';
+    const propsArray = chatData.properties.map(p => `<span class="tag">${p}</span>`).join('');
+    const props = propsArray ? `<p class="tags-list">${propsArray}</p>` : '';
+
+    const content = `${title}${uses}${props}`;
+
+    tippy(el, {
+      content,
+      allowHTML: true,
+      trigger: 'mouseenter focus',
+      theme: 'item',
+      placement: 'right',
+      interactive: true,
+      appendTo: $(el).parents('.equipped-items-list')[0],
     });
   }
 

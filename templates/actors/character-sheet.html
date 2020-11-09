@@ -1,5 +1,4 @@
 <form class="{{cssClass}} flexcol flex--unset" autocomplete="off">
-    {{ log equippedItems }}
     {{!-- Sheet Header --}}
     <header class="sheet-header flexrow">
         <h1 class="charname">
@@ -51,7 +50,6 @@
                             <div class="char-level flexrow flexrow--space-between">
                                 <label>{{ localize "DND5E.Level" }}</label>
                                 <span>{{data.details.level}}</span>
-                                <!-- <span class="levels">{{classLabels}}</span> -->
                             </div>
 
                             {{#unless disableExperience}}
@@ -198,8 +196,29 @@
                         </div>
                     </aside>
 
-                    <div class="img-wrapper">
+                    <div class="img-wrapper flexrow flex--unset flexrow--no-wrap flexrow--space-between">
+                        <div class="equipped-items weapons">
+                            <ul class="equipped-items-list flexcol flex--unset">
+                                {{#each equippedItems.weapons as |weapon|}}
+                                    <li class="item short-summary-js rollable" data-item-id="{{weapon._id}}">
+                                        <img class="item-roll-js item-preview-js item-image" src="{{weapon.img}}" alt="{{weapon.name}}" />
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+
                         <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img"/>
+
+                        <div class="equipped-items armour">
+                            <ul class="equipped-items-list flexcol flex--unset">
+                                {{#each equippedItems.armour as |armour|}}
+                                    <li class="item short-summary-js rollable" data-item-id="{{armour._id}}">
+                                        <img class="item-roll-js item-preview-js item-image" src="{{armour.img}}" alt="{{armour.name}}" />
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                        
                     </div>
 
                 </section>

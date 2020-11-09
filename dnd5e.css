@@ -1204,6 +1204,9 @@
   /*  Inventory Alternative                    */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
+  /*  Tooltip styles                           */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
   /*  Spellbook                                */
   /* ----------------------------------------- */
   /* ----------------------------------------- */
@@ -1689,7 +1692,7 @@
 }
 .dnd5e.sheet.actor-alternative .character-image .img-wrapper {
   position: relative;
-  padding: 10%;
+  padding: 10% 3%;
   background: #0f233a;
   box-shadow: inset 0 0 30px #000000;
   clip-path: polygon(10% 100%, 0 90%, 0% 10%, 10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%);
@@ -1704,11 +1707,47 @@
   box-shadow: 0px 0px 5px #fff;
   transform: translateX(-50%);
 }
+.dnd5e.sheet.actor-alternative .character-image .equipped-items {
+  max-width: 40px;
+}
+.dnd5e.sheet.actor-alternative .character-image .equipped-items-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 100%;
+  justify-content: center;
+}
+.dnd5e.sheet.actor-alternative .character-image .equipped-items-list .item {
+  margin-bottom: 2rem;
+}
+.dnd5e.sheet.actor-alternative .character-image .equipped-items-list .rollable {
+  position: relative;
+  cursor: pointer;
+}
+.dnd5e.sheet.actor-alternative .character-image .equipped-items-list .rollable:hover {
+  background-image: url("../../icons/svg/d20.svg") !important;
+  background-size: 75%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.dnd5e.sheet.actor-alternative .character-image .equipped-items-list .rollable:hover img {
+  opacity: 0.25;
+}
+.dnd5e.sheet.actor-alternative .character-image .equipped-items-list [data-tippy-root] {
+  max-width: 75% !important;
+}
+.dnd5e.sheet.actor-alternative .character-image .equipped-items-list .tippy-box[data-theme="item"] .tippy-content {
+  max-height: 200px;
+  background: #031121;
+}
+.dnd5e.sheet.actor-alternative .character-image .equipped-items-list .tippy-box[data-theme="item"] .tippy-content .item-title {
+  background: inherit;
+}
 .dnd5e.sheet.actor-alternative .character-image img {
   display: block;
   margin: 0 auto;
   border: none;
-  max-height: 300px;
+  max-height: 280px;
 }
 .dnd5e.sheet.actor-alternative .skills-section {
   flex: 0;
@@ -2127,6 +2166,55 @@
 .dnd5e.sheet.actor-alternative .inventory-alternative .item-control.active i.fas {
   color: #fff;
 }
+.dnd5e.sheet.actor-alternative .tippy-box[data-theme="item"] {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+.dnd5e.sheet.actor-alternative .tippy-box[data-theme="item"] .tippy-content {
+  padding: 1rem;
+  padding-top: 3rem;
+  background: #0f233a;
+  color: #fff;
+  max-height: 500px;
+  overflow: auto;
+}
+.dnd5e.sheet.actor-alternative .tippy-box[data-theme="item"] .item-title {
+  position: fixed;
+  top: 0;
+  margin-bottom: 0.5rem;
+  padding-top: 1rem;
+  min-width: calc(100% - 2rem);
+  background: #0f233a;
+  font-size: 1rem;
+  color: #d3ae3f;
+}
+.dnd5e.sheet.actor-alternative .tippy-box[data-theme="item"] .item-type,
+.dnd5e.sheet.actor-alternative .tippy-box[data-theme="item"] .item-weight,
+.dnd5e.sheet.actor-alternative .tippy-box[data-theme="item"] .item-uses {
+  margin: 0;
+}
+.dnd5e.sheet.actor-alternative .tippy-box[data-theme="item"] .item-type {
+  text-transform: capitalize;
+}
+.dnd5e.sheet.actor-alternative .tippy-box[data-theme="item"] .item-summary {
+  margin-bottom: 1.5rem;
+  padding: 0;
+}
+.dnd5e.sheet.actor-alternative .tippy-box[data-theme="item"] .tags-list .tag {
+  display: inline-block;
+  margin: 0 0.25rem 0 0;
+  padding: 0 3px;
+  font-size: 0.8rem;
+  line-height: 16px;
+  border: 1px solid #3bc1e5;
+  border-radius: 3px;
+}
+.dnd5e.sheet.actor-alternative .tippy-box[data-theme="item"] .tags-list .tag:last-of-type {
+  margin-right: 0;
+}
+.dnd5e.sheet.actor-alternative .tippy-box[data-theme="item"] .tippy-arrow {
+  color: #0f233a;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
 .dnd5e.sheet.actor-alternative .spellcasting-ability {
   flex: 0 0 240px;
   margin: 0;
@@ -2238,46 +2326,6 @@
 }
 .dnd5e.sheet.actor-alternative .editor .tox-tbtn:hover svg {
   fill: #031121;
-}
-.tippy-box[data-theme="item"] {
-  background-color: tomato;
-  color: yellow;
-}
-.tippy-box[data-theme="item"] .tippy-content {
-  padding: 1rem;
-  background: #0f233a;
-  color: #fff;
-}
-.tippy-box[data-theme="item"] .item-title {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  color: #d3ae3f;
-}
-.tippy-box[data-theme="item"] .item-type,
-.tippy-box[data-theme="item"] .item-weight,
-.tippy-box[data-theme="item"] .item-uses {
-  margin: 0;
-}
-.tippy-box[data-theme="item"] .item-type {
-  text-transform: capitalize;
-}
-.tippy-box[data-theme="item"] .item-summary {
-  margin-bottom: 1.5rem;
-}
-.tippy-box[data-theme="item"] .tags-list .tag {
-  display: inline-block;
-  margin: 0 0.25rem 0 0;
-  padding: 0 3px;
-  font-size: 0.8rem;
-  line-height: 16px;
-  border: 1px solid #3bc1e5;
-  border-radius: 3px;
-}
-.tippy-box[data-theme="item"] .tags-list .tag:last-of-type {
-  margin-right: 0;
-}
-.tippy-box[data-theme="item"] .tippy-arrow {
-  color: #0f233a;
 }
 .dnd5e.sheet.item {
   min-height: 420px;
