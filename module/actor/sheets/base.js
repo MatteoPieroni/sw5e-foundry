@@ -444,7 +444,7 @@ export default class ActorSheet5e extends ActorSheet {
    * @private
    */
   _prepareEquippedItems(data) {
-    const items = [...data.inventory];
+    const items = data.inventory ? [...data.inventory] : [];
     const filteredItems = items.reduce((acc, group) => (
       group.dataset &&
       (
