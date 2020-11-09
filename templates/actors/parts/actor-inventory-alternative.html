@@ -1,0 +1,116 @@
+<div class="inventory-filters">
+
+    {{#unless isNPC}}
+    <ol class="currency flexrow">
+        <h3>
+            {{localize "DND5E.Currency"}}
+        </h3>
+        {{#each data.currency as |v k|}}
+        <label class="denomination {{k}}">{{ lookup ../config.currencies k }}</label>
+        <input type="text" name="data.currency.{{k}}" value="{{v}}" data-dtype="Number"/>
+        {{/each}}
+    </ol>
+    {{/unless}}
+
+    {{#unless isVehicle}}
+    <ul class="filter-list subfilters flexrow" data-filter="inventory">
+        <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
+        <li class="filter-item" data-filter="bonus">{{localize "DND5E.BonusAction"}}</li>
+        <li class="filter-item" data-filter="reaction">{{localize "DND5E.Reaction"}}</li>
+        <li class="filter-item" data-filter="equipped">{{localize "DND5E.Equipped"}}</li>
+    </ul>
+    {{/unless}}
+
+    {{#unless isVehicle}}
+    <ul class="filter-list flexrow" data-filter="inventory">
+        {{# each sections as |section sid|}}
+            {{#each section.dataset as |v k|}}
+                <li class="flexrow">
+                    <span class="filter-item" data-filter="{{v}}">
+                        {{localize section.label}}
+                    </span>
+                    <a class="item-control item-create" title='{{localize "DND5E.ItemCreate"}}' data-{{k}}="{{v}}">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </li>
+            {{/each}}
+        {{/each}}
+    </ul>
+    {{/unless}}
+</div>
+
+<div class="inventory-grid">
+    <ol class="item-list">
+        {{#each sections as |section sid|}}
+            {{#each section.items as |item iid|}}
+                <li class="item flexcol flex--unset {{section.css}}"
+                    data-item-id="{{#if section.editableName}}{{iid}}{{else}}{{item._id}}{{/if}}">
+                    <div class="item-image">
+                        <img class="item-roll-js" src="{{item.img}}" alt="{{item.name}} icon" />
+
+                        {{#if ../../owner}}
+                        <div class="item-equipped">
+                            {{#unless @root.isVehicle}}
+                            <a class="item-control item-toggle {{item.toggleClass}}" title='{{item.toggleTitle}}'><i class="fas fa-shield-alt"></i></a>
+                            {{/unless}}
+                        </div>
+                        <div class="item-add">
+                            {{#unless section.editableName}}
+                            <a class="item-control item-edit" title='{{localize "DND5E.ItemEdit"}}'><i class="fas fa-edit"></i></a>
+                            {{/unless}}
+                            <a class="item-control item-delete" title='{{localize "DND5E.ItemDelete"}}'><i class="fas fa-trash"></i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    <div class="item-name rollable">
+                        {{#if section.editableName}}
+                        <input type="text" value="{{item.name}}">
+                        {{else}}
+                        <h4>
+                            {{item.name~}}
+                            {{~#if item.isStack}} ({{item.data.quantity}}){{/if}}
+                            {{~#if item.data.attuned}} <i class="fas fa-sun attuned" title={{localize "DND5E.Attuned"}}></i>{{/if}}
+                        </h4>
+                        {{/if}}
+                    </div>
+
+                    {{#if section.columns}}
+                        {{#each section.columns}}
+                            <div class="item-detail {{css}}">
+                                {{#with (getProperty item property)}}
+                                    {{#if ../editable}}
+                                        <input type="text" value="{{this}}" placeholder="&mdash;"
+                                            data-dtype="{{../editable}}" data-property="{{../property}}">
+                                    {{else}}
+                                        {{this}}
+                                    {{/if}}
+                                {{/with}}
+                            </div>
+                        {{/each}}
+                    {{else}}
+                        <div class="item-detail flexrow flexrow--no-wrap item-uses">
+                            {{#if item.hasUses }}
+                                <input class="uses-current" type="text" value="{{item.data.uses.value}}" placeholder="0"/>
+                                <input class="uses-total" disabled type="text" value="/ {{item.data.uses.max}}" />
+                            {{/if}}
+                        </div>
+                    {{/if}}
+                </li>
+            {{/each}}
+        {{/each}}
+    </ol>
+</div>
+
+
+{{#unless isNPC}}
+{{#with data.attributes.encumbrance}}
+<div class="encumbrance {{#if encumbered}}encumbered{{/if}}">
+    <span class="encumbrance-bar" style="width:{{pct}}%"></span>
+    <span class="encumbrance-label">{{value}} / {{max}}</span>
+    <i class="encumbrance-breakpoint encumbrance-33 arrow-up"></i>
+    <i class="encumbrance-breakpoint encumbrance-33 arrow-down"></i>
+    <i class="encumbrance-breakpoint encumbrance-66 arrow-up"></i>
+    <i class="encumbrance-breakpoint encumbrance-66 arrow-down"></i>
+</div>
+{{/with}}
+{{/unless}}
