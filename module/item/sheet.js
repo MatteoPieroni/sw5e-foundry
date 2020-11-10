@@ -19,7 +19,7 @@ export default class ItemSheet5e extends ItemSheet {
 	  return mergeObject(super.defaultOptions, {
       width: 560,
       height: "auto",
-      classes: ["dnd5e", "sheet", "item"],
+      classes: ["dnd5e", "sheet", "item", "item-alternative"],
       resizable: true,
       scrollY: [".tab.details"],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
