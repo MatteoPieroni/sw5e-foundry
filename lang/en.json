@@ -49,7 +49,7 @@
 "DND5E.AbilityUseConsume": "Consume Available Usage?",
 "DND5E.AbilityUseChargesLabel": "{value} Charges",
 "DND5E.AbilityUseConsumableLabel": "{max} per {per}",
-"DND5E.AbilityUseCast": "Cast Spell",
+"DND5E.AbilityUseCast": "Cast Power",
 "DND5E.AbilityUseUse": "Use Ability",
 
 "DND5E.Action": "Action",
