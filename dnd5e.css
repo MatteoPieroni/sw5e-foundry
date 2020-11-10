@@ -2671,6 +2671,7 @@
   background: #031121;
   background: linear-gradient(180deg, #031121 0%, #031121 39%, #0c547b 70%, #35b2d7 91%, #3bc1e5 100%);
   color: #fff;
+  text-shadow: none;
 }
 .dnd5e.sheet.item.item-alternative .window-content .sheet-body {
   overflow: auto;
@@ -2680,10 +2681,15 @@
 }
 .dnd5e.sheet.item.item-alternative .window-content .sheet-header {
   border: none;
+  border-bottom: 2px solid #11638b;
+  margin: 0 0.5rem;
 }
 .dnd5e.sheet.item.item-alternative .window-content .sheet-header h1 input {
   border: none;
   color: #d3ae3f;
+}
+.dnd5e.sheet.item.item-alternative .window-content .sheet-header img.profile {
+  border-color: transparent;
 }
 .dnd5e.sheet.item.item-alternative .window-content .sheet-header .summary {
   border: none;
@@ -2693,8 +2699,14 @@
   border-color: #11638b;
   color: #3bc1e5;
 }
+.dnd5e.sheet.item.item-alternative .window-content .tab {
+  margin: 0.5rem 0.5rem 0;
+}
 .dnd5e.sheet.item.item-alternative .window-content .tab .item-properties {
   border-color: #11638b;
+}
+.dnd5e.sheet.item.item-alternative .window-content .tab .item-properties input {
+  border: none;
 }
 .dnd5e.sheet.item.item-alternative .window-content .tab.details .form-header {
   margin-bottom: 0.5rem;

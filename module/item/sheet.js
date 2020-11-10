@@ -11,7 +11,7 @@ export default class ItemSheet5e extends ItemSheet {
       this.options.width =  600;
     }
 
-    const changed = ["forcepower", "techpower"];
+    const changed = ["forcepower", "techpower", "weapon"];
     if ( changed.some(el => el === this.object.data.type) ) {
       this.options.classes.push('item-alternative');
     }
