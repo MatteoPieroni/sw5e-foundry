@@ -2534,6 +2534,9 @@
   /* ----------------------------------------- */
   /*  Details Tab                              */
   /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  TinyMCE                                  */
+  /* ----------------------------------------- */
 }
 .dnd5e.sheet.item.item-alternative .window-content h1,
 .dnd5e.sheet.item.item-alternative .window-content h2,
@@ -2701,6 +2704,31 @@
 }
 .dnd5e.sheet.item.item-alternative .window-content .tab.details .form-group {
   padding: 0.125rem 0px;
+}
+.dnd5e.sheet.item.item-alternative .window-content .editor {
+  padding: 0.5rem;
+}
+.dnd5e.sheet.item.item-alternative .window-content .editor .editor-edit {
+  background: none;
+  color: #fff;
+}
+.dnd5e.sheet.item.item-alternative .window-content .editor .editor-content {
+  color: #fff;
+}
+.dnd5e.sheet.item.item-alternative .window-content .editor iframe {
+  background: #fff;
+}
+.dnd5e.sheet.item.item-alternative .window-content .editor .tox-tbtn {
+  color: #fff;
+}
+.dnd5e.sheet.item.item-alternative .window-content .editor .tox-tbtn svg {
+  fill: #fff;
+}
+.dnd5e.sheet.item.item-alternative .window-content .editor .tox-tbtn:hover {
+  color: #031121;
+}
+.dnd5e.sheet.item.item-alternative .window-content .editor .tox-tbtn:hover svg {
+  fill: #031121;
 }
 /* ----------------------------------------- */
 /*  Chat Cards

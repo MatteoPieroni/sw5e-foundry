@@ -434,6 +434,41 @@
           padding: 0.125rem 0px;
         }
       }
+
+      /* ----------------------------------------- */
+      /*  TinyMCE                                  */
+      /* ----------------------------------------- */
+      .editor {
+        padding: .5rem;
+    
+        .editor-edit {
+          background: none;
+          color: @colorWhite;
+        }
+    
+        .editor-content {
+          color: @colorWhite;
+        }
+    
+        iframe {
+          background: @colorWhite;
+        }
+    
+        .tox-tbtn {
+          color: @colorWhite;
+    
+          svg {
+            fill: @colorWhite;
+          }
+    
+          &:hover {
+            color: @primaryColor;
+            svg {
+              fill: @primaryColor;
+            }
+          }
+        }
+      }
     }
   }
 }
