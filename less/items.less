@@ -229,4 +229,189 @@
   .loot-header {
     margin-bottom: 10px;
   }
+
+  /* ----------------------------------------- */
+  /*  Item Alternative                         */
+  /* ----------------------------------------- */
+  &.item-alternative {
+    @borderSize: 3px;
+    
+    .window-content {
+      border: @borderSize solid @lightColor;
+      padding: 0;
+      max-height: 75vh;
+      background: @primaryColor;
+      color: @lightColor;
+  
+      h1, h2, h3, h4, h5, h6 {
+        border-bottom-color: @colorYellow;
+      }
+      
+      input, textarea, select {
+        color: @lightColor;
+        border: 1px solid @secondaryColor;
+  
+        &:hover, &:focus {
+          border: 1px solid @lightColor;
+          box-shadow: 0 0 8px @lightColor;
+        }
+  
+        &:disabled {
+          border: 1px solid transparent;
+          background: none;
+          box-shadow: none;
+        }
+  
+        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+          color: @lightGrey;
+        }
+        &::-moz-placeholder { /* Firefox 19+ */
+          color: @lightGrey;
+        }
+        &:-ms-input-placeholder { /* IE 10+ */
+          color: @lightGrey;
+        }
+        &:-moz-placeholder { /* Firefox 18- */
+          color: @lightGrey;
+        }
+      }
+  
+      select {
+        background: @primaryColor;
+      }
+  
+      textarea {
+        color: @colorWhite;
+      }
+  
+      input[type="number"],
+      input[data-dtype="Number"] {
+        text-align: right;
+      }
+  
+      a, .rollable {
+        &:hover, &:focus {
+          color: @colorWhite;
+          text-shadow: 0 0 10px @lightColor;
+        }
+      }
+  
+      label {
+        color: @lightColor;
+      }
+  
+      *::-webkit-scrollbar-thumb {
+        background: @colorYellow;
+        border: 1px solid @primaryColor;
+      }
+    
+      *::-webkit-scrollbar-track {
+        box-shadow: 0 1px @lightGrey inset;
+      }
+
+
+      /* ----------------------------------------- */
+      /*  Sheet Navigation                         */
+      /* ----------------------------------------- */
+      .sheet-footer {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        color: @lightGrey;
+        transform: translateY(100%);
+
+        .sheet-navigation {
+          flex: unset;
+          margin: 0;
+          padding: 0;
+
+          .item {
+            margin: 0;
+            border: @borderSize solid @lighterPrimaryColor;
+            border-top: none;
+            border-left: none;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 15px;
+            padding: 0 0.8rem 0;
+            height: auto;
+            background-color: @primaryColor;
+
+            &:first-of-type {
+              border-left: @borderSize solid @lighterPrimaryColor;
+            }
+
+            &.active {
+              border-left: @borderSize solid @lightColor;
+              border-color: @lightColor;
+              background: #82a9c5;
+              background: rgb(3,17,33);
+              background: linear-gradient(180deg, rgba(3,17,33,1) 0%, rgba(3,17,33,1) 39%, rgba(12,84,123,1) 70%, rgba(53,178,215,1) 91%, rgba(59,193,229,1) 100%);
+              color: @colorWhite;
+            }
+          }
+        }
+      }
+
+      /* ----------------------------------------- */
+      /*  General                                  */
+      /* ----------------------------------------- */
+      .sheet-body {
+        overflow: auto;
+      }
+    
+      .tag {
+        font-size: .8rem;
+      }
+
+      /* ----------------------------------------- */
+      /*  Sheet Header                             */
+      /* ----------------------------------------- */
+      .sheet-header {
+        border: none;
+
+        // Character Name
+        h1 {          
+          input {
+            border: none;
+            color: @colorYellow;
+          }
+        }
+
+        .summary {
+          border: none;
+
+          li {
+            margin: 2px .25rem;
+            border-color: @secondaryColor;
+            color: @lightColor;
+          }
+        }
+      }
+
+      /* ----------------------------------------- */
+      /*  Description Tab                          */
+      /* ----------------------------------------- */
+      .tab {
+        .item-properties {
+          border-color: @secondaryColor;
+        }
+      }
+
+      /* ----------------------------------------- */
+      /*  Details Tab                              */
+      /* ----------------------------------------- */
+      .tab.details {
+        .form-header {
+          margin-bottom: .5rem;
+          border-top: none;
+          border-color: @secondaryColor;
+          color: @colorYellow;
+        }
+
+        .form-group {
+          padding: 0.125rem 0px;
+        }
+      }
+    }
+  }
 }
