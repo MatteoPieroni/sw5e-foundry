@@ -44,7 +44,7 @@ Hooks.once("init", function() {
   console.log(`DnD5e | Initializing the DnD5e Game System\n${DND5E.ASCII}`);
 
   // Create a namespace within the game global
-  game.dnd5e = {
+  game.sw5e = {
     applications: {
       AbilityUseDialog,
       ActorSheetFlags,
