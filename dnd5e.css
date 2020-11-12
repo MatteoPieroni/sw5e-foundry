@@ -2344,6 +2344,9 @@
   /* ----------------------------------------- */
   /*  Loot Sheet (No Tabs)                     */
   /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Item Alternative                         */
+  /* ----------------------------------------- */
 }
 .dnd5e.sheet.item .sheet-header img.profile {
   border: 2px solid #000;
@@ -2509,6 +2512,235 @@
 }
 .dnd5e.sheet.item .loot-header {
   margin-bottom: 10px;
+}
+.dnd5e.sheet.item.item-alternative .window-content {
+  border: 3px solid #3bc1e5;
+  padding: 0;
+  max-height: 75vh;
+  background: #031121;
+  color: #3bc1e5;
+  /* ----------------------------------------- */
+  /*  Sheet Navigation                         */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  General                                  */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Description Tab                          */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Details Tab                              */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  TinyMCE                                  */
+  /* ----------------------------------------- */
+}
+.dnd5e.sheet.item.item-alternative .window-content h1,
+.dnd5e.sheet.item.item-alternative .window-content h2,
+.dnd5e.sheet.item.item-alternative .window-content h3,
+.dnd5e.sheet.item.item-alternative .window-content h4,
+.dnd5e.sheet.item.item-alternative .window-content h5,
+.dnd5e.sheet.item.item-alternative .window-content h6 {
+  border-bottom-color: #d3ae3f;
+}
+.dnd5e.sheet.item.item-alternative .window-content input,
+.dnd5e.sheet.item.item-alternative .window-content textarea,
+.dnd5e.sheet.item.item-alternative .window-content select {
+  color: #3bc1e5;
+  border: 1px solid #11638b;
+}
+.dnd5e.sheet.item.item-alternative .window-content input:hover,
+.dnd5e.sheet.item.item-alternative .window-content textarea:hover,
+.dnd5e.sheet.item.item-alternative .window-content select:hover,
+.dnd5e.sheet.item.item-alternative .window-content input:focus,
+.dnd5e.sheet.item.item-alternative .window-content textarea:focus,
+.dnd5e.sheet.item.item-alternative .window-content select:focus {
+  border: 1px solid #3bc1e5;
+  box-shadow: 0 0 8px #3bc1e5;
+}
+.dnd5e.sheet.item.item-alternative .window-content input:disabled,
+.dnd5e.sheet.item.item-alternative .window-content textarea:disabled,
+.dnd5e.sheet.item.item-alternative .window-content select:disabled {
+  border: 1px solid transparent;
+  background: none;
+  box-shadow: none;
+}
+.dnd5e.sheet.item.item-alternative .window-content input::-webkit-input-placeholder,
+.dnd5e.sheet.item.item-alternative .window-content textarea::-webkit-input-placeholder,
+.dnd5e.sheet.item.item-alternative .window-content select::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #9e9c9c;
+}
+.dnd5e.sheet.item.item-alternative .window-content input::-moz-placeholder,
+.dnd5e.sheet.item.item-alternative .window-content textarea::-moz-placeholder,
+.dnd5e.sheet.item.item-alternative .window-content select::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #9e9c9c;
+}
+.dnd5e.sheet.item.item-alternative .window-content input:-ms-input-placeholder,
+.dnd5e.sheet.item.item-alternative .window-content textarea:-ms-input-placeholder,
+.dnd5e.sheet.item.item-alternative .window-content select:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #9e9c9c;
+}
+.dnd5e.sheet.item.item-alternative .window-content input:-moz-placeholder,
+.dnd5e.sheet.item.item-alternative .window-content textarea:-moz-placeholder,
+.dnd5e.sheet.item.item-alternative .window-content select:-moz-placeholder {
+  /* Firefox 18- */
+  color: #9e9c9c;
+}
+.dnd5e.sheet.item.item-alternative .window-content select {
+  background: #031121;
+}
+.dnd5e.sheet.item.item-alternative .window-content textarea {
+  color: #fff;
+}
+.dnd5e.sheet.item.item-alternative .window-content input[type="number"],
+.dnd5e.sheet.item.item-alternative .window-content input[data-dtype="Number"] {
+  text-align: right;
+}
+.dnd5e.sheet.item.item-alternative .window-content input[type="checkbox"] {
+  appearance: none;
+}
+.dnd5e.sheet.item.item-alternative .window-content input[type="checkbox"]:checked {
+  border-color: transparent;
+  filter: none;
+}
+.dnd5e.sheet.item.item-alternative .window-content input[type="checkbox"]:checked:after {
+  content: "\f00c";
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+.dnd5e.sheet.item.item-alternative .window-content a:hover,
+.dnd5e.sheet.item.item-alternative .window-content .rollable:hover,
+.dnd5e.sheet.item.item-alternative .window-content a:focus,
+.dnd5e.sheet.item.item-alternative .window-content .rollable:focus {
+  color: #fff;
+  text-shadow: 0 0 10px #3bc1e5;
+}
+.dnd5e.sheet.item.item-alternative .window-content label {
+  color: #3bc1e5;
+}
+.dnd5e.sheet.item.item-alternative .window-content *::-webkit-scrollbar-thumb {
+  background: #d3ae3f;
+  border: 1px solid #031121;
+}
+.dnd5e.sheet.item.item-alternative .window-content *::-webkit-scrollbar-track {
+  box-shadow: 0 1px #9e9c9c inset;
+}
+.dnd5e.sheet.item.item-alternative .window-content .sheet-footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  color: #9e9c9c;
+  transform: translateY(100%);
+}
+.dnd5e.sheet.item.item-alternative .window-content .sheet-footer .sheet-navigation {
+  flex: unset;
+  margin: 0;
+  padding: 0;
+}
+.dnd5e.sheet.item.item-alternative .window-content .sheet-footer .sheet-navigation .item {
+  margin: 0;
+  border: 3px solid #182f40;
+  border-top: none;
+  border-left: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 15px;
+  padding: 0 0.8rem 0;
+  height: auto;
+  background-color: #031121;
+}
+.dnd5e.sheet.item.item-alternative .window-content .sheet-footer .sheet-navigation .item:first-of-type {
+  border-left: 3px solid #182f40;
+}
+.dnd5e.sheet.item.item-alternative .window-content .sheet-footer .sheet-navigation .item.active {
+  border-left: 3px solid #3bc1e5;
+  border-color: #3bc1e5;
+  background: #82a9c5;
+  background: #031121;
+  background: linear-gradient(180deg, #031121 0%, #031121 39%, #0c547b 70%, #35b2d7 91%, #3bc1e5 100%);
+  color: #fff;
+  text-shadow: none;
+}
+.dnd5e.sheet.item.item-alternative .window-content .sheet-body {
+  overflow: auto;
+}
+.dnd5e.sheet.item.item-alternative .window-content .tag {
+  font-size: 0.8rem;
+}
+.dnd5e.sheet.item.item-alternative .window-content .sheet-header {
+  border: none;
+  border-bottom: 2px solid #11638b;
+  margin: 0 0.5rem;
+}
+.dnd5e.sheet.item.item-alternative .window-content .sheet-header h1 input {
+  border: none;
+  color: #d3ae3f;
+}
+.dnd5e.sheet.item.item-alternative .window-content .sheet-header img.profile {
+  border-color: transparent;
+}
+.dnd5e.sheet.item.item-alternative .window-content .sheet-header .summary {
+  border: none;
+}
+.dnd5e.sheet.item.item-alternative .window-content .sheet-header .summary li {
+  margin: 2px 0.25rem;
+  border-color: #11638b;
+  color: #3bc1e5;
+}
+.dnd5e.sheet.item.item-alternative .window-content .tab {
+  margin: 0.5rem 0.5rem 0;
+}
+.dnd5e.sheet.item.item-alternative .window-content .tab .item-properties {
+  border-color: #11638b;
+}
+.dnd5e.sheet.item.item-alternative .window-content .tab .item-properties input {
+  border: none;
+}
+.dnd5e.sheet.item.item-alternative .window-content .tab.details .form-header {
+  margin-bottom: 0.5rem;
+  border-top: none;
+  border-color: #11638b;
+  color: #d3ae3f;
+}
+.dnd5e.sheet.item.item-alternative .window-content .tab.details .form-group {
+  padding: 0.125rem 0px;
+}
+.dnd5e.sheet.item.item-alternative .window-content .editor {
+  padding: 0.5rem;
+}
+.dnd5e.sheet.item.item-alternative .window-content .editor .editor-edit {
+  background: none;
+  color: #fff;
+}
+.dnd5e.sheet.item.item-alternative .window-content .editor .editor-content {
+  color: #fff;
+}
+.dnd5e.sheet.item.item-alternative .window-content .editor iframe {
+  background: #fff;
+}
+.dnd5e.sheet.item.item-alternative .window-content .editor .tox-tbtn {
+  color: #fff;
+}
+.dnd5e.sheet.item.item-alternative .window-content .editor .tox-tbtn svg {
+  fill: #fff;
+}
+.dnd5e.sheet.item.item-alternative .window-content .editor .tox-tbtn:hover {
+  color: #031121;
+}
+.dnd5e.sheet.item.item-alternative .window-content .editor .tox-tbtn:hover svg {
+  fill: #031121;
 }
 /* ----------------------------------------- */
 /*  Chat Cards
@@ -2800,6 +3032,125 @@
 .dnd5e.sheet.actor.vehicle .counters .counter.cargo-cap input {
   max-width: 40px;
   text-align: right;
+}
+.sw5e.dialog .window-content {
+  border: 3px solid #3bc1e5;
+  padding: 0;
+  background: #031121;
+  color: #3bc1e5;
+}
+.sw5e.dialog .window-content h1,
+.sw5e.dialog .window-content h2,
+.sw5e.dialog .window-content h3,
+.sw5e.dialog .window-content h4,
+.sw5e.dialog .window-content h5,
+.sw5e.dialog .window-content h6 {
+  border-bottom-color: #d3ae3f;
+}
+.sw5e.dialog .window-content input,
+.sw5e.dialog .window-content textarea,
+.sw5e.dialog .window-content select {
+  color: #3bc1e5;
+}
+.sw5e.dialog .window-content input:hover,
+.sw5e.dialog .window-content textarea:hover,
+.sw5e.dialog .window-content select:hover,
+.sw5e.dialog .window-content input:focus,
+.sw5e.dialog .window-content textarea:focus,
+.sw5e.dialog .window-content select:focus {
+  border: 1px solid #3bc1e5;
+  box-shadow: 0 0 8px #3bc1e5;
+}
+.sw5e.dialog .window-content input:disabled,
+.sw5e.dialog .window-content textarea:disabled,
+.sw5e.dialog .window-content select:disabled {
+  border: 1px solid transparent;
+  background: none;
+  box-shadow: none;
+}
+.sw5e.dialog .window-content input::-webkit-input-placeholder,
+.sw5e.dialog .window-content textarea::-webkit-input-placeholder,
+.sw5e.dialog .window-content select::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #9e9c9c;
+}
+.sw5e.dialog .window-content input::-moz-placeholder,
+.sw5e.dialog .window-content textarea::-moz-placeholder,
+.sw5e.dialog .window-content select::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #9e9c9c;
+}
+.sw5e.dialog .window-content input:-ms-input-placeholder,
+.sw5e.dialog .window-content textarea:-ms-input-placeholder,
+.sw5e.dialog .window-content select:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #9e9c9c;
+}
+.sw5e.dialog .window-content input:-moz-placeholder,
+.sw5e.dialog .window-content textarea:-moz-placeholder,
+.sw5e.dialog .window-content select:-moz-placeholder {
+  /* Firefox 18- */
+  color: #9e9c9c;
+}
+.sw5e.dialog .window-content select {
+  background: #031121;
+}
+.sw5e.dialog .window-content textarea {
+  color: #fff;
+}
+.sw5e.dialog .window-content input[type="checkbox"] {
+  appearance: none;
+}
+.sw5e.dialog .window-content input[type="checkbox"]:checked {
+  border-color: transparent;
+  filter: none;
+}
+.sw5e.dialog .window-content input[type="checkbox"]:checked:after {
+  content: "\f00c";
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+.sw5e.dialog .window-content input[type="number"],
+.sw5e.dialog .window-content input[data-dtype="Number"] {
+  text-align: right;
+}
+.sw5e.dialog .window-content a:hover,
+.sw5e.dialog .window-content .rollable:hover,
+.sw5e.dialog .window-content a:focus,
+.sw5e.dialog .window-content .rollable:focus {
+  color: #fff;
+  text-shadow: 0 0 10px #3bc1e5;
+}
+.sw5e.dialog .window-content label {
+  color: #3bc1e5;
+}
+.sw5e.dialog .window-content *::-webkit-scrollbar-thumb {
+  background: #d3ae3f;
+  border: 1px solid #031121;
+}
+.sw5e.dialog .window-content *::-webkit-scrollbar-track {
+  box-shadow: 0 1px #9e9c9c inset;
+}
+.sw5e.dialog .dialog-content {
+  margin: 0.5rem;
+}
+.sw5e.dialog .dialog-buttons button {
+  border-color: #3bc1e5;
+  margin: 0.5rem;
+  color: #fff;
+}
+.sw5e.dialog .dialog-buttons button:hover {
+  background: #031121;
+  background: linear-gradient(180deg, #031121 0%, #031121 39%, #0c547b 70%, #35b2d7 91%, #3bc1e5 100%);
+  box-shadow: none;
+  text-shadow: 0 0 10px #3bc1e5;
 }
 input[type="number"] {
   width: calc(100% - 2px);

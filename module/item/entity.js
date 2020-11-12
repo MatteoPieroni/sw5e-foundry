@@ -312,7 +312,7 @@ export default class Item5e extends Item {
 
     // Render the chat card template
     const templateType = ["tool"].includes(this.data.type) ? this.data.type : "item";
-    const template = `systems/sw5e/templates/chat/${templateType}-card.html`;
+    const template = `systems/sw5efoundry/templates/chat/${templateType}-card.html`;
     const html = await renderTemplate(template, templateData);
 
     // Basic chat message data
@@ -331,7 +331,7 @@ export default class Item5e extends Item {
 
     // If the consumable was destroyed in the process - embed the item data in the surviving message
     if ( (this.data.type === "consumable") && !this.actor.items.has(this.id) ) {
-      chatData.flags["sw5e.itemData"] = this.data;
+      chatData.flags["sw5efoundry.itemData"] = this.data;
     }
 
     // Toggle default roll mode
@@ -621,7 +621,7 @@ export default class Item5e extends Item {
   async rollAttack(options={}) {
     const itemData = this.data.data;
     const actorData = this.actor.data.data;
-    const flags = this.actor.data.flags.sw5e || {};
+    const flags = this.actor.data.flags.sw5efoundry || {};
     if ( !this.hasAttack ) {
       throw new Error("You may not place an Attack Roll with this Item.");
     }
@@ -673,7 +673,7 @@ export default class Item5e extends Item {
         top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710
       },
-      messageData: {"flags.sw5e.roll": {type: "attack", itemId: this.id }}
+      messageData: {"flags.sw5efoundry.roll": {type: "attack", itemId: this.id }}
     }, options);
     rollConfig.event = options.event;
 
@@ -716,7 +716,7 @@ export default class Item5e extends Item {
     if ( !this.hasDamage ) {
       throw new Error("You may not make a Damage Roll with this Item.");
     }
-    const messageData = {"flags.sw5e.roll": {type: "damage", itemId: this.id }};
+    const messageData = {"flags.sw5efoundry.roll": {type: "damage", itemId: this.id }};
 
     // Get roll data
     const rollData = this.getRollData();
@@ -732,7 +732,7 @@ export default class Item5e extends Item {
     // Adjust damage from versatile usage
     if ( versatile && itemData.damage.versatile ) {
       parts[0] = itemData.damage.versatile;
-      messageData["flags.sw5e.roll"].versatile = true;
+      messageData["flags.sw5efoundry.roll"].versatile = true;
     }
 
     // Scale damage from up-casting spells
@@ -897,7 +897,7 @@ export default class Item5e extends Item {
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: this.data.data.chatFlavor || title,
       rollMode: game.settings.get("core", "rollMode"),
-      messageData: {"flags.sw5e.roll": {type: "other", itemId: this.id }}
+      messageData: {"flags.sw5efoundry.roll": {type: "other", itemId: this.id }}
     });
     return roll;
   }
@@ -1014,7 +1014,7 @@ export default class Item5e extends Item {
     const rollConfig = mergeObject({
       parts: parts,
       data: rollData,
-      template: "systems/sw5e/templates/chat/tool-roll-dialog.html",
+      template: "systems/sw5efoundry/templates/chat/tool-roll-dialog.html",
       title: title,
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: `${this.name} - ${game.i18n.localize("DND5E.ToolCheck")}`,
@@ -1023,8 +1023,8 @@ export default class Item5e extends Item {
         top: options.event ? options.event.clientY - 80 : null,
         left: window.innerWidth - 710,
       },
-      halflingLucky: this.actor.getFlag("sw5e", "halflingLucky" ) || false,
-      messageData: {"flags.sw5e.roll": {type: "tool", itemId: this.id }}
+      halflingLucky: this.actor.getFlag("sw5efoundry", "halflingLucky" ) || false,
+      messageData: {"flags.sw5efoundry.roll": {type: "tool", itemId: this.id }}
     }, options);
     rollConfig.event = options.event;
 
@@ -1093,7 +1093,7 @@ export default class Item5e extends Item {
     if ( !actor ) return;
 
     // Get the Item from stored flag data or by the item ID on the Actor
-    const storedData = message.getFlag("sw5e", "itemData");
+    const storedData = message.getFlag("sw5efoundry", "itemData");
     const item = storedData ? this.createOwned(storedData, actor) : actor.getOwnedItem(card.dataset.itemId);
     if ( !item ) {
       return ui.notifications.error(game.i18n.format("DND5E.ActionWarningNoItem", {item: card.dataset.itemId, name: actor.name}))

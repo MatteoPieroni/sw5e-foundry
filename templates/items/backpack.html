@@ -26,17 +26,11 @@
 		</div>
 	</header>
 
-	{{!-- Item Sheet Navigation --}}
-	<nav class="sheet-navigation tabs" data-group="primary">
-		<a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
-		<a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
-	</nav>
-
 	{{!-- Item Sheet Body --}}
 	<section class="sheet-body">
 
 		{{!-- Description Tab --}}
-		{{> "systems/sw5e/templates/items/parts/item-description.html"}}
+		{{> "systems/sw5efoundry/templates/items/parts/item-description.html"}}
 
 		{{!-- Details Tab --}}
 		<div class="tab details" data-group="primary" data-tab="details">
@@ -69,4 +63,11 @@
 				</label>
 			</div>
 	</section>
+
+    <footer class="sheet-footer">
+        <nav class="sheet-navigation flexrow flex--unset tabs" data-group="primary">
+			<a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
+			<a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
+		</nav>
+	</footer>
 </form>

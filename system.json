@@ -1,115 +1,121 @@
 {
-  "name": "sw5e",
-  "title": "SW5e system - Based on DnD5e system",
+  "name": "sw5efoundry",
+  "title": "SW5e Foundry system - Based on DnD5e system",
   "description": "A system for playing the Star Wars 5e RPG based on the fifth edition system in the Foundry Virtual Tabletop environment.",
-  "version": 0.021,
+  "version": 0.030,
   "author": "Matteo Pieroni",
   "scripts": ["module/modules/popper-2.5.4.js", "module/modules/tippy-6.2.7.js"],
   "esmodules": ["dnd5e.js"],
   "styles": ["dnd5e.css"],
+  "dependencies": [
+    {
+      "name": "dnd5e",
+      "type": "system"
+    }
+  ],
   "packs": [
     {
       "name": "adventuringgear",
       "label": "Adventuring Gear",
-      "system": "sw5e",
+      "system": "sw5efoundry",
       "path": "./packs/adventuring-gear.db",
       "entity": "Item"
     },
     {
       "name": "archetypes",
       "label": "Archetypes",
-      "system": "sw5e",
+      "system": "sw5efoundry",
       "path": "./packs/archetypes.db",
       "entity": "Item"
     },
     {
       "name": "armour",
       "label": "Armour",
-      "system": "sw5e",
+      "system": "sw5efoundry",
       "path": "./packs/armour.db",
       "entity": "Item"
     },
     {
       "name": "classes",
       "label": "Classes",
-      "system": "sw5e",
+      "system": "sw5efoundry",
       "path": "./packs/classes.db",
       "entity": "Item"
     },
     {
       "name": "classfeatures",
       "label": "Class Features",
-      "system": "sw5e",
+      "system": "sw5efoundry",
       "path": "./packs/class-features.db",
       "entity": "Item"
     },
     {
       "name": "enhanceditems",
       "label": "Enhanced Items",
-      "system": "sw5e",
+      "system": "sw5efoundry",
       "path": "./packs/enhanced-items.db",
       "entity": "Item"
     },
     {
       "name": "feats",
       "label": "Feats",
-      "system": "sw5e",
+      "system": "sw5efoundry",
       "path": "./packs/feats.db",
       "entity": "Item"
     },
     {
       "name": "forcepowers",
       "label": "Force Powers",
-      "system": "sw5e",
+      "system": "sw5efoundry",
       "path": "./packs/force-powers.db",
       "entity": "Item"
     },
     {
       "name": "gamingsets",
       "label": "Gaming Sets",
-      "system": "sw5e",
+      "system": "sw5efoundry",
       "path": "./packs/gaming-sets.db",
       "entity": "Item"
     },
     {
       "name": "lightsaberforms",
       "label": "Lightsaber Forms",
-      "system": "sw5e",
+      "system": "sw5efoundry",
       "path": "./packs/lightsaber-forms.db",
       "entity": "Item"
     },
     {
       "name": "enemies",
       "label": "Enemies",
-      "system": "sw5e",
+      "system": "sw5efoundry",
       "path": "./packs/enemies.db",
       "entity": "Actor"
     },
     {
       "name": "speciesfeats",
       "label": "Species Traits",
-      "system": "sw5e",
+      "system": "sw5efoundry",
       "path": "./packs/species-feats.db",
       "entity": "Item"
     },
     {
       "name": "techpowers",
       "label": "Tech Powers",
-      "system": "sw5e",
+      "system": "sw5efoundry",
       "path": "./packs/tech-powers.db",
       "entity": "Item"
     },
     {
       "name": "tradegoods",
       "label": "Trade Goods",
-      "system": "sw5e",
+      "system": "sw5efoundry",
       "path": "./packs/trade-goods.db",
       "entity": "Item"
     },
     {
       "name": "weapons",
       "label": "Weapons",
-      "system": "sw5e",
+      "system": "sw5efoundry",
       "path": "./packs/weapons.db",
       "entity": "Item"
     }
@@ -130,5 +136,5 @@
   "compatibleCoreVersion": "0.7.5",
   "url": "https://github.com/MatteoPieroni/sw5e-foundry",
   "manifest": "https://raw.githubusercontent.com/MatteoPieroni/sw5e-foundry/main/system.json",
-  "download": "https://github.com/MatteoPieroni/sw5e-foundry/archive/0.2.1.zip"
+  "download": "https://github.com/MatteoPieroni/sw5e-foundry/archive/0.3.0.zip"
 }

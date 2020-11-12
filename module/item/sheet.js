@@ -19,7 +19,7 @@ export default class ItemSheet5e extends ItemSheet {
 	  return mergeObject(super.defaultOptions, {
       width: 560,
       height: "auto",
-      classes: ["dnd5e", "sheet", "item"],
+      classes: ["dnd5e", "sheet", "item", "item-alternative"],
       resizable: true,
       scrollY: [".tab.details"],
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}]
@@ -30,7 +30,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @override */
   get template() {
-    const path = "systems/sw5e/templates/items/";
+    const path = "systems/sw5efoundry/templates/items/";
     return `${path}/${this.item.data.type}.html`;
   }
 
@@ -130,8 +130,8 @@ export default class ItemSheet5e extends ItemSheet {
    * @private
    */
   _getItemStatus(item) {
-    if ( item.type === "spell" ) {
-      return CONFIG.DND5E.spellPreparationModes[item.data.preparation];
+    if ( ["forcepower", "techpower", "spell"].includes(item.type) ) {
+      return CONFIG.DND5E.powerPreparationModes[item.data.preparation];
     }
     else if ( ["weapon", "equipment"].includes(item.type) ) {
       return game.i18n.localize(item.data.equipped ? "DND5E.Equipped" : "DND5E.Unequipped");

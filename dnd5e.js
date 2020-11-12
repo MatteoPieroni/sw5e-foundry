@@ -44,7 +44,7 @@ Hooks.once("init", function() {
   console.log(`DnD5e | Initializing the DnD5e Game System\n${DND5E.ASCII}`);
 
   // Create a namespace within the game global
-  game.dnd5e = {
+  game.sw5efoundry = {
     applications: {
       AbilityUseDialog,
       ActorSheetFlags,
@@ -84,23 +84,23 @@ Hooks.once("init", function() {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("sw5e", ActorSheet5eCharacter, {
+  Actors.registerSheet("sw5efoundry", ActorSheet5eCharacter, {
     types: ["character"],
     makeDefault: true,
     label: "DND5E.SheetClassCharacter"
   });
-  Actors.registerSheet("sw5e", ActorSheet5eNPC, {
+  Actors.registerSheet("sw5efoundry", ActorSheet5eNPC, {
     types: ["npc"],
     makeDefault: true,
     label: "DND5E.SheetClassNPC"
   });
-  Actors.registerSheet('sw5e', ActorSheet5eVehicle, {
+  Actors.registerSheet('sw5efoundry', ActorSheet5eVehicle, {
     types: ['vehicle'],
     makeDefault: true,
     label: "DND5E.SheetClassVehicle"
   });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("sw5e", ItemSheet5e, {
+  Items.registerSheet("sw5efoundry", ItemSheet5e, {
     makeDefault: true,
     label: "DND5E.SheetClassItem"
   });
@@ -123,7 +123,7 @@ Hooks.once("setup", function() {
   const toLocalize = [
     "abilities", "abilityAbbreviations", "alignments", "conditionTypes", "consumableTypes", "currencies",
     "damageTypes", "damageResistanceTypes", "distanceUnits", "equipmentTypes", "healingTypes", "itemActionTypes",
-    "limitedUsePeriods", "senses", "skills", "spellComponents", "spellLevels", "spellPreparationModes", "spellSchools",
+    "limitedUsePeriods", "senses", "skills", "spellComponents", "spellLevels", "powerPreparationModes", "spellSchools",
     "spellScalingModes", "powerLevels", "powerAlignments", "targetTypes", "timePeriods", "weaponProperties", "weaponTypes", "languages",
     "polymorphSettings", "armorProficiencies", "weaponProficiencies", "toolProficiencies", "abilityActivationTypes",
     "abilityConsumptionTypes", "actorSizes", "proficiencyLevels", "cover"
@@ -156,7 +156,7 @@ Hooks.once("setup", function() {
 Hooks.once("ready", function() {
 
   // Determine whether a system migration is required and feasible
-  const currentVersion = game.settings.get("sw5e", "systemMigrationVersion");
+  const currentVersion = game.settings.get("sw5efoundry", "systemMigrationVersion");
   const NEEDS_MIGRATION_VERSION = 0.010;
   const COMPATIBLE_MIGRATION_VERSION = 0.10;
   let needMigration = (currentVersion < NEEDS_MIGRATION_VERSION) || (currentVersion === null);
@@ -180,7 +180,7 @@ Hooks.once("ready", function() {
 Hooks.on("canvasInit", function() {
 
   // Extend Diagonal Measurement
-  canvas.grid.diagonalRule = game.settings.get("sw5e", "diagonalMovement");
+  canvas.grid.diagonalRule = game.settings.get("sw5efoundry", "diagonalMovement");
   SquareGrid.prototype.measureDistances = measureDistances;
 
   // Extend Token Resource Bars
@@ -201,7 +201,7 @@ Hooks.on("renderChatMessage", (app, html, data) => {
   chat.highlightCriticalSuccessFailure(app, html, data);
 
   // Optionally collapse the content
-  if (game.settings.get("sw5e", "autoCollapseItemCards")) html.find(".card-content").hide();
+  if (game.settings.get("sw5efoundry", "autoCollapseItemCards")) html.find(".card-content").hide();
 });
 Hooks.on("getChatLogEntryContext", chat.addChatMessageContextOptions);
 Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));

@@ -15,7 +15,7 @@ export default class Actor5e extends Actor {
    * @return {boolean}
    */
   get isPolymorphed() {
-    return this.getFlag("sw5e", "isPolymorphed") || false;
+    return this.getFlag("sw5efoundry", "isPolymorphed") || false;
   }
 
   /* -------------------------------------------- */
@@ -80,15 +80,15 @@ export default class Actor5e extends Actor {
   prepareDerivedData() {
     const actorData = this.data;
     const data = actorData.data;
-    const flags = actorData.flags.sw5e || {};
+    const flags = actorData.flags.sw5efoundry || {};
     const bonuses = getProperty(data, "bonuses.abilities") || {};
 
     // Retrieve data for polymorphed actors
     let originalSaves = null;
     let originalSkills = null;
     if (this.isPolymorphed) {
-      const transformOptions = this.getFlag('sw5e', 'transformOptions');
-      const original = game.actors?.get(this.getFlag('sw5e', 'originalActor'));
+      const transformOptions = this.getFlag('sw5efoundry', 'transformOptions');
+      const original = game.actors?.get(this.getFlag('sw5efoundry', 'originalActor'));
       if (original) {
         if (transformOptions.mergeSaves) {
           originalSaves = original.data.data.abilities;
@@ -349,7 +349,7 @@ export default class Actor5e extends Actor {
     if (actorData.type === 'vehicle') return;
 
     const data = actorData.data;
-    const flags = actorData.flags.sw5e || {};
+    const flags = actorData.flags.sw5efoundry || {};
 
     // Skill modifiers
     const feats = DND5E.characterFlags;
@@ -517,7 +517,7 @@ export default class Actor5e extends Actor {
     }, 0);
 
     // [Optional] add Currency Weight
-    if ( game.settings.get("sw5e", "currencyWeight") ) {
+    if ( game.settings.get("sw5efoundry", "currencyWeight") ) {
       const currency = actorData.data.currency;
       const numCoins = Object.values(currency).reduce((val, denom) => val += Math.max(denom, 0), 0);
       weight += Math.round((numCoins * 10) / CONFIG.DND5E.encumbrance.currencyPerWeight) / 10;
@@ -532,7 +532,7 @@ export default class Actor5e extends Actor {
       huge: 4,
       grg: 8
     }[actorData.data.traits.size] || 1;
-    if ( this.getFlag("sw5e", "powerfulBuild") ) mod = Math.min(mod * 2, 8);
+    if ( this.getFlag("sw5efoundry", "powerfulBuild") ) mod = Math.min(mod * 2, 8);
 
     // Compute Encumbrance percentage
     const max = actorData.data.abilities.str.value * CONFIG.DND5E.encumbrance.strMultiplier * mod;
@@ -839,16 +839,16 @@ export default class Actor5e extends Actor {
     }
 
     // Reliable Talent applies to any skill check we have full or better proficiency in
-    const reliableTalent = (skl.value >= 1 && this.getFlag("sw5e", "reliableTalent"));
+    const reliableTalent = (skl.value >= 1 && this.getFlag("sw5efoundry", "reliableTalent"));
 
     // Roll and return
     const rollData = mergeObject(options, {
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]}),
-      halflingLucky: this.getFlag("sw5e", "halflingLucky"),
+      halflingLucky: this.getFlag("sw5efoundry", "halflingLucky"),
       reliableTalent: reliableTalent,
-      messageData: {"flags.sw5e.roll": {type: "skill", skillId }}
+      messageData: {"flags.sw5efoundry.roll": {type: "skill", skillId }}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
@@ -898,7 +898,7 @@ export default class Actor5e extends Actor {
     const data = {mod: abl.mod};
 
     // Add feat-related proficiency bonuses
-    const feats = this.data.flags.sw5e || {};
+    const feats = this.data.flags.sw5efoundry || {};
     if ( feats.remarkableAthlete && DND5E.characterFlags.remarkableAthlete.abilities.includes(abilityId) ) {
       parts.push("@proficiency");
       data.proficiency = Math.ceil(0.5 * this.data.data.attributes.prof);
@@ -926,7 +926,7 @@ export default class Actor5e extends Actor {
       data: data,
       title: game.i18n.format("DND5E.AbilityPromptTitle", {ability: label}),
       halflingLucky: feats.halflingLucky,
-      messageData: {"flags.sw5e.roll": {type: "ability", abilityId }}
+      messageData: {"flags.sw5efoundry.roll": {type: "ability", abilityId }}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
@@ -972,8 +972,8 @@ export default class Actor5e extends Actor {
       parts: parts,
       data: data,
       title: game.i18n.format("DND5E.SavePromptTitle", {ability: label}),
-      halflingLucky: this.getFlag("sw5e", "halflingLucky"),
-      messageData: {"flags.sw5e.roll": {type: "save", abilityId }}
+      halflingLucky: this.getFlag("sw5efoundry", "halflingLucky"),
+      messageData: {"flags.sw5efoundry.roll": {type: "save", abilityId }}
     });
     rollData.speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
     return d20Roll(rollData);
@@ -1013,9 +1013,9 @@ export default class Actor5e extends Actor {
       data: data,
       title: game.i18n.localize("DND5E.DeathSavingThrow"),
       speaker: speaker,
-      halflingLucky: this.getFlag("sw5e", "halflingLucky"),
+      halflingLucky: this.getFlag("sw5efoundry", "halflingLucky"),
       targetValue: 10,
-      messageData: {"flags.sw5e.roll": {type: "death"}}
+      messageData: {"flags.sw5efoundry.roll": {type: "death"}}
     });
     rollData.speaker = speaker;
     const roll = await d20Roll(rollData);
@@ -1113,7 +1113,7 @@ export default class Actor5e extends Actor {
       allowcritical: false,
       fastForward: !dialog,
       dialogOptions: {width: 350},
-      messageData: {"flags.sw5e.roll": {type: "hitDie"}}
+      messageData: {"flags.sw5efoundry.roll": {type: "hitDie"}}
     });
     if ( !roll ) return null;
 
@@ -1194,7 +1194,7 @@ export default class Actor5e extends Actor {
 
       // Summarize the rest duration
       let restFlavor;
-      switch (game.settings.get("sw5e", "restVariant")) {
+      switch (game.settings.get("sw5efoundry", "restVariant")) {
         case 'normal': restFlavor = game.i18n.localize("DND5E.ShortRestNormal"); break;
         case 'gritty': restFlavor = game.i18n.localize(newDay ? "DND5E.ShortRestOvernight" : "DND5E.ShortRestGritty"); break;
         case 'epic':  restFlavor = game.i18n.localize("DND5E.ShortRestEpic"); break;
@@ -1313,7 +1313,7 @@ export default class Actor5e extends Actor {
 
     // Display a Chat Message summarizing the rest effects
     let restFlavor;
-    switch (game.settings.get("sw5e", "restVariant")) {
+    switch (game.settings.get("sw5efoundry", "restVariant")) {
       case 'normal': restFlavor = game.i18n.localize(newDay ? "DND5E.LongRestOvernight" : "DND5E.LongRestNormal"); break;
       case 'gritty': restFlavor = game.i18n.localize("DND5E.LongRestGritty"); break;
       case 'epic':  restFlavor = game.i18n.localize("DND5E.LongRestEpic"); break;
@@ -1368,15 +1368,15 @@ export default class Actor5e extends Actor {
     keepItems=false, keepBio=false, keepVision=false, transformTokens=true}={}) {
 
     // Ensure the player is allowed to polymorph
-    const allowed = game.settings.get("sw5e", "allowPolymorphing");
+    const allowed = game.settings.get("sw5efoundry", "allowPolymorphing");
     if ( !allowed && !game.user.isGM ) {
       return ui.notifications.warn(game.i18n.localize("DND5E.PolymorphWarn"));
     }
 
     // Get the original Actor data and the new source data
     const o = duplicate(this.data);
-    o.flags.sw5e = o.flags.sw5e || {};
-    o.flags.sw5e.transformOptions = {mergeSkills, mergeSaves};
+    o.flags.sw5efoundry = o.flags.sw5efoundry || {};
+    o.flags.sw5efoundry.transformOptions = {mergeSkills, mergeSaves};
     const source = duplicate(target.data);
 
     // Prepare new data to merge from the source
@@ -1462,8 +1462,8 @@ export default class Actor5e extends Actor {
     if (keepVision) d.data.traits.senses = o.data.traits.senses;
 
     // Set new data flags
-    if ( !this.isPolymorphed || !d.flags.sw5e.originalActor ) d.flags.sw5e.originalActor = this.id;
-    d.flags.sw5e.isPolymorphed = true;
+    if ( !this.isPolymorphed || !d.flags.sw5efoundry.originalActor ) d.flags.sw5efoundry.originalActor = this.id;
+    d.flags.sw5efoundry.isPolymorphed = true;
 
     // Update unlinked Tokens in place since they can simply be re-dropped from the base actor
     if (this.isToken) {
@@ -1475,7 +1475,7 @@ export default class Actor5e extends Actor {
 
     // Update regular Actors by creating a new Actor with the Polymorphed data
     await this.sheet.close();
-    Hooks.callAll('sw5e.transformActor', this, target, d, {
+    Hooks.callAll('sw5efoundry.transformActor', this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills,
       keepClass, keepFeats, keepSpells, keepItems, keepBio, keepVision, transformTokens
     });
@@ -1516,7 +1516,7 @@ export default class Actor5e extends Actor {
     }
 
     // Obtain a reference to the original actor
-    const original = game.actors.get(this.getFlag('sw5e', 'originalActor'));
+    const original = game.actors.get(this.getFlag('sw5efoundry', 'originalActor'));
     if ( !original ) return;
 
     // Get the Tokens which represent this actor
@@ -1552,7 +1552,7 @@ export default class Actor5e extends Actor {
         return actor.revertOriginalForm();
       },
       condition: li => {
-        const allowed = game.settings.get("sw5e", "allowPolymorphing");
+        const allowed = game.settings.get("sw5efoundry", "allowPolymorphing");
         if ( !allowed && !game.user.isGM ) return false;
         const actor = game.actors.get(li.data('entityId'));
         return actor && actor.isPolymorphed;
