@@ -123,7 +123,7 @@ Hooks.once("setup", function() {
   const toLocalize = [
     "abilities", "abilityAbbreviations", "alignments", "conditionTypes", "consumableTypes", "currencies",
     "damageTypes", "damageResistanceTypes", "distanceUnits", "equipmentTypes", "healingTypes", "itemActionTypes",
-    "limitedUsePeriods", "senses", "skills", "spellComponents", "spellLevels", "spellPreparationModes", "spellSchools",
+    "limitedUsePeriods", "senses", "skills", "spellComponents", "spellLevels", "powerPreparationModes", "spellSchools",
     "spellScalingModes", "powerLevels", "powerAlignments", "targetTypes", "timePeriods", "weaponProperties", "weaponTypes", "languages",
     "polymorphSettings", "armorProficiencies", "weaponProficiencies", "toolProficiencies", "abilityActivationTypes",
     "abilityConsumptionTypes", "actorSizes", "proficiencyLevels", "cover"
@@ -169,6 +169,7 @@ Hooks.once("ready", function() {
     migrations.migrateWorld();
   }
 
+  migrations.migrateWorld();
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => macros.create5eMacro(data, slot));
 });

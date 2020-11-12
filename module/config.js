@@ -401,7 +401,7 @@ DND5E.skills = {
 
 /* -------------------------------------------- */
 
-DND5E.spellPreparationModes = {
+DND5E.powerPreparationModes = {
   "always": "DND5E.SpellPrepAlways",
   "atwill": "DND5E.SpellPrepAtWill",
   "innate": "DND5E.SpellPrepInnate",

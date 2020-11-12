@@ -266,7 +266,7 @@ export default class ActorSheet5e extends ActorSheet {
     if ( levels.pact && levels.pact.max ) {
       if ( !spellbook["0"] ) registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
       const l = levels.pact;
-      const config = CONFIG.DND5E.spellPreparationModes.pact;
+      const config = CONFIG.DND5E.powerPreparationModes.pact;
       registerSection("pact", sections.pact, config, {
         prepMode: "pact",
         value: l.value,
@@ -286,7 +286,7 @@ export default class ActorSheet5e extends ActorSheet {
         s = sections[mode];
         if ( !spellbook[s] ){
           const l = levels[mode] || {};
-          const config = CONFIG.DND5E.spellPreparationModes[mode];
+          const config = CONFIG.DND5E.powerPreparationModes[mode];
           registerSection(mode, s, config, {
             prepMode: mode,
             value: l.value,
@@ -385,7 +385,7 @@ export default class ActorSheet5e extends ActorSheet {
         s = sections[mode];
         if ( !spellbook[s] ){
           const l = levels[mode] || {};
-          const config = CONFIG.DND5E.spellPreparationModes[mode];
+          const config = CONFIG.DND5E.powerPreparationModes[mode];
           registerSection(mode, s, config, {
             prepMode: mode,
             value: l.value,

@@ -130,8 +130,8 @@ export default class ItemSheet5e extends ItemSheet {
    * @private
    */
   _getItemStatus(item) {
-    if ( item.type === "spell" ) {
-      return CONFIG.DND5E.spellPreparationModes[item.data.preparation];
+    if ( ["forcepower", "techpower", "spell"].includes(item.type) ) {
+      return CONFIG.DND5E.powerPreparationModes[item.data.preparation];
     }
     else if ( ["weapon", "equipment"].includes(item.type) ) {
       return game.i18n.localize(item.data.equipped ? "DND5E.Equipped" : "DND5E.Unequipped");
