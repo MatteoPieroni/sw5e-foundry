@@ -30,7 +30,7 @@ export default class ItemSheet5e extends ItemSheet {
 
   /** @override */
   get template() {
-    const path = "systems/sw5e/templates/items/";
+    const path = "systems/sw5efoundry/templates/items/";
     return `${path}/${this.item.data.type}.html`;
   }
 

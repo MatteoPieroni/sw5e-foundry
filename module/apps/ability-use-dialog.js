@@ -50,7 +50,7 @@ export default class AbilityUseDialog extends Dialog {
     if ( item.data.type === "techpower" ) this._getPowerData(actorData, itemData, data, { mode: 'tech' });
 
     // Render the ability usage template
-    const html = await renderTemplate("systems/sw5e/templates/apps/ability-use.html", data);
+    const html = await renderTemplate("systems/sw5efoundry/templates/apps/ability-use.html", data);
 
     // Create the Dialog and return as a Promise
     const icon = data.isSpell ? "fa-magic" : "fa-fist-raised";

@@ -53,7 +53,7 @@ export const migrateWorld = async function() {
   }
 
   // Set the migration as complete
-  game.settings.set("sw5e", "systemMigrationVersion", game.system.data.version);
+  game.settings.set("sw5efoundry", "systemMigrationVersion", game.system.data.version);
   ui.notifications.info(`DnD5E System Migration to version ${game.system.data.version} completed!`, {permanent: true});
 };
 
@@ -155,8 +155,8 @@ function cleanActorData(actorData) {
     obj[f] = null;
     return obj;
   }, {});
-  if ( actorData.flags.sw5e ) {
-    actorData.flags.sw5e = filterObject(actorData.flags.sw5e, allowedFlags);
+  if ( actorData.flags.sw5efoundry ) {
+    actorData.flags.sw5efoundry = filterObject(actorData.flags.sw5efoundry, allowedFlags);
   }
 
   // Return the scrubbed data
@@ -262,7 +262,7 @@ const _migrateRemoveDeprecated = function(ent, updateData) {
  */
 export async function purgeFlags(pack) {
   const cleanFlags = (flags) => {
-    const flags5e = flags.sw5e || null;
+    const flags5e = flags.sw5efoundry || null;
     return flags5e ? {dnd5e: flags5e} : {};
   };
   await pack.configure({locked: false});

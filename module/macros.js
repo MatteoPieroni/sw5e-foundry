@@ -24,7 +24,7 @@ export async function create5eMacro(data, slot) {
       type: "script",
       img: item.img,
       command: command,
-      flags: {"sw5e.itemMacro": true}
+      flags: {"sw5efoundry.itemMacro": true}
     });
   }
   game.user.assignHotbarMacro(macro, slot);
