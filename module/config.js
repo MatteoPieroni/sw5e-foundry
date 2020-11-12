@@ -401,7 +401,7 @@ DND5E.skills = {
 
 /* -------------------------------------------- */
 
-DND5E.spellPreparationModes = {
+DND5E.powerPreparationModes = {
   "always": "DND5E.SpellPrepAlways",
   "atwill": "DND5E.SpellPrepAtWill",
   "innate": "DND5E.SpellPrepInnate",
@@ -531,16 +531,16 @@ DND5E.powerAlignments = {
 
 // Spell Scroll Compendium UUIDs
 DND5E.spellScrollIds = {
-  0: 'Compendium.sw5e.items.rQ6sO7HDWzqMhSI3',
-  1: 'Compendium.sw5e.items.9GSfMg0VOA2b4uFN',
-  2: 'Compendium.sw5e.items.XdDp6CKh9qEvPTuS',
-  3: 'Compendium.sw5e.items.hqVKZie7x9w3Kqds',
-  4: 'Compendium.sw5e.items.DM7hzgL836ZyUFB1',
-  5: 'Compendium.sw5e.items.wa1VF8TXHmkrrR35',
-  6: 'Compendium.sw5e.items.tI3rWx4bxefNCexS',
-  7: 'Compendium.sw5e.items.mtyw4NS1s7j2EJaD',
-  8: 'Compendium.sw5e.items.aOrinPg7yuDZEuWr',
-  9: 'Compendium.sw5e.items.O4YbkJkLlnsgUszZ'
+  0: 'Compendium.sw5efoundry.items.rQ6sO7HDWzqMhSI3',
+  1: 'Compendium.sw5efoundry.items.9GSfMg0VOA2b4uFN',
+  2: 'Compendium.sw5efoundry.items.XdDp6CKh9qEvPTuS',
+  3: 'Compendium.sw5efoundry.items.hqVKZie7x9w3Kqds',
+  4: 'Compendium.sw5efoundry.items.DM7hzgL836ZyUFB1',
+  5: 'Compendium.sw5efoundry.items.wa1VF8TXHmkrrR35',
+  6: 'Compendium.sw5efoundry.items.tI3rWx4bxefNCexS',
+  7: 'Compendium.sw5efoundry.items.mtyw4NS1s7j2EJaD',
+  8: 'Compendium.sw5efoundry.items.aOrinPg7yuDZEuWr',
+  9: 'Compendium.sw5efoundry.items.O4YbkJkLlnsgUszZ'
 };
 
 /**

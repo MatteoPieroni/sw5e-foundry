@@ -10,7 +10,7 @@ export default class TraitSelector extends FormApplication {
 	    id: "trait-selector",
       classes: ["dnd5e"],
       title: "Actor Trait Selection",
-      template: "systems/sw5e/templates/apps/trait-selector.html",
+      template: "systems/sw5efoundry/templates/apps/trait-selector.html",
       width: 320,
       height: "auto",
       choices: {},

@@ -46,8 +46,8 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @override */
   get template() {
-    if ( !game.user.isGM && this.actor.limited ) return "systems/sw5e/templates/actors/limited-sheet.html";
-    return `systems/sw5e/templates/actors/${this.actor.data.type}-sheet.html`;
+    if ( !game.user.isGM && this.actor.limited ) return "systems/sw5efoundry/templates/actors/limited-sheet.html";
+    return `systems/sw5efoundry/templates/actors/${this.actor.data.type}-sheet.html`;
   }
 
   /* -------------------------------------------- */
@@ -266,7 +266,7 @@ export default class ActorSheet5e extends ActorSheet {
     if ( levels.pact && levels.pact.max ) {
       if ( !spellbook["0"] ) registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
       const l = levels.pact;
-      const config = CONFIG.DND5E.spellPreparationModes.pact;
+      const config = CONFIG.DND5E.powerPreparationModes.pact;
       registerSection("pact", sections.pact, config, {
         prepMode: "pact",
         value: l.value,
@@ -286,7 +286,7 @@ export default class ActorSheet5e extends ActorSheet {
         s = sections[mode];
         if ( !spellbook[s] ){
           const l = levels[mode] || {};
-          const config = CONFIG.DND5E.spellPreparationModes[mode];
+          const config = CONFIG.DND5E.powerPreparationModes[mode];
           registerSection(mode, s, config, {
             prepMode: mode,
             value: l.value,
@@ -385,7 +385,7 @@ export default class ActorSheet5e extends ActorSheet {
         s = sections[mode];
         if ( !spellbook[s] ){
           const l = levels[mode] || {};
-          const config = CONFIG.DND5E.spellPreparationModes[mode];
+          const config = CONFIG.DND5E.powerPreparationModes[mode];
           registerSection(mode, s, config, {
             prepMode: mode,
             value: l.value,
@@ -695,7 +695,7 @@ export default class ActorSheet5e extends ActorSheet {
 
   /** @override */
   async _onDropActor(event, data) {
-    const canPolymorph = game.user.isGM || (this.actor.owner && game.settings.get('sw5e', 'allowPolymorphing'));
+    const canPolymorph = game.user.isGM || (this.actor.owner && game.settings.get('sw5efoundry', 'allowPolymorphing'));
     if ( !canPolymorph ) return false;
 
     // Get the target actor
@@ -714,8 +714,8 @@ export default class ActorSheet5e extends ActorSheet {
       html.find('input').each((i, el) => {
         options[el.name] = el.checked;
       });
-      const settings = mergeObject(game.settings.get('sw5e', 'polymorphSettings') || {}, options);
-      game.settings.set('sw5e', 'polymorphSettings', settings);
+      const settings = mergeObject(game.settings.get('sw5efoundry', 'polymorphSettings') || {}, options);
+      game.settings.set('sw5efoundry', 'polymorphSettings', settings);
       return settings;
     };
 
@@ -723,7 +723,7 @@ export default class ActorSheet5e extends ActorSheet {
     return new Dialog({
       title: game.i18n.localize('DND5E.PolymorphPromptTitle'),
       content: {
-        options: game.settings.get('sw5e', 'polymorphSettings'),
+        options: game.settings.get('sw5efoundry', 'polymorphSettings'),
         i18n: DND5E.polymorphSettings,
         isToken: this.actor.isToken
       },
@@ -759,7 +759,7 @@ export default class ActorSheet5e extends ActorSheet {
     }, {
       classes: ['dialog', 'sw5e'],
       width: 600,
-      template: 'systems/sw5e/templates/apps/polymorph-prompt.html'
+      template: 'systems/sw5efoundry/templates/apps/polymorph-prompt.html'
     }).render(true);
   }
 
