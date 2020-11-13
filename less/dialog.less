@@ -48,6 +48,7 @@
     }
 
     input[type="checkbox"] {
+      border: 1px solid @lightColor;
       appearance: none;
 
       &:checked {
@@ -112,5 +113,16 @@
             text-shadow: 0 0 10px @lightColor;
         }
       }
+  }
+
+  /* ----------------------------------------- */
+  /*  Fixes                                    */
+  /* ----------------------------------------- */
+  .form-group.block {
+    display: block;
+
+    label {
+      line-height: 1;
+    }
   }
 }

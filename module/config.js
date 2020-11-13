@@ -529,6 +529,18 @@ DND5E.powerAlignments = {
   "uni": "DND5E.PowerAlignmentUni"
 };
 
+// Power Alignments modifiers
+DND5E.powerAlignmentsModifiers = {
+  techpower: {
+    "uni": ["int"],
+  },
+  forcepower: {
+    "lig": ["wis"],
+    "dar": ["cha"],
+    "uni": ["wis", "cha"],
+  }
+};
+
 // Spell Scroll Compendium UUIDs
 DND5E.spellScrollIds = {
   0: 'Compendium.sw5efoundry.items.rQ6sO7HDWzqMhSI3',

@@ -3,6 +3,7 @@ import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
 import AbilityTemplate from "../pixi/ability-template.js";
+import { Power } from "../../domain/index.js";
 import {DND5E} from '../config.js';
 
 /**
@@ -738,6 +739,7 @@ export default class Actor5e extends Actor {
     let consumeUse = false;
     let ignoreLevel = false;
     let placeTemplate = false;
+    let useWrongModifier = false;
 
     // Configure spell slot consumption and measured template placement from the form
     if (configureDialog) {
@@ -749,6 +751,7 @@ export default class Actor5e extends Actor {
       consumeUse = Boolean(usage.get("consumeUse"));
       placeTemplate = Boolean(usage.get("placeTemplate"));
       ignoreLevel = Boolean(usage.get("ignoreLevel"));
+      useWrongModifier = Boolean(usage.get("useWrongModifier"));
 
       // Determine the cast spell level
       const lvl = parseInt(usage.get("level"));
@@ -759,6 +762,7 @@ export default class Actor5e extends Actor {
     }
 
     // Update Actor data
+    // Update number of points
     if ( lvl > 0 ) {
       const remainingPoints = parseInt(
         isTech ?
@@ -784,6 +788,18 @@ export default class Actor5e extends Actor {
       await this.update({
         [`data.${isTech ? 'techcasting' : 'forcecasting'}.points.value`]: resultingPoints,
       });
+    }
+
+    // Update modifier used
+    // check the modifier is correct for the alignment of the power
+    const isWrongModifier = Power.computeModifierAlignment({
+      itemType: item.data.type,
+      itemAlignment: itemData.school || "uni",
+      currentModifier: item.abilityMod,
+    });
+
+    if (isWrongModifier.value && !useWrongModifier) {
+      return ui.notifications.error(game.i18n.localize("DND5E.PowerWrongModifierError"));
     }
 
     // Update Item data

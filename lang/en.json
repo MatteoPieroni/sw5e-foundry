@@ -546,6 +546,8 @@
 "DND5E.PowerForceBonus": "Force attack modifier",
 "DND5E.PowerTarget": "Power Target",
 "DND5E.PowerUsage": "Power Usage",
+"DND5E.PowerWrongModifier": "This power should be cast using the {original} modifier, do you want to override and use {current} instead?",
+"DND5E.PowerWrongModifierError": "Change the forcecasting modifier to the appropriate attribute to cast this power",
 "DND5E.Prepared": "Prepared",
 "DND5E.Price": "Price",
 "DND5E.Proficiency": "Proficiency",

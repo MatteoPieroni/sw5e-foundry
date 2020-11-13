@@ -3033,6 +3033,11 @@
   max-width: 40px;
   text-align: right;
 }
+.sw5e.dialog {
+  /* ----------------------------------------- */
+  /*  Fixes                                    */
+  /* ----------------------------------------- */
+}
 .sw5e.dialog .window-content {
   border: 3px solid #3bc1e5;
   padding: 0;
@@ -3099,6 +3104,7 @@
   color: #fff;
 }
 .sw5e.dialog .window-content input[type="checkbox"] {
+  border: 1px solid #3bc1e5;
   appearance: none;
 }
 .sw5e.dialog .window-content input[type="checkbox"]:checked {
@@ -3151,6 +3157,12 @@
   background: linear-gradient(180deg, #031121 0%, #031121 39%, #0c547b 70%, #35b2d7 91%, #3bc1e5 100%);
   box-shadow: none;
   text-shadow: 0 0 10px #3bc1e5;
+}
+.sw5e.dialog .form-group.block {
+  display: block;
+}
+.sw5e.dialog .form-group.block label {
+  line-height: 1;
 }
 input[type="number"] {
   width: calc(100% - 2px);
