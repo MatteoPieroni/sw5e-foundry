@@ -1,3 +1,15 @@
+{{#if isNPC}}
+<ol class="currency flexrow">
+    <h3>
+        {{localize "DND5E.Currency"}}
+    </h3>
+    {{#each data.currency as |v k|}}
+    <label class="denomination {{k}}">{{ lookup ../config.currencies k }}</label>
+    <input type="text" name="data.currency.{{k}}" value="{{v}}" data-dtype="Number"/>
+    {{/each}}
+</ol>
+{{/if}}
+
 {{#unless isVehicle}}
 <div class="inventory-filters flexrow">
     <ul class="filter-list flexrow" data-filter="features">
