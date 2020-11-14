@@ -86,6 +86,7 @@
         },
         "details": {
           "alignment": "",
+          "forceAlignment": 0,
           "species": ""
         },
         "skills": {

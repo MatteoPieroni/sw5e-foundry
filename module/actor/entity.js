@@ -3,7 +3,7 @@ import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
 import AbilityTemplate from "../pixi/ability-template.js";
-import { Power } from "../../domain/index.js";
+import { Alignment, Power } from "../../domain/index.js";
 import {DND5E} from '../config.js';
 
 /**
@@ -761,6 +761,25 @@ export default class Actor5e extends Actor {
       }
     }
 
+    // Update modifier used
+    // check the modifier is correct for the alignment of the power
+    const isWrongModifier = Power.computeModifierAlignment({
+      itemType: item.data.type,
+      itemAlignment: itemData.school || "uni",
+      currentModifier: item.abilityMod,
+    });
+
+    if (isWrongModifier.value && !useWrongModifier) {
+      return ui.notifications.error(game.i18n.localize("DND5E.PowerWrongModifierError"));
+    }
+
+    // Update Item data
+    if ( limitedUses && consumeUse ) {
+      const uses = parseInt(itemData.uses.value || 0);
+      if ( uses <= 0 ) ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: item.name}));
+      await item.update({"data.uses.value": Math.max(parseInt(item.data.data.uses.value || 0) - 1, 0)})
+    }
+
     // Update Actor data
     // Update number of points
     if ( lvl > 0 ) {
@@ -790,23 +809,13 @@ export default class Actor5e extends Actor {
       });
     }
 
-    // Update modifier used
-    // check the modifier is correct for the alignment of the power
-    const isWrongModifier = Power.computeModifierAlignment({
-      itemType: item.data.type,
-      itemAlignment: itemData.school || "uni",
-      currentModifier: item.abilityMod,
-    });
+    // Update Actor alignment
+    if (itemData.school) {
+      const newAlignment = Alignment.computePowerToAlignment({ original: this.data.data.details.forceAlignment || 0, powerType: itemData.school });
 
-    if (isWrongModifier.value && !useWrongModifier) {
-      return ui.notifications.error(game.i18n.localize("DND5E.PowerWrongModifierError"));
-    }
-
-    // Update Item data
-    if ( limitedUses && consumeUse ) {
-      const uses = parseInt(itemData.uses.value || 0);
-      if ( uses <= 0 ) ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: item.name}));
-      await item.update({"data.uses.value": Math.max(parseInt(item.data.data.uses.value || 0) - 1, 0)})
+      await this.update({
+        [`data.details.forceAlignment`]: newAlignment,
+      });
     }
 
     // Initiate ability template placement workflow if selected
