@@ -7,6 +7,10 @@ export class Alignment {
     uni: 0,
   }
 
+  static computeAlignment({ original = 0, modifier }) {
+    return Math.min(Math.max(+original + +modifier, this.min), this.max);
+  }
+
   static computePowerToAlignment({ original, powerType }) {
     const modifier = this.alignPowerValue[powerType];
 
