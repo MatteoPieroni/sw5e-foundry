@@ -247,14 +247,16 @@ DND5E.armorProficiencies = {
  * @type {Object}
  */
 DND5E.consumableTypes = {
-  "ammo": "DND5E.ConsumableAmmunition",
-  "potion": "DND5E.ConsumablePotion",
+  "adrenal": "DND5E.ConsumableAdrenal",
   "poison": "DND5E.ConsumablePoison",
+  "explosive": "DND5E.ConsumableExplosive",
   "food": "DND5E.ConsumableFood",
-  "scroll": "DND5E.ConsumableScroll",
-  "wand": "DND5E.ConsumableWand",
-  "rod": "DND5E.ConsumableRod",
-  "trinket": "DND5E.ConsumableTrinket"
+  "medpac": "DND5E.ConsumableMedpac",
+  "technology": "DND5E.ConsumableTechnology",
+  "ammunition": "DND5E.ConsumableAmmunition",
+  "trinket": "DND5E.ConsumableTrinket",
+  "force": "DND5E.ConsumableForce",
+  "tech": "DND5E.ConsumableTech"
 };
 
 /* -------------------------------------------- */
