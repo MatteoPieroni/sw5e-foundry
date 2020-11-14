@@ -591,7 +591,8 @@
       "armor": {
         "type": "light",
         "value": 10,
-        "dex": null
+        "dex": null,
+        "properties": {}
       },
       "speed": {
         "value": null,

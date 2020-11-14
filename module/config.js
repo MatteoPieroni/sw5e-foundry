@@ -453,6 +453,39 @@ DND5E.weaponTypes = {
 
 /* -------------------------------------------- */
 
+DND5E.armourProperties = {
+  "absorptive": "DND5E.ArmourProperAbsorptive",
+  "agile": "DND5E.ArmourProperAgile",
+  "anchor": "DND5E.ArmourProperAnchor",
+  "avoidant": "DND5E.ArmourProperAvoidant",
+  "barbed": "DND5E.ArmourProperBarbed",
+  "bulky": "DND5E.ArmourProperBulky",
+  "charging": "DND5E.ArmourProperCharging",
+  "concealing": "DND5E.ArmourProperConcealing",
+  "cumbersome": "DND5E.ArmourProperCumbersome",
+  "gauntleted": "DND5E.ArmourProperGauntleted",
+  "imbalanced": "DND5E.ArmourProperImbalanced",
+  "impermeable": "DND5E.ArmourProperImpermeable",
+  "insulated": "DND5E.ArmourProperInsulated",
+  "interlocking": "DND5E.ArmourProperInterlocking",
+  "lambent": "DND5E.ArmourProperLambent",
+  "lightweight": "DND5E.ArmourProperLightweight",
+  "magnetic": "DND5E.ArmourProperMagnetic",
+  "obscured": "DND5E.ArmourProperObscured",
+  "obtrusive": "DND5E.ArmourProperObtrusive",
+  "powered": "DND5E.ArmourProperPowered",
+  "reactive": "DND5E.ArmourProperReactive",
+  "regulated": "DND5E.ArmourProperRegulated",
+  "reinforced": "DND5E.ArmourProperReinforced",
+  "responsive": "DND5E.ArmourProperResponsive",
+  "rigid": "DND5E.ArmourProperRigid",
+  "silent": "DND5E.ArmourProperSilent",
+  "spiked": "DND5E.ArmourProperSpiked",
+  "strength": "DND5E.ArmourProperStrength",
+  "steadfast": "DND5E.ArmourProperSteadfast",
+  "versatile": "DND5E.ArmourProperVersatile"
+}
+
 /**
  * Define the set of weapon property flags which can exist on a weapon
  * @type {Object}
