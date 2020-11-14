@@ -151,6 +151,93 @@
 .flexrow--space-between > * {
   flex: unset;
 }
+.alternative-styling .window-content {
+  border: 3px solid #3bc1e5;
+  padding: 0;
+  background: #031121;
+  color: #3bc1e5;
+}
+.alternative-styling .window-content h1,
+.alternative-styling .window-content h2,
+.alternative-styling .window-content h3,
+.alternative-styling .window-content h4,
+.alternative-styling .window-content h5,
+.alternative-styling .window-content h6 {
+  color: #3bc1e5;
+  border-bottom-color: #d3ae3f;
+}
+.alternative-styling .window-content input,
+.alternative-styling .window-content textarea,
+.alternative-styling .window-content select {
+  color: #3bc1e5;
+}
+.alternative-styling .window-content input:hover,
+.alternative-styling .window-content textarea:hover,
+.alternative-styling .window-content select:hover,
+.alternative-styling .window-content input:focus,
+.alternative-styling .window-content textarea:focus,
+.alternative-styling .window-content select:focus {
+  border: 1px solid #3bc1e5;
+  box-shadow: 0 0 8px #3bc1e5;
+}
+.alternative-styling .window-content input:disabled,
+.alternative-styling .window-content textarea:disabled,
+.alternative-styling .window-content select:disabled {
+  border: 1px solid transparent;
+  background: none;
+  box-shadow: none;
+}
+.alternative-styling .window-content input::-webkit-input-placeholder,
+.alternative-styling .window-content textarea::-webkit-input-placeholder,
+.alternative-styling .window-content select::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #9e9c9c;
+}
+.alternative-styling .window-content input::-moz-placeholder,
+.alternative-styling .window-content textarea::-moz-placeholder,
+.alternative-styling .window-content select::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #9e9c9c;
+}
+.alternative-styling .window-content input:-ms-input-placeholder,
+.alternative-styling .window-content textarea:-ms-input-placeholder,
+.alternative-styling .window-content select:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #9e9c9c;
+}
+.alternative-styling .window-content input:-moz-placeholder,
+.alternative-styling .window-content textarea:-moz-placeholder,
+.alternative-styling .window-content select:-moz-placeholder {
+  /* Firefox 18- */
+  color: #9e9c9c;
+}
+.alternative-styling .window-content select {
+  background: #031121;
+}
+.alternative-styling .window-content textarea {
+  color: #fff;
+}
+.alternative-styling .window-content input[type="number"],
+.alternative-styling .window-content input[data-dtype="Number"] {
+  text-align: right;
+}
+.alternative-styling .window-content a:hover,
+.alternative-styling .window-content .rollable:hover,
+.alternative-styling .window-content a:focus,
+.alternative-styling .window-content .rollable:focus {
+  color: #fff;
+  text-shadow: 0 0 10px #3bc1e5;
+}
+.alternative-styling .window-content label {
+  color: #3bc1e5;
+}
+.alternative-styling .window-content *::-webkit-scrollbar-thumb {
+  background: #d3ae3f;
+  border: 1px solid #031121;
+}
+.alternative-styling .window-content *::-webkit-scrollbar-track {
+  box-shadow: 0 1px #9e9c9c inset;
+}
 /* ----------------------------------------- */
 /*  All DnD5e Apps                           */
 /* ----------------------------------------- */
@@ -1228,6 +1315,7 @@
 .dnd5e.sheet.actor-alternative .window-content h4,
 .dnd5e.sheet.actor-alternative .window-content h5,
 .dnd5e.sheet.actor-alternative .window-content h6 {
+  color: #3bc1e5;
   border-bottom-color: #d3ae3f;
 }
 .dnd5e.sheet.actor-alternative .window-content input,
@@ -2327,6 +2415,96 @@
 .dnd5e.sheet.actor-alternative .editor .tox-tbtn:hover svg {
   fill: #031121;
 }
+.dnd5e.sheet.actor-alternative.npc .window-content {
+  border: 3px solid #3bc1e5;
+  padding: 0;
+  background: #031121;
+  color: #3bc1e5;
+}
+.dnd5e.sheet.actor-alternative.npc .window-content h1,
+.dnd5e.sheet.actor-alternative.npc .window-content h2,
+.dnd5e.sheet.actor-alternative.npc .window-content h3,
+.dnd5e.sheet.actor-alternative.npc .window-content h4,
+.dnd5e.sheet.actor-alternative.npc .window-content h5,
+.dnd5e.sheet.actor-alternative.npc .window-content h6 {
+  color: #3bc1e5;
+  border-bottom-color: #d3ae3f;
+}
+.dnd5e.sheet.actor-alternative.npc .window-content input,
+.dnd5e.sheet.actor-alternative.npc .window-content textarea,
+.dnd5e.sheet.actor-alternative.npc .window-content select {
+  color: #3bc1e5;
+}
+.dnd5e.sheet.actor-alternative.npc .window-content input:hover,
+.dnd5e.sheet.actor-alternative.npc .window-content textarea:hover,
+.dnd5e.sheet.actor-alternative.npc .window-content select:hover,
+.dnd5e.sheet.actor-alternative.npc .window-content input:focus,
+.dnd5e.sheet.actor-alternative.npc .window-content textarea:focus,
+.dnd5e.sheet.actor-alternative.npc .window-content select:focus {
+  border: 1px solid #3bc1e5;
+  box-shadow: 0 0 8px #3bc1e5;
+}
+.dnd5e.sheet.actor-alternative.npc .window-content input:disabled,
+.dnd5e.sheet.actor-alternative.npc .window-content textarea:disabled,
+.dnd5e.sheet.actor-alternative.npc .window-content select:disabled {
+  border: 1px solid transparent;
+  background: none;
+  box-shadow: none;
+}
+.dnd5e.sheet.actor-alternative.npc .window-content input::-webkit-input-placeholder,
+.dnd5e.sheet.actor-alternative.npc .window-content textarea::-webkit-input-placeholder,
+.dnd5e.sheet.actor-alternative.npc .window-content select::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #9e9c9c;
+}
+.dnd5e.sheet.actor-alternative.npc .window-content input::-moz-placeholder,
+.dnd5e.sheet.actor-alternative.npc .window-content textarea::-moz-placeholder,
+.dnd5e.sheet.actor-alternative.npc .window-content select::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #9e9c9c;
+}
+.dnd5e.sheet.actor-alternative.npc .window-content input:-ms-input-placeholder,
+.dnd5e.sheet.actor-alternative.npc .window-content textarea:-ms-input-placeholder,
+.dnd5e.sheet.actor-alternative.npc .window-content select:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #9e9c9c;
+}
+.dnd5e.sheet.actor-alternative.npc .window-content input:-moz-placeholder,
+.dnd5e.sheet.actor-alternative.npc .window-content textarea:-moz-placeholder,
+.dnd5e.sheet.actor-alternative.npc .window-content select:-moz-placeholder {
+  /* Firefox 18- */
+  color: #9e9c9c;
+}
+.dnd5e.sheet.actor-alternative.npc .window-content select {
+  background: #031121;
+}
+.dnd5e.sheet.actor-alternative.npc .window-content textarea {
+  color: #fff;
+}
+.dnd5e.sheet.actor-alternative.npc .window-content input[type="number"],
+.dnd5e.sheet.actor-alternative.npc .window-content input[data-dtype="Number"] {
+  text-align: right;
+}
+.dnd5e.sheet.actor-alternative.npc .window-content a:hover,
+.dnd5e.sheet.actor-alternative.npc .window-content .rollable:hover,
+.dnd5e.sheet.actor-alternative.npc .window-content a:focus,
+.dnd5e.sheet.actor-alternative.npc .window-content .rollable:focus {
+  color: #fff;
+  text-shadow: 0 0 10px #3bc1e5;
+}
+.dnd5e.sheet.actor-alternative.npc .window-content label {
+  color: #3bc1e5;
+}
+.dnd5e.sheet.actor-alternative.npc .window-content *::-webkit-scrollbar-thumb {
+  background: #d3ae3f;
+  border: 1px solid #031121;
+}
+.dnd5e.sheet.actor-alternative.npc .window-content *::-webkit-scrollbar-track {
+  box-shadow: 0 1px #9e9c9c inset;
+}
+.dnd5e.sheet.actor-alternative.npc .currency {
+  flex: unset;
+}
 .dnd5e.sheet.item {
   min-height: 420px;
   /* ----------------------------------------- */
@@ -3033,6 +3211,11 @@
   max-width: 40px;
   text-align: right;
 }
+.sw5e.dialog {
+  /* ----------------------------------------- */
+  /*  Fixes                                    */
+  /* ----------------------------------------- */
+}
 .sw5e.dialog .window-content {
   border: 3px solid #3bc1e5;
   padding: 0;
@@ -3099,6 +3282,7 @@
   color: #fff;
 }
 .sw5e.dialog .window-content input[type="checkbox"] {
+  border: 1px solid #3bc1e5;
   appearance: none;
 }
 .sw5e.dialog .window-content input[type="checkbox"]:checked {
@@ -3151,6 +3335,12 @@
   background: linear-gradient(180deg, #031121 0%, #031121 39%, #0c547b 70%, #35b2d7 91%, #3bc1e5 100%);
   box-shadow: none;
   text-shadow: 0 0 10px #3bc1e5;
+}
+.sw5e.dialog .form-group.block {
+  display: block;
+}
+.sw5e.dialog .form-group.block label {
+  line-height: 1;
 }
 input[type="number"] {
   width: calc(100% - 2px);

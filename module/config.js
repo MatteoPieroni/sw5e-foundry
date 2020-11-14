@@ -4,14 +4,16 @@ import {ClassFeatures} from "./classFeatures.js"
 export const DND5E = {};
 
 // ASCII Artwork
-DND5E.ASCII = `_______________________________
-______      ______ _____ _____
-|  _  \\___  |  _  \\  ___|  ___|
-| | | ( _ ) | | | |___ \\| |__
-| | | / _ \\/\\ | | |   \\ \\  __|
-| |/ / (_>  < |/ //\\__/ / |___
-|___/ \\___/\\/___/ \\____/\\____/
-_______________________________`;
+DND5E.ASCII = `
+
+███████ ██     ██ ███████ ███████ ███████  ██████  ██    ██ ███    ██ ██████  ██████  ██    ██ 
+██      ██     ██ ██      ██      ██      ██    ██ ██    ██ ████   ██ ██   ██ ██   ██  ██  ██  
+███████ ██  █  ██ ███████ █████   █████   ██    ██ ██    ██ ██ ██  ██ ██   ██ ██████    ████   
+     ██ ██ ███ ██      ██ ██      ██      ██    ██ ██    ██ ██  ██ ██ ██   ██ ██   ██    ██    
+███████  ███ ███  ███████ ███████ ██       ██████   ██████  ██   ████ ██████  ██   ██    ██    
+                                                                                               
+                                                                                               
+`;
 
 
 /**
@@ -61,15 +63,35 @@ DND5E.weaponProficiencies = {
 };
 
 DND5E.toolProficiencies = {
-  "art": "DND5E.ToolArtisans",
+  "armor": "DND5E.ToolArmormech",
+  "arms": "DND5E.ToolArmstech",
+  "arti": "DND5E.ToolArtificer",
+  "art": "DND5E.ToolArtist",
+  "astro": "DND5E.ToolAstrotech",
+  "bio": "DND5E.ToolBiotech",
+  "con": "DND5E.ToolConstructor",
+  "cyb": "DND5E.ToolCybertech",
+  "jew": "DND5E.ToolJeweler",
+  "sur": "DND5E.ToolSurveyor",
+  "syn": "DND5E.ToolSynthweaver",
+  "tin": "DND5E.ToolTinker",
+  "ant": "DND5E.ToolAntitoxkit",
+  "arc": "DND5E.ToolArchaeologistKit",
+  "aud": "DND5E.ToolAudiotechKit",
+  "bioa": "DND5E.ToolBioanalysisKit",
+  "brew": "DND5E.ToolBrewerKit",
+  "chef": "DND5E.ToolChefKit",
+  "demo": "DND5E.ToolDemolitionKit",
   "disg": "DND5E.ToolDisguiseKit",
   "forg": "DND5E.ToolForgeryKit",
+  "mech": "DND5E.ToolMechanicKit",
   "game": "DND5E.ToolGamingSet",
-  "herb": "DND5E.ToolHerbalismKit",
+  "poi": "DND5E.ToolPoisonKit",
+  "scav": "DND5E.ToolScavengingKit",
+  "secur": "DND5E.ToolSecurityKit",
+  "slic": "DND5E.ToolSlicerKit",
+  "spice": "DND5E.ToolSpiceKit",
   "music": "DND5E.ToolMusicalInstrument",
-  "navg": "DND5E.ToolNavigators",
-  "pois": "DND5E.ToolPoisonersKit",
-  "thief": "DND5E.ToolThieves",
   "vehicle": "DND5E.ToolVehicle"
 };
 
@@ -225,14 +247,16 @@ DND5E.armorProficiencies = {
  * @type {Object}
  */
 DND5E.consumableTypes = {
-  "ammo": "DND5E.ConsumableAmmunition",
-  "potion": "DND5E.ConsumablePotion",
+  "adrenal": "DND5E.ConsumableAdrenal",
   "poison": "DND5E.ConsumablePoison",
+  "explosive": "DND5E.ConsumableExplosive",
   "food": "DND5E.ConsumableFood",
-  "scroll": "DND5E.ConsumableScroll",
-  "wand": "DND5E.ConsumableWand",
-  "rod": "DND5E.ConsumableRod",
-  "trinket": "DND5E.ConsumableTrinket"
+  "medpac": "DND5E.ConsumableMedpac",
+  "technology": "DND5E.ConsumableTechnology",
+  "ammunition": "DND5E.ConsumableAmmunition",
+  "trinket": "DND5E.ConsumableTrinket",
+  "force": "DND5E.ConsumableForce",
+  "tech": "DND5E.ConsumableTech"
 };
 
 /* -------------------------------------------- */
@@ -453,25 +477,77 @@ DND5E.weaponTypes = {
 
 /* -------------------------------------------- */
 
+DND5E.armourProperties = {
+  "absorptive": "DND5E.ArmourProperAbsorptive",
+  "agile": "DND5E.ArmourProperAgile",
+  "anchor": "DND5E.ArmourProperAnchor",
+  "avoidant": "DND5E.ArmourProperAvoidant",
+  "barbed": "DND5E.ArmourProperBarbed",
+  "bulky": "DND5E.ArmourProperBulky",
+  "charging": "DND5E.ArmourProperCharging",
+  "concealing": "DND5E.ArmourProperConcealing",
+  "cumbersome": "DND5E.ArmourProperCumbersome",
+  "gauntleted": "DND5E.ArmourProperGauntleted",
+  "imbalanced": "DND5E.ArmourProperImbalanced",
+  "impermeable": "DND5E.ArmourProperImpermeable",
+  "insulated": "DND5E.ArmourProperInsulated",
+  "interlocking": "DND5E.ArmourProperInterlocking",
+  "lambent": "DND5E.ArmourProperLambent",
+  "lightweight": "DND5E.ArmourProperLightweight",
+  "magnetic": "DND5E.ArmourProperMagnetic",
+  "obscured": "DND5E.ArmourProperObscured",
+  "obtrusive": "DND5E.ArmourProperObtrusive",
+  "powered": "DND5E.ArmourProperPowered",
+  "reactive": "DND5E.ArmourProperReactive",
+  "regulated": "DND5E.ArmourProperRegulated",
+  "reinforced": "DND5E.ArmourProperReinforced",
+  "responsive": "DND5E.ArmourProperResponsive",
+  "rigid": "DND5E.ArmourProperRigid",
+  "silent": "DND5E.ArmourProperSilent",
+  "spiked": "DND5E.ArmourProperSpiked",
+  "strength": "DND5E.ArmourProperStrength",
+  "steadfast": "DND5E.ArmourProperSteadfast",
+  "versatile": "DND5E.ArmourProperVersatile"
+}
+
 /**
  * Define the set of weapon property flags which can exist on a weapon
  * @type {Object}
  */
 DND5E.weaponProperties = {
   "amm": "DND5E.WeaponPropertiesAmm",
-  "hvy": "DND5E.WeaponPropertiesHvy",
+  "aut": "DND5E.WeaponPropertiesAut",
+  "bur": "DND5E.WeaponPropertiesBur",
+  "def": "DND5E.WeaponPropertiesDef",
+  "dex": "DND5E.WeaponPropertiesDex",
+  "dir": "DND5E.WeaponPropertiesDir",
+  "drm": "DND5E.WeaponPropertiesDrm",
+  "dgd": "DND5E.WeaponPropertiesDgd",
+  "dis": "DND5E.WeaponPropertiesDis",
+  "dpt": "DND5E.WeaponPropertiesDpt",
+  "dou": "DND5E.WeaponPropertiesDou",
   "fin": "DND5E.WeaponPropertiesFin",
-  "fir": "DND5E.WeaponPropertiesFir",
+  "fix": "DND5E.WeaponPropertiesFix",
   "foc": "DND5E.WeaponPropertiesFoc",
+  "hvy": "DND5E.WeaponPropertiesHvy",
+  "hid": "DND5E.WeaponPropertiesHid",
+  "ken": "DND5E.WeaponPropertiesKen",
   "lgt": "DND5E.WeaponPropertiesLgt",
-  "lod": "DND5E.WeaponPropertiesLod",
+  "lum": "DND5E.WeaponPropertiesLum",
+  "mig": "DND5E.WeaponPropertiesMig",
+  "pic": "DND5E.WeaponPropertiesPic",
+  "rap": "DND5E.WeaponPropertiesRap",
   "rch": "DND5E.WeaponPropertiesRch",
   "rel": "DND5E.WeaponPropertiesRel",
   "ret": "DND5E.WeaponPropertiesRet",
+  "shk": "DND5E.WeaponPropertiesShk",
+  "sil": "DND5E.WeaponPropertiesSil",
   "spc": "DND5E.WeaponPropertiesSpc",
+  "str": "DND5E.WeaponPropertiesStr",
   "thr": "DND5E.WeaponPropertiesThr",
   "two": "DND5E.WeaponPropertiesTwo",
-  "ver": "DND5E.WeaponPropertiesVer"
+  "ver": "DND5E.WeaponPropertiesVer",
+  "vic": "DND5E.WeaponPropertiesVic"
 };
 
 
@@ -527,6 +603,18 @@ DND5E.powerAlignments = {
   "lig": "DND5E.PowerAlignmentLig",
   "dar": "DND5E.PowerAlignmentDar",
   "uni": "DND5E.PowerAlignmentUni"
+};
+
+// Power Alignments modifiers
+DND5E.powerAlignmentsModifiers = {
+  techpower: {
+    "uni": ["int"],
+  },
+  forcepower: {
+    "lig": ["wis"],
+    "dar": ["cha"],
+    "uni": ["wis", "cha"],
+  }
 };
 
 // Spell Scroll Compendium UUIDs
@@ -636,6 +724,8 @@ DND5E.conditionTypes = {
   "poisoned": "DND5E.ConPoisoned",
   "prone": "DND5E.ConProne",
   "restrained": "DND5E.ConRestrained",
+  "shocked": "DND5E.ConShocked",
+  "slowed": "DND5E.ConSlowed",
   "stunned": "DND5E.ConStunned",
   "unconscious": "DND5E.ConUnconscious"
 };

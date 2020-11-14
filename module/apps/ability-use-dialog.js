@@ -1,3 +1,5 @@
+import { Power } from "../../domain/index.js";
+
 /**
  * A specialized Dialog subclass for ability usage
  * @type {Dialog}
@@ -131,11 +133,18 @@ export default class AbilityUseDialog extends Dialog {
   /* -------------------------------------------- */
 
   /**
-   * Get dialog data related to limited spell slots
+   * Get dialog data related to limited power points
    * @private
    */
   static _getPowerData(actorData, itemData, data, { mode }) {
     const isTech = mode === "tech";
+
+    // check the modifier is correct for the alignment of the power
+    const isWrongModifier = Power.computeModifierAlignment({
+      itemType: data.item.type,
+      itemAlignment: itemData.school || "uni",
+      currentModifier: actorData.attributes[isTech ? 'techcasting' : 'forcecasting'],
+    });
 
     // Determine whether the spell may be up-cast
     const lvl = itemData.level;
@@ -149,7 +158,7 @@ export default class AbilityUseDialog extends Dialog {
 
     // If can't upcast, return early and don't bother calculating available spell slots
     if (!canUpcast) {
-      data = mergeObject(data, { isSpell: true, canUpcast, hasSlots: remainingPoints - (lvl + 1) > 0, isHigherPower  });
+      data = mergeObject(data, { isSpell: true, canUpcast, hasSlots: remainingPoints - (lvl + 1) > 0, isHigherPower, isWrongModifier  });
       return;
     }
 
@@ -168,7 +177,7 @@ export default class AbilityUseDialog extends Dialog {
     }, []).filter(sl => sl.level <= lmax);
 
     // Return merged data
-    data = mergeObject(data, { isSpell: true, canUpcast, spellLevels, isHigherPower });
+    data = mergeObject(data, { isSpell: true, canUpcast, spellLevels, isHigherPower, isWrongModifier });
   }
 
   /* -------------------------------------------- */

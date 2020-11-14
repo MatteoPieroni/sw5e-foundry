@@ -2,6 +2,7 @@ import Item5e from "../../item/entity.js";
 import TraitSelector from "../../apps/trait-selector.js";
 import ActorSheetFlags from "../../apps/actor-flags.js";
 import {DND5E} from '../../config.js';
+import { Caster } from "../../../domain/caster.js";
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -109,6 +110,9 @@ export default class ActorSheet5e extends ActorSheet {
 
     // Update traits
     this._prepareTraits(data.actor.data.traits);
+
+    // Prepare casting capacity
+    this._prepareCasting(data.actor.data);
 
     // Prepare owned items
     this._prepareItems(data);
@@ -479,6 +483,36 @@ export default class ActorSheet5e extends ActorSheet {
     }, [[], []]);
     
     data.equippedItems = { weapons, armour };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare casting capacities
+   * @param {Object} data     The Actor data being prepared
+   * @private
+   */
+  _prepareCasting(data) {
+    const {
+      forcecasting,
+      techcasting,
+      attributes: { forcecasting: forceMod, techcasting: techMod, prof: proficiencyBonus },
+      abilities,
+    } = data;
+    const forceModifier = abilities[forceMod].mod;
+    const techModifier = abilities[techMod].mod;
+
+    data.forcecasting = {
+      ...forcecasting,
+      dc: Caster.getCastingDC({ proficiencyBonus, modifier: forceModifier }),
+      bonus: Caster.getCastingAttackModifier({ proficiencyBonus, modifier: forceModifier }),
+    };
+
+    data.techcasting = {
+      ...techcasting,
+      dc: Caster.getCastingDC({ proficiencyBonus, modifier: techModifier }),
+      bonus: Caster.getCastingAttackModifier({ proficiencyBonus, modifier: techModifier }),
+    };
   }
 
   /* -------------------------------------------- */
