@@ -33,7 +33,7 @@ export default class Item5e extends Item {
       if (this.data.type === "forcepower") return actorData.attributes.forcecasting || "int";
 
       // Powers - Use Actor techcasting modifier
-      if (this.data.type === "forcepower") return actorData.attributes.forcecasting || "int";
+      if (this.data.type === "techpower") return actorData.attributes.techcasting || "int";
 
       // Tools - default to Intelligence
       else if (this.data.type === "tool") return "int";

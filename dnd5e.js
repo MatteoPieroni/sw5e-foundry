@@ -125,7 +125,7 @@ Hooks.once("setup", function() {
     "damageTypes", "damageResistanceTypes", "distanceUnits", "equipmentTypes", "healingTypes", "itemActionTypes",
     "limitedUsePeriods", "senses", "skills", "spellComponents", "spellLevels", "powerPreparationModes", "spellSchools",
     "spellScalingModes", "powerLevels", "powerAlignments", "targetTypes", "timePeriods", "weaponProperties", "weaponTypes", "languages",
-    "polymorphSettings", "armorProficiencies", "weaponProficiencies", "toolProficiencies", "abilityActivationTypes",
+    "polymorphSettings", "armorProficiencies", "armourProperties", "weaponProficiencies", "toolProficiencies", "abilityActivationTypes",
     "abilityConsumptionTypes", "actorSizes", "proficiencyLevels", "cover"
   ];
 

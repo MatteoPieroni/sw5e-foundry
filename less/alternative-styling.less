@@ -1,0 +1,76 @@
+.alternative-styling {
+  @borderSize: 3px;
+
+  .window-content {
+    border: @borderSize solid @lightColor;
+    padding: 0;
+    background: @primaryColor;
+    color: @lightColor;
+
+    h1, h2, h3, h4, h5, h6 {
+      color: @lightColor;
+      border-bottom-color: @colorYellow;
+    }
+    
+    input, textarea, select {
+      color: @lightColor;
+
+      &:hover, &:focus {
+        border: 1px solid @lightColor;
+        box-shadow: 0 0 8px @lightColor;
+      }
+
+      &:disabled {
+        border: 1px solid transparent;
+        background: none;
+        box-shadow: none;
+      }
+
+      &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: @lightGrey;
+      }
+      &::-moz-placeholder { /* Firefox 19+ */
+        color: @lightGrey;
+      }
+      &:-ms-input-placeholder { /* IE 10+ */
+        color: @lightGrey;
+      }
+      &:-moz-placeholder { /* Firefox 18- */
+        color: @lightGrey;
+      }
+    }
+
+    select {
+      background: @primaryColor;
+    }
+
+    textarea {
+      color: @colorWhite;
+    }
+
+    input[type="number"],
+    input[data-dtype="Number"] {
+      text-align: right;
+    }
+
+    a, .rollable {
+      &:hover, &:focus {
+        color: @colorWhite;
+        text-shadow: 0 0 10px @lightColor;
+      }
+    }
+
+    label {
+      color: @lightColor;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background: @colorYellow;
+      border: 1px solid @primaryColor;
+    }
+  
+    *::-webkit-scrollbar-track {
+      box-shadow: 0 1px @lightGrey inset;
+    }
+  }
+}
