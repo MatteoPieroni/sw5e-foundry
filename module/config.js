@@ -516,19 +516,38 @@ DND5E.armourProperties = {
  */
 DND5E.weaponProperties = {
   "amm": "DND5E.WeaponPropertiesAmm",
-  "hvy": "DND5E.WeaponPropertiesHvy",
+  "aut": "DND5E.WeaponPropertiesAut",
+  "bur": "DND5E.WeaponPropertiesBur",
+  "def": "DND5E.WeaponPropertiesDef",
+  "dex": "DND5E.WeaponPropertiesDex",
+  "dir": "DND5E.WeaponPropertiesDir",
+  "drm": "DND5E.WeaponPropertiesDrm",
+  "dgd": "DND5E.WeaponPropertiesDgd",
+  "dis": "DND5E.WeaponPropertiesDis",
+  "dpt": "DND5E.WeaponPropertiesDpt",
+  "dou": "DND5E.WeaponPropertiesDou",
   "fin": "DND5E.WeaponPropertiesFin",
-  "fir": "DND5E.WeaponPropertiesFir",
+  "fix": "DND5E.WeaponPropertiesFix",
   "foc": "DND5E.WeaponPropertiesFoc",
+  "hvy": "DND5E.WeaponPropertiesHvy",
+  "hid": "DND5E.WeaponPropertiesHid",
+  "ken": "DND5E.WeaponPropertiesKen",
   "lgt": "DND5E.WeaponPropertiesLgt",
-  "lod": "DND5E.WeaponPropertiesLod",
+  "lum": "DND5E.WeaponPropertiesLum",
+  "mig": "DND5E.WeaponPropertiesMig",
+  "pic": "DND5E.WeaponPropertiesPic",
+  "rap": "DND5E.WeaponPropertiesRap",
   "rch": "DND5E.WeaponPropertiesRch",
   "rel": "DND5E.WeaponPropertiesRel",
   "ret": "DND5E.WeaponPropertiesRet",
+  "shk": "DND5E.WeaponPropertiesShk",
+  "sil": "DND5E.WeaponPropertiesSil",
   "spc": "DND5E.WeaponPropertiesSpc",
+  "str": "DND5E.WeaponPropertiesStr",
   "thr": "DND5E.WeaponPropertiesThr",
   "two": "DND5E.WeaponPropertiesTwo",
-  "ver": "DND5E.WeaponPropertiesVer"
+  "ver": "DND5E.WeaponPropertiesVer",
+  "vic": "DND5E.WeaponPropertiesVic"
 };
 
 
