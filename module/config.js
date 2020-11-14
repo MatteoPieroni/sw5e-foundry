@@ -703,6 +703,8 @@ DND5E.conditionTypes = {
   "poisoned": "DND5E.ConPoisoned",
   "prone": "DND5E.ConProne",
   "restrained": "DND5E.ConRestrained",
+  "shocked": "DND5E.ConShocked",
+  "slowed": "DND5E.ConSlowed",
   "stunned": "DND5E.ConStunned",
   "unconscious": "DND5E.ConUnconscious"
 };
