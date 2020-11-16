@@ -1643,6 +1643,53 @@
   font-size: 12px;
   font-weight: 400;
 }
+.dnd5e.sheet.actor-alternative .alignment-slider {
+  position: relative;
+}
+.dnd5e.sheet.actor-alternative .alignment-slider .icon-img {
+  width: 45px;
+  z-index: 1;
+  fill: currentColor;
+  stroke: currentColor;
+}
+.dnd5e.sheet.actor-alternative .alignment-slider .sith {
+  color: #c7160f;
+}
+.dnd5e.sheet.actor-alternative .alignment-slider .jedi {
+  color: #3bc1e5;
+}
+.dnd5e.sheet.actor-alternative .alignment-slider input[type=range] {
+  width: 100%;
+  margin: 11px -13px;
+  background-color: transparent;
+  -webkit-appearance: none;
+}
+.dnd5e.sheet.actor-alternative .alignment-slider input[type=range]::-webkit-slider-runnable-track {
+  background: #c7160f;
+  background: linear-gradient(90deg, #c7160f 0%, #963f3b 35%, #838383 50%, #62a1b1 65%, #3bc1e5 100%);
+  width: 100%;
+  height: 14px;
+}
+.dnd5e.sheet.actor-alternative .alignment-slider input[type=range]::-webkit-slider-thumb {
+  margin-top: -11.3px;
+  width: 4px;
+  height: 36px;
+  background: #3bc1e5;
+  -webkit-appearance: none;
+  z-index: 1;
+}
+.dnd5e.sheet.actor-alternative .alignment-slider input[type=range]::-moz-range-track {
+  background: #c7160f;
+  background: linear-gradient(90deg, #c7160f 0%, #963f3b 35%, #838383 50%, #62a1b1 65%, #3bc1e5 100%);
+  width: 100%;
+  height: 14px;
+}
+.dnd5e.sheet.actor-alternative .alignment-slider input[type=range]::-moz-range-thumb {
+  width: 4px;
+  height: 36px;
+  background: #3bc1e5;
+  z-index: 1;
+}
 .dnd5e.sheet.actor-alternative .alignment {
   position: absolute;
   top: 0;
@@ -2024,7 +2071,7 @@
   background: #06243a;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item .item-name {
-  cursor: pointer;
+  cursor: default;
   max-height: 30px;
   overflow: hidden;
 }
@@ -2032,11 +2079,13 @@
   flex: 0 0 30px;
   background-size: 30px;
   margin-right: 5px;
+  cursor: pointer;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item .item-name h4 {
   margin: 0;
   white-space: nowrap;
   overflow-x: hidden;
+  cursor: pointer;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item .item-name.rollable:hover .item-image {
   background-image: url("../../icons/svg/d20-grey.svg") !important;

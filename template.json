@@ -86,6 +86,10 @@
         },
         "details": {
           "alignment": "",
+          "forceAlignment": {
+            "value": 0,
+            "tier": 0
+          },
           "species": ""
         },
         "skills": {

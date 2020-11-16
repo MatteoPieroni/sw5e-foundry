@@ -3,7 +3,7 @@ import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
 import AbilityTemplate from "../pixi/ability-template.js";
-import { Power } from "../../domain/index.js";
+import { Alignment, Power } from "../../domain/index.js";
 import {DND5E} from '../config.js';
 
 /**
@@ -761,6 +761,25 @@ export default class Actor5e extends Actor {
       }
     }
 
+    // Update modifier used
+    // check the modifier is correct for the alignment of the power
+    const isWrongModifier = Power.computeModifierAlignment({
+      itemType: item.data.type,
+      itemAlignment: itemData.school || "uni",
+      currentModifier: item.abilityMod,
+    });
+
+    if (isWrongModifier.value && !useWrongModifier) {
+      return ui.notifications.error(game.i18n.localize("DND5E.PowerWrongModifierError"));
+    }
+
+    // Update Item data
+    if ( limitedUses && consumeUse ) {
+      const uses = parseInt(itemData.uses.value || 0);
+      if ( uses <= 0 ) ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: item.name}));
+      await item.update({"data.uses.value": Math.max(parseInt(item.data.data.uses.value || 0) - 1, 0)})
+    }
+
     // Update Actor data
     // Update number of points
     if ( lvl > 0 ) {
@@ -790,23 +809,11 @@ export default class Actor5e extends Actor {
       });
     }
 
-    // Update modifier used
-    // check the modifier is correct for the alignment of the power
-    const isWrongModifier = Power.computeModifierAlignment({
-      itemType: item.data.type,
-      itemAlignment: itemData.school || "uni",
-      currentModifier: item.abilityMod,
-    });
-
-    if (isWrongModifier.value && !useWrongModifier) {
-      return ui.notifications.error(game.i18n.localize("DND5E.PowerWrongModifierError"));
-    }
-
-    // Update Item data
-    if ( limitedUses && consumeUse ) {
-      const uses = parseInt(itemData.uses.value || 0);
-      if ( uses <= 0 ) ui.notifications.warn(game.i18n.format("DND5E.ItemNoUses", {name: item.name}));
-      await item.update({"data.uses.value": Math.max(parseInt(item.data.data.uses.value || 0) - 1, 0)})
+    // Update Actor alignment
+    if (itemData.school) {
+      const newAlignment = Alignment.computePowerToAlignment({ original: forceAlignment?.value || 0, powerType });
+      
+      await this.updateAlignment(newAlignment);
     }
 
     // Initiate ability template placement workflow if selected
@@ -818,6 +825,63 @@ export default class Actor5e extends Actor {
 
     // Invoke the Item roll
     return item.roll();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll a Skill Check
+   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
+   * @param {string} skillId      The skill id (e.g. "ins")
+   * @param {Object} options      Options which configure how the skill check is rolled
+   * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
+   */
+  async updateAlignment(newAlignment) {
+    const newTier = Alignment.checkChangedTierEffect({
+      currentTier: this.data.data.details.forceAlignment?.tier || 0,
+      newTier: newAlignment.tier,
+      config: CONFIG.DND5E.tierProgression,
+    });
+
+    await this.update({
+      [`data.details.forceAlignment`]: { value: newAlignment.value, tier: newAlignment.tier }
+    });
+
+    if (newTier) {
+      let chatMessageContent = game.i18n.format(
+        "DND5E.ChangedForceAlignmentTier",
+        {
+          name: this.name,
+          tier: CONFIG.DND5E.alignmentTiers[newAlignment.tier],
+        }
+      );
+
+      if (newTier.dc) {
+        chatMessageContent = `${chatMessageContent}.\n${
+          game.i18n.format(
+            "DND5E.RollDCDice",
+            {
+              dice: newTier.dc,
+              modifier: game.i18n.localize(newAlignment.tier > 0 ? "DND5E.AbilityWis" : "DND5E.AbilityCha"),
+            }
+          )
+        }`;
+      }
+
+      await ChatMessage.create(
+        {
+          user: game.user._id,
+          speaker: {actor: this, alias: this.name},
+          content: chatMessageContent,
+          rollMode: 'selfroll'
+        },
+      );
+
+      if (newTier.table) {
+        const rollTable = await fromUuid(newTier.table);
+        return await rollTable.draw();
+      }
+    }
   }
 
   /* -------------------------------------------- */

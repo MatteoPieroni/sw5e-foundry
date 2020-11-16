@@ -1068,6 +1068,58 @@
   /* ----------------------------------------- */
   /*  Alignment                                */
   /* ----------------------------------------- */
+  .alignment-slider {
+    position: relative;
+
+    .icon-img {
+      width: 45px;
+      z-index: 1;
+      fill: currentColor;
+      stroke: currentColor;
+    }
+
+    .sith {
+      color: rgba(199,22,15,1);
+    }
+
+    .jedi {
+      color: rgba(59,193,229,1);
+    }
+
+    input[type=range] {
+      width: 100%;
+      margin: 11px -13px;
+      background-color: transparent;
+      -webkit-appearance: none;
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+      background: rgb(199,22,15);
+      background: linear-gradient(90deg, rgba(199,22,15,1) 0%, rgba(150,63,59,1) 35%, rgba(131,131,131,1) 50%, rgba(98,161,177,1) 65%, rgba(59,193,229,1) 100%);
+      width: 100%;
+      height: 14px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      margin-top: -11.3px;
+      width: 4px;
+      height: 36px;
+      background: @lightColor;
+      -webkit-appearance: none;
+      z-index: 1;
+    }
+    input[type=range]::-moz-range-track {
+      background: rgb(199,22,15);
+      background: linear-gradient(90deg, rgba(199,22,15,1) 0%, rgba(150,63,59,1) 35%, rgba(131,131,131,1) 50%, rgba(98,161,177,1) 65%, rgba(59,193,229,1) 100%);
+      width: 100%;
+      height: 14px;
+    }
+    input[type=range]::-moz-range-thumb {
+      width: 4px;
+      height: 36px;
+      background: @lightColor;
+      z-index: 1;
+    }
+  }
+
   .alignment {
     position: absolute;
     top: 0;
@@ -1531,7 +1583,7 @@
 
       // Item Header Name
       .item-name {
-        cursor: pointer;
+        cursor: default;
         max-height: 30px;
         overflow: hidden;
 
@@ -1539,12 +1591,14 @@
           flex: 0 0 30px;
           background-size: 30px;
           margin-right: 5px;
+          cursor: pointer;
         }
 
         h4 {
           margin: 0;
           white-space: nowrap;
           overflow-x: hidden;
+          cursor: pointer;
         }
 
         &.rollable:hover .item-image {
