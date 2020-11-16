@@ -2071,7 +2071,7 @@
   background: #06243a;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item .item-name {
-  cursor: pointer;
+  cursor: default;
   max-height: 30px;
   overflow: hidden;
 }
@@ -2079,11 +2079,13 @@
   flex: 0 0 30px;
   background-size: 30px;
   margin-right: 5px;
+  cursor: pointer;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item .item-name h4 {
   margin: 0;
   white-space: nowrap;
   overflow-x: hidden;
+  cursor: pointer;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item .item-name.rollable:hover .item-image {
   background-image: url("../../icons/svg/d20-grey.svg") !important;

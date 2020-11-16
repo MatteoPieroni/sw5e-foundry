@@ -1583,7 +1583,7 @@
 
       // Item Header Name
       .item-name {
-        cursor: pointer;
+        cursor: default;
         max-height: 30px;
         overflow: hidden;
 
@@ -1591,12 +1591,14 @@
           flex: 0 0 30px;
           background-size: 30px;
           margin-right: 5px;
+          cursor: pointer;
         }
 
         h4 {
           margin: 0;
           white-space: nowrap;
           overflow-x: hidden;
+          cursor: pointer;
         }
 
         &.rollable:hover .item-image {
