@@ -16,7 +16,7 @@ export class Alignment {
       return Math.floor(value / this.max * 10);
     }
 
-    return Math.floor(value / this.min * 10);
+    return Math.floor(value / this.min * -10);
   }
 
   static computeProgression(value, numberOfPoints) {
@@ -24,21 +24,21 @@ export class Alignment {
       throw new Error('Cannot modify without a number of points');
     }
 
-    const currentSign = value > 0 ? 1 : -1;
+    const currentSign = value >= 0 ? 1 : -1;
     const modificationSign = numberOfPoints > 0 ? 1 : -1;
     const valueModulus = value * currentSign;
     const tier = Math.floor(valueModulus / this.max * 10);
 
     if (tier === 0) {
-      return value + modificationSign;
+      return value + numberOfPoints;
     }
 
     if (currentSign * modificationSign < 0) {
-      return value + modificationSign;
+      return value + numberOfPoints;
     }
 
-    const increase =  Math.max(1, 1 + Math.floor((tier + 1) / 3));
-    const decrease =  Math.min(-1, -1 - Math.floor((tier + 1) / 3));
+    const increase =  Math.max(1, numberOfPoints + Math.floor((tier + 1) / 3));
+    const decrease =  Math.min(-1, numberOfPoints - Math.floor((tier + 1) / 3));
 
     return value + (modificationSign > 0 ? increase : decrease);
   }
@@ -62,7 +62,19 @@ export class Alignment {
     };
   }
 
-  static checkPowerEffect({ alignment }) {
-    
+  static checkChangedTierEffect({ currentTier, newTier, config }) {
+    if ((currentTier !== 0 && !currentTier) || (newTier !== 0 && !newTier)) {
+      console.error('You need to pass both tiers to calculate a tier change');
+      return;
+    }
+
+    if (currentTier === newTier) {
+      return;
+    }
+
+    return {
+      tier: newTier,
+      ...(config[newTier] ? config[newTier] : {}),
+    }
   }
 }

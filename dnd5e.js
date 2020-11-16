@@ -130,7 +130,7 @@ Hooks.once("setup", function() {
     "limitedUsePeriods", "senses", "skills", "spellComponents", "spellLevels", "powerPreparationModes", "spellSchools",
     "spellScalingModes", "powerLevels", "powerAlignments", "targetTypes", "timePeriods", "weaponProperties", "weaponTypes", "languages",
     "polymorphSettings", "armorProficiencies", "armourProperties", "weaponProficiencies", "toolProficiencies", "abilityActivationTypes",
-    "abilityConsumptionTypes", "actorSizes", "proficiencyLevels", "cover"
+    "abilityConsumptionTypes", "actorSizes", "proficiencyLevels", "cover", "alignmentTiers"
   ];
 
   // Exclude some from sorting where the default order matters

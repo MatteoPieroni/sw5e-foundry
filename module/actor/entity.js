@@ -811,11 +811,9 @@ export default class Actor5e extends Actor {
 
     // Update Actor alignment
     if (itemData.school) {
-      const newAlignment = Alignment.computePowerToAlignment({ original: this.data.data.details.forceAlignment || 0, powerType: itemData.school });
-
-      await this.update({
-        [`data.details.forceAlignment`]: newAlignment,
-      });
+      const newAlignment = Alignment.computePowerToAlignment({ original: forceAlignment?.value || 0, powerType });
+      
+      await this.updateAlignment(newAlignment);
     }
 
     // Initiate ability template placement workflow if selected
@@ -827,6 +825,63 @@ export default class Actor5e extends Actor {
 
     // Invoke the Item roll
     return item.roll();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Roll a Skill Check
+   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
+   * @param {string} skillId      The skill id (e.g. "ins")
+   * @param {Object} options      Options which configure how the skill check is rolled
+   * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
+   */
+  async updateAlignment(newAlignment) {
+    const newTier = Alignment.checkChangedTierEffect({
+      currentTier: this.data.data.details.forceAlignment?.tier || 0,
+      newTier: newAlignment.tier,
+      config: CONFIG.DND5E.tierProgression,
+    });
+
+    await this.update({
+      [`data.details.forceAlignment`]: { value: newAlignment.value, tier: newAlignment.tier }
+    });
+
+    if (newTier) {
+      let chatMessageContent = game.i18n.format(
+        "DND5E.ChangedForceAlignmentTier",
+        {
+          name: this.name,
+          tier: CONFIG.DND5E.alignmentTiers[newAlignment.tier],
+        }
+      );
+
+      if (newTier.dc) {
+        chatMessageContent = `${chatMessageContent}.\n${
+          game.i18n.format(
+            "DND5E.RollDCDice",
+            {
+              dice: newTier.dc,
+              modifier: game.i18n.localize(newAlignment.tier > 0 ? "DND5E.AbilityWis" : "DND5E.AbilityCha"),
+            }
+          )
+        }`;
+      }
+
+      await ChatMessage.create(
+        {
+          user: game.user._id,
+          speaker: {actor: this, alias: this.name},
+          content: chatMessageContent,
+          rollMode: 'selfroll'
+        },
+      );
+
+      if (newTier.table) {
+        const rollTable = await fromUuid(newTier.table);
+        return await rollTable.draw();
+      }
+    }
   }
 
   /* -------------------------------------------- */
