@@ -118,6 +118,13 @@
       "system": "sw5efoundry",
       "path": "./packs/weapons.db",
       "entity": "Item"
+    },
+    {
+      "name": "macros",
+      "label": "Macros",
+      "system": "sw5efoundry",
+      "path": "./packs/macros.db",
+      "entity": "Macro"
     }
   ],
   "languages": [
