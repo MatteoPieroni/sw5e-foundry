@@ -2,6 +2,31 @@
 
 ## Releases
 
+### v0.4.0 - 16-11-2020
+- [Bugfix] Fix full width tippy (#9)
+- [Feature] Force Alignment (#8)
+  - Added powercasting alignment mod
+  - Added alignment bar
+  - Added a way to compute alignment for macros
+  - Removed old alignment
+  - Added different progression and tiers to alignment
+  - Added force alignment tier progression
+  - Added macro to change player force alignment  
+- [Feature] General improvements (#7)
+  - Removed dnd class features
+  - Updated force powers attributes labels
+  - Add Power domain and method for modifier alignment
+  - Added powercasting modifier check when casting
+  - Added caster domain and calculate casting data
+  - Migrated packs
+  - Added currency to npc and init alternative styles
+  - Added armour properties
+  - Updated ASCII art
+  - Updated tool proficencies
+  - Updated conditions
+  - Updated consumable types
+  - Updated weapon properties
+
 ### v0.3.0 - 12-11-2020
 - [Bugfix][Breaking] fixes for modules (#6)
     - Changed spellPreparation to powerPreparation
