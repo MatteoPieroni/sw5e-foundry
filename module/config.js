@@ -56,6 +56,65 @@ DND5E.alignments = {
   'ce': "DND5E.AlignmentCE"
 };
 
+DND5E.alignmentTiers = {
+  '-10': "DND5E.ForceAlignDark10",
+  '-9': "DND5E.ForceAlignDark9",
+  '-8': "DND5E.ForceAlignDark8",
+  '-7': "DND5E.ForceAlignDark7",
+  '-6': "DND5E.ForceAlignDark6",
+  '-5': "DND5E.ForceAlignDark5",
+  '-4': "DND5E.ForceAlignDark4",
+  '-3': "DND5E.ForceAlignDark3",
+  '-2': "DND5E.ForceAlignDark2",
+  '-1': "DND5E.ForceAlignDark1",
+  '0': "DND5E.ForceAlignNeutral",
+  '1': "DND5E.ForceAlignLight1",
+  '2': "DND5E.ForceAlignLight2",
+  '3': "DND5E.ForceAlignLight3",
+  '4': "DND5E.ForceAlignLight4",
+  '5': "DND5E.ForceAlignLight5",
+  '6': "DND5E.ForceAlignLight6",
+  '7': "DND5E.ForceAlignLight7",
+  '8': "DND5E.ForceAlignLight8",
+  '9': "DND5E.ForceAlignLight9",
+  '10': "DND5E.ForceAlignLight10"
+};
+
+// TODO: Add rolltables to the appropriate levels
+DND5E.tierProgression = {
+  "-9": {
+    dc: "20"
+  },
+  "-7": {
+    dc: "18"
+  },
+  "-5": {
+    dc: "16"
+  },
+  "-3": {
+    dc: "14"
+  },
+  "-1": {
+    dc: "12"
+  },
+  "0": null,
+  "1": {
+    dc: "12"
+  },
+  "3": {
+    dc: "14"
+  },
+  "5": {
+    dc: "16"
+  },
+  "7": {
+    dc: "18"
+  },
+  "9": {
+    dc: "20"
+  },
+}
+
 
 DND5E.weaponProficiencies = {
   "sim": "DND5E.WeaponSimpleProficiency",

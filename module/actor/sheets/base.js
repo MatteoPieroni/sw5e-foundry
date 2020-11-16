@@ -428,15 +428,8 @@ export default class ActorSheet5e extends ActorSheet {
       return;
     }
 
-    const [orientation, morals] = alignment.split(' ');
-
     data.sheetAlignment = {
-      orientation: {
-        ...(orientation ? { [orientation]: true } : {}),
-      },
-      morals: {
-        ...(morals ? { [morals]: true } : {}),
-      }
+      ...(alignment ? { [alignment.toLowerCase()]: true } : {}),
     }
   }
 
@@ -1110,19 +1103,10 @@ export default class ActorSheet5e extends ActorSheet {
   _onSelectAlignment(event) {
     event.preventDefault();
     
-    const [currentOrientation = '', currentMorals = ''] = this.actor.data.data.details.alignment.split(' ');
-
     const element = event.target;
-    const name = element.name;
-
-    const type = name;
     const value = element.value;
 
-    console.log({ type, value })
-
-    this.actor.update({
-      ['data.details.alignment']: 
-        `${type === 'orientation' ? value : currentOrientation} ${type === 'morals' ? value : currentMorals}` });
+    this.actor.update({ ['data.details.alignment']: value });
   }
 
   /* -------------------------------------------- */

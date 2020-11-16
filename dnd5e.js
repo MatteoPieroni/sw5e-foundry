@@ -19,6 +19,9 @@ import { measureDistances, getBarAttribute } from "./module/canvas.js";
 import Actor5e from "./module/actor/entity.js";
 import Item5e from "./module/item/entity.js";
 
+// Import Entities
+import * as domain from "./domain/index.js";
+
 // Import Applications
 import AbilityTemplate from "./module/pixi/ability-template.js";
 import AbilityUseDialog from "./module/apps/ability-use-dialog.js";
@@ -60,6 +63,7 @@ Hooks.once("init", function() {
     },
     config: DND5E,
     dice: dice,
+    domain,
     entities: {
       Actor5e,
       Item5e,
@@ -126,7 +130,7 @@ Hooks.once("setup", function() {
     "limitedUsePeriods", "senses", "skills", "spellComponents", "spellLevels", "powerPreparationModes", "spellSchools",
     "spellScalingModes", "powerLevels", "powerAlignments", "targetTypes", "timePeriods", "weaponProperties", "weaponTypes", "languages",
     "polymorphSettings", "armorProficiencies", "armourProperties", "weaponProficiencies", "toolProficiencies", "abilityActivationTypes",
-    "abilityConsumptionTypes", "actorSizes", "proficiencyLevels", "cover"
+    "abilityConsumptionTypes", "actorSizes", "proficiencyLevels", "cover", "alignmentTiers"
   ];
 
   // Exclude some from sorting where the default order matters
