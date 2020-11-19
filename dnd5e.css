@@ -1648,6 +1648,7 @@
 }
 .dnd5e.sheet.actor-alternative .alignment-slider .icon-img {
   width: 45px;
+  height: 38px;
   z-index: 1;
   fill: currentColor;
   stroke: currentColor;
