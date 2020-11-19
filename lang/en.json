@@ -333,6 +333,8 @@
 "DND5E.FlagsElvenAccuracyHint": "Roll an extra d20 with advantage to Dex, Int, Wis, or Cha.",
 "DND5E.FlagsHalflingLucky": "Halfling Lucky",
 "DND5E.FlagsHalflingLuckyHint": "Reroll ones when rolling d20 checks.",
+"DND5E.FlagsIgnoreAlignmentEffect": "Ignore alignment change effects",
+"DND5E.FlagsIgnoreAlignmentEffectHint": "Don't gain the effects of alignment changes and don't show them in the chat",
 "DND5E.FlagsInitiativeAdv": "Advantage on Initiative",
 "DND5E.FlagsInitiativeAdvHint": "Provided by feats or magical items.",
 "DND5E.FlagsAlert": "Alert Feat",

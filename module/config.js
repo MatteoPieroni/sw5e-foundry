@@ -944,6 +944,12 @@ DND5E.characterFlags = {
     section: "Racial Traits",
     type: Boolean
   },
+  "ignoreAlignmentEffects": {
+    name: "DND5E.FlagsIgnoreAlignmentEffect",
+    hint: "DND5E.FlagsIgnoreAlignmentEffectHint",
+    section: "Casting",
+    type: Boolean
+  },
   "initiativeAdv": {
     name: "DND5E.FlagsInitiativeAdv",
     hint: "DND5E.FlagsInitiativeAdvHint",
