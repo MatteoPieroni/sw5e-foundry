@@ -932,10 +932,22 @@ DND5E.characterFlags = {
     section: "Racial Traits",
     type: Boolean
   },
+  "forceCaster": {
+    name: "DND5E.FlagsForceCaster",
+    hint: "DND5E.FlagsForceCasterHint",
+    section: "Casting",
+    type: Boolean
+  },
   "halflingLucky": {
     name: "DND5E.FlagsHalflingLucky",
     hint: "DND5E.FlagsHalflingLuckyHint",
     section: "Racial Traits",
+    type: Boolean
+  },
+  "ignoreAlignmentEffects": {
+    name: "DND5E.FlagsIgnoreAlignmentEffect",
+    hint: "DND5E.FlagsIgnoreAlignmentEffectHint",
+    section: "Casting",
     type: Boolean
   },
   "initiativeAdv": {
@@ -974,6 +986,12 @@ DND5E.characterFlags = {
     hint: "DND5E.FlagsRemarkableAthleteHint",
     abilities: ['str','dex','con'],
     section: "Feats",
+    type: Boolean
+  },
+  "techCaster": {
+    name: "DND5E.FlagsTechCaster",
+    hint: "DND5E.FlagsTechCasterHint",
+    section: "Casting",
     type: Boolean
   },
   "weaponCriticalThreshold": {

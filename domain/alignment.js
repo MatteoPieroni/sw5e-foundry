@@ -20,7 +20,11 @@ export class Alignment {
   }
 
   static computeProgression(value, numberOfPoints) {
-    if (!numberOfPoints || numberOfPoints === 0) {
+    if (numberOfPoints === 0) {
+      return value;
+    }
+
+    if (!numberOfPoints) {
       throw new Error('Cannot modify without a number of points');
     }
 
