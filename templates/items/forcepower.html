@@ -54,6 +54,7 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.PowerAlignment" }}</label>
                 <select name="data.school">
+                    <option></option>
                     {{#select data.school}}
                     {{#each config.powerAlignments as |name sch|}}
                     <option value="{{sch}}">{{name}}</option>

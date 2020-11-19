@@ -782,6 +782,7 @@ export default class Actor5e extends Actor {
 
     // Update Actor data
     // Update number of points
+    // ignore at-will powers
     if ( lvl > 0 ) {
       const remainingPoints = parseInt(
         isTech ?
