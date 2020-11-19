@@ -33,7 +33,7 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     };
 
     // Start by classifying items into groups for rendering
-    let [spells, other] = data.items.reduce((arr, item) => {
+    let [spells, forcepowers, techpowers, other] = data.items.reduce((arr, item) => {
       item.img = item.img || DEFAULT_TOKEN;
       item.isStack = Number.isNumeric(item.data.quantity) && (item.data.quantity !== 1);
       item.hasUses = item.data.uses && (item.data.uses.max > 0);
@@ -41,16 +41,22 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
       item.isDepleted = item.isOnCooldown && (item.data.uses.per && (item.data.uses.value > 0));
       item.hasTarget = !!item.data.target && !(["none",""].includes(item.data.target.type));
       if ( item.type === "spell" ) arr[0].push(item);
-      else arr[1].push(item);
+      else if ( item.type === "forcepower" ) arr[1].push(item);
+      else if ( item.type === "techpower" ) arr[2].push(item);
+      else arr[3].push(item);
       return arr;
-    }, [[], []]);
+    }, [[], [], [], []]);
 
     // Apply item filters
     spells = this._filterItems(spells, this._filters.spellbook);
+    forcepowers = this._filterItems(forcepowers, this._filters.forcepowers);
+    techpowers = this._filterItems(techpowers, this._filters.techpowers);
     other = this._filterItems(other, this._filters.features);
 
     // Organize Spellbook
     const spellbook = this._prepareSpellbook(data, spells);
+    const forcePowerBook = this._preparePowers(data, forcepowers, { mode: 'forcecasting' });
+    const techPowerBook = this._preparePowers(data, techpowers, { mode: 'techcasting' });
 
     // Organize Features
     for ( let item of other ) {
@@ -65,6 +71,8 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     // Assign and return
     data.features = Object.values(features);
     data.spellbook = spellbook;
+    data.forcePowerBook = forcePowerBook;
+    data.techPowerBook = techPowerBook;
   }
 
 

@@ -76,14 +76,6 @@
         </section>
     </header>
 
-    {{!-- NPC Sheet Navigation --}}
-    <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="attributes">{{ localize "DND5E.Attributes" }}</a>
-        <a class="item" data-tab="features">{{ localize "DND5E.Features" }}</a>
-        <a class="item" data-tab="spellbook">{{ localize "DND5E.Spellbook" }}</a>
-        <a class="item" data-tab="biography">{{ localize "DND5E.Biography" }}</a>
-    </nav>
-
     {{!-- NPC Sheet Body --}}
     <section class="sheet-body">
         <div class="tab attributes flexrow" data-group="primary" data-tab="attributes">
@@ -158,9 +150,14 @@
             {{> "systems/sw5efoundry/templates/actors/parts/actor-features.html" sections=features}}
         </div>
 
-        {{!-- Spellbook Tab --}}
-        <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
-            {{> "systems/sw5efoundry/templates/actors/parts/actor-spellbook.html"}}
+        {{!-- Force Powers Tab --}}
+        <div class="tab spellbook flexcol" data-group="primary" data-tab="forcepowers">
+            {{> "systems/sw5efoundry/templates/actors/parts/actor-forcepowers.html" powers=forcePowerBook}}
+        </div>
+
+        {{!-- Tech Powers Tab --}}
+        <div class="tab spellbook flexcol" data-group="primary" data-tab="techpowers">
+            {{> "systems/sw5efoundry/templates/actors/parts/actor-techpowers.html" powers=techPowerBook}}
         </div>
 
         {{!-- Biography Tab --}}
@@ -168,4 +165,15 @@
             {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}
         </div>
     </section>
+
+    <footer class="sheet-footer">
+        {{!-- NPC Sheet Navigation --}}
+        <nav class="sheet-navigation tabs" data-group="primary">
+            <a class="item active" data-tab="attributes">{{ localize "DND5E.Attributes" }}</a>
+            <a class="item" data-tab="features">{{ localize "DND5E.Features" }}</a>
+            <a class="item" data-tab="forcepowers">{{ localize "DND5E.ForcePowers" }}</a>
+            <a class="item" data-tab="techpowers">{{ localize "DND5E.TechPowers" }}</a>
+            <a class="item" data-tab="biography">{{ localize "DND5E.Biography" }}</a>
+        </nav>
+    </footer>
 </form>
