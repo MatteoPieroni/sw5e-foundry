@@ -149,16 +149,25 @@ export default class AbilityUseDialog extends Dialog {
     // Determine whether the spell may be up-cast
     const lvl = itemData.level;
 
+    // If the power is at-will do not show consume points checkbox
+    const powerCosts = lvl > 0;
+
     // Determine the levels which are feasible
     const remainingPoints = isTech ? actorData.techcasting.points.value : actorData.forcecasting.points.value;
     let lmax = actorData[(isTech ? 'techcasting' : 'forcecasting')]?.level || 0;
 
-    const canUpcast = lvl > 0 && lvl < lmax;
+    const canUpcast = lvl < lmax;
     const isHigherPower = lvl > lmax;
 
     // If can't upcast, return early and don't bother calculating available spell slots
     if (!canUpcast) {
-      data = mergeObject(data, { isSpell: true, canUpcast, hasSlots: remainingPoints - (lvl + 1) > 0, isHigherPower, isWrongModifier  });
+      data = mergeObject(data, {
+        isSpell: true, canUpcast,
+        hasSlots: remainingPoints - (lvl + 1) > 0,
+        isHigherPower,
+        isWrongModifier,
+        powerCosts,
+      });
       return;
     }
 
@@ -171,7 +180,9 @@ export default class AbilityUseDialog extends Dialog {
         level: i,
         label,
         canCast: potentialRemainingPoints > 0,
-        hasSlots: potentialRemainingPoints > 0
+        hasSlots: potentialRemainingPoints > 0,
+        // if we can upcast then always ask about consuming power points
+        powerCosts: true,
       });
       return arr;
     }, []).filter(sl => sl.level <= lmax);
