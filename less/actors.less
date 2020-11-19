@@ -1577,6 +1577,10 @@
       line-height: 30px;
       padding: .125rem 0px;
 
+      &:hover {
+        outline: 1px solid @colorYellow;
+      }
+
       &:nth-child(even) {
         background: #06243a;
       }
@@ -1790,7 +1794,7 @@
 
     .item-list {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
       margin: .5rem 0 1rem 0;
       padding: 0;
     }
@@ -1798,6 +1802,10 @@
     .item {
       margin: 0 .5rem .5rem;
       text-align: center;
+
+      &:hover {
+        outline: 1px solid @colorYellow;
+      }
     }
 
     .item-image {
