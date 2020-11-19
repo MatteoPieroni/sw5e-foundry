@@ -42,6 +42,7 @@
             <div class="form-group">
                 <label>{{ localize "DND5E.PowerLevel" }}</label>
                 <select name="data.level" data-dtype="Number">
+                    <option></option>
                     {{#select data.level}}
                     {{#each config.powerLevels as |name lvl|}}
                     <option value="{{lvl}}">{{name}}</option>

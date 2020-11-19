@@ -40,6 +40,7 @@
                 <label>{{ localize "DND5E.PowerLevel" }}</label>
                 <select name="data.level" data-dtype="Number">
                     {{#select data.level}}
+                    <option></option>
                     {{#each config.powerLevels as |name lvl|}}
                     <option value="{{lvl}}">{{name}}</option>
                     {{/each}}
