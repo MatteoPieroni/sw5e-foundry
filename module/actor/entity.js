@@ -811,7 +811,10 @@ export default class Actor5e extends Actor {
 
     // Update Actor alignment
     if (itemData.school) {
-      const newAlignment = Alignment.computePowerToAlignment({ original: forceAlignment?.value || 0, powerType });
+      const newAlignment = Alignment.computePowerToAlignment({
+        original: this.data.data.details.forceAlignment?.value || 0,
+        powerType: itemData.school
+      });
       
       await this.updateAlignment(newAlignment);
     }
