@@ -287,8 +287,12 @@
             <a class="item" data-tab="traits">{{ localize "DND5E.Traits" }}</a>
             <a class="item" data-tab="inventory">{{ localize "DND5E.Inventory" }}</a>
             <a class="item" data-tab="features">{{ localize "DND5E.Features" }}</a>
+            {{#if actor.flags.sw5efoundry.forceCaster}}
             <a class="item" data-tab="forcepowers">{{ localize "DND5E.ForcePowers" }}</a>
+            {{/if}}
+            {{#if actor.flags.sw5efoundry.techCaster}}
             <a class="item" data-tab="techpowers">{{ localize "DND5E.TechPowers" }}</a>
+            {{/if}}
             <a class="item" data-tab="effects">{{ localize "DND5E.Effects" }}</a>
             <a class="item" data-tab="biography">{{ localize "DND5E.Biography" }}</a>
         </nav>

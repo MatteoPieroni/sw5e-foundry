@@ -1,6 +1,22 @@
 # Changelog
 
 ## Releases
+### v0.5.0 - 18-11-2020
+- [Feature] Improvements and bug fixes (#10)
+  - Fixed error when casting aligned power
+  - Fixed macros
+  - Fixed bug on migration
+  - Added empty school option on forcepowers
+  - Added outline to hovered actor items
+  - Fixed bug with zero points as falsy in alignment
+  - Hide ignore level for powers if level at will and no scaling
+  - Added empty option in level select for edge case
+  - Swapped to roll on item name click
+  - Added roll on name click in inventory
+  - Fixed small bug with svg alignment
+  - Update hide force and tech in sheet without flag
+  - Added powers to NPC
+  - Added flag to ignore alignment effects
 
 ### v0.4.0 - 16-11-2020
 - [Bugfix] Fix full width tippy (#9)

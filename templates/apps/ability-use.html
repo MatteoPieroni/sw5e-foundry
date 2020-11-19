@@ -20,9 +20,11 @@
     </div>
     {{/if}}
 
+    {{#if powerCosts}}
     <div class="form-group">
         <label class="checkbox"><input type="checkbox" name="consumeSlot" checked/>{{ localize "DND5E.PowerCastConsume" }}</label>
     </div>
+    {{/if}}
 
     {{#if isHigherPower}}
     <div class="form-group">
