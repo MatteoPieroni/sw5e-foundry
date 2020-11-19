@@ -181,14 +181,20 @@ export default class AbilityUseDialog extends Dialog {
         label,
         canCast: potentialRemainingPoints > 0,
         hasSlots: potentialRemainingPoints > 0,
-        // if we can upcast then always ask about consuming power points
-        powerCosts: true,
       });
       return arr;
     }, []).filter(sl => sl.level <= lmax);
 
     // Return merged data
-    data = mergeObject(data, { isSpell: true, canUpcast, spellLevels, isHigherPower, isWrongModifier });
+    data = mergeObject(data, {
+      isSpell: true,
+      canUpcast,
+      spellLevels,
+      isHigherPower,
+      isWrongModifier,
+      // if we can upcast then always ask about consuming power points
+      powerCosts: true,
+    });
   }
 
   /* -------------------------------------------- */
