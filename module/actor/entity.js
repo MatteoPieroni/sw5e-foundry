@@ -315,6 +315,9 @@ export default class Actor5e extends Actor {
   _prepareNPCData(actorData) {
     const data = actorData.data;
 
+    // Default flags
+    actorData.flags.sw5efoundry.ignoreAlignmentEffects = true;
+
     // Kill Experience
     data.details.xp.value = this.getCRExp(data.details.cr);
 
@@ -782,6 +785,7 @@ export default class Actor5e extends Actor {
 
     // Update Actor data
     // Update number of points
+    // ignore at-will powers
     if ( lvl > 0 ) {
       const remainingPoints = parseInt(
         isTech ?
@@ -811,7 +815,10 @@ export default class Actor5e extends Actor {
 
     // Update Actor alignment
     if (itemData.school) {
-      const newAlignment = Alignment.computePowerToAlignment({ original: forceAlignment?.value || 0, powerType });
+      const newAlignment = Alignment.computePowerToAlignment({
+        original: this.data.data.details.forceAlignment?.value || 0,
+        powerType: itemData.school
+      });
       
       await this.updateAlignment(newAlignment);
     }
@@ -847,7 +854,9 @@ export default class Actor5e extends Actor {
       [`data.details.forceAlignment`]: { value: newAlignment.value, tier: newAlignment.tier }
     });
 
-    if (newTier) {
+    const ignoreAlignmentEffect = this.data.flags.sw5efoundry?.ignoreAlignmentEffects;
+
+    if (newTier && !ignoreAlignmentEffect) {
       let chatMessageContent = game.i18n.format(
         "DND5E.ChangedForceAlignmentTier",
         {

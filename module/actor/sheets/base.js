@@ -912,7 +912,7 @@ export default class ActorSheet5e extends ActorSheet {
     tippy(el, {
       content,
       allowHTML: true,
-      trigger: 'mouseenter focus click',
+      trigger: 'mouseenter focus',
       theme: 'item',
       placement: 'right',
       interactive: true,

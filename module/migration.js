@@ -263,7 +263,7 @@ const _migrateRemoveDeprecated = function(ent, updateData) {
 export async function purgeFlags(pack) {
   const cleanFlags = (flags) => {
     const flags5e = flags.sw5efoundry || null;
-    return flags5e ? {dnd5e: flags5e} : {};
+    return flags5e ? {sw5efoundry: flags5e} : {};
   };
   await pack.configure({locked: false});
   const content = await pack.getContent();

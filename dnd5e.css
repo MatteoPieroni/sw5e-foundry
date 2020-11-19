@@ -1648,6 +1648,7 @@
 }
 .dnd5e.sheet.actor-alternative .alignment-slider .icon-img {
   width: 45px;
+  height: 38px;
   z-index: 1;
   fill: currentColor;
   stroke: currentColor;
@@ -2067,6 +2068,9 @@
   line-height: 30px;
   padding: 0.125rem 0px;
 }
+.dnd5e.sheet.actor-alternative .inventory-list .item:hover {
+  outline: 1px solid #d3ae3f;
+}
 .dnd5e.sheet.actor-alternative .inventory-list .item:nth-child(even) {
   background: #06243a;
 }
@@ -2088,9 +2092,6 @@
   cursor: pointer;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item .item-name.rollable:hover .item-image {
-  background-image: url("../../icons/svg/d20-grey.svg") !important;
-}
-.dnd5e.sheet.actor-alternative .inventory-list .item .item-name.rollable .item-image:hover {
   background-image: url("../../icons/svg/d20.svg") !important;
 }
 .dnd5e.sheet.actor-alternative .inventory-list .item .item-name i.attuned {
@@ -2259,13 +2260,16 @@
 }
 .dnd5e.sheet.actor-alternative .inventory-alternative .item-list {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   margin: 0.5rem 0 1rem 0;
   padding: 0;
 }
 .dnd5e.sheet.actor-alternative .inventory-alternative .item {
   margin: 0 0.5rem 0.5rem;
   text-align: center;
+}
+.dnd5e.sheet.actor-alternative .inventory-alternative .item:hover {
+  outline: 1px solid #d3ae3f;
 }
 .dnd5e.sheet.actor-alternative .inventory-alternative .item-image {
   position: relative;
