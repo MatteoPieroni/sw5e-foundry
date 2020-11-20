@@ -1,6 +1,12 @@
 # Changelog
 
 ## Releases
+## v0.5.1 - 20-11-2020
+- [Bugfix] Fixed effects on NPC (#11)
+  - Fixed effects on NPC
+  - Removed auto set of flag on npc
+
+
 ### v0.5.0 - 18-11-2020
 - [Feature] Improvements and bug fixes (#10)
   - Fixed error when casting aligned power
