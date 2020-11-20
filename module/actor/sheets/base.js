@@ -193,6 +193,10 @@ export default class ActorSheet5e extends ActorSheet {
       }
     };
 
+    if (!this.actor.effects) {
+      return data.effects = categories;
+    }
+
     // Iterate over active effects, classifying them into categories
     for ( let e of this.actor.effects ) {
       e._getSourceName(); // Trigger a lookup for the source name
