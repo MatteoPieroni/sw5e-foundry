@@ -315,9 +315,6 @@ export default class Actor5e extends Actor {
   _prepareNPCData(actorData) {
     const data = actorData.data;
 
-    // Default flags
-    actorData.flags.sw5efoundry.ignoreAlignmentEffects = true;
-
     // Kill Experience
     data.details.xp.value = this.getCRExp(data.details.cr);
 
@@ -856,7 +853,7 @@ export default class Actor5e extends Actor {
 
     const ignoreAlignmentEffect = this.data.flags.sw5efoundry?.ignoreAlignmentEffects;
 
-    if (newTier && !ignoreAlignmentEffect) {
+    if (newTier && (!ignoreAlignmentEffect || this.data.type !== 'npc')) {
       let chatMessageContent = game.i18n.format(
         "DND5E.ChangedForceAlignmentTier",
         {
