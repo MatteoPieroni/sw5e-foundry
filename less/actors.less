@@ -1,14 +1,12 @@
-@import "./variables.less";
+@import './variables.less';
 
 @actorNameHeight: 60px;
 
 .dnd5e.sheet.actor {
-
   /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
   .sheet-header {
-
     // Portrait Artwork
     img.profile {
       flex: 0 0 160px;
@@ -41,7 +39,8 @@
       height: 30px;
       border-bottom: @borderGroove;
       font-size: 18px;
-      input, span {
+      input,
+      span {
         display: block;
         height: 24px;
         line-height: 24px;
@@ -69,12 +68,29 @@
           line-height: 30px;
         }
       }
-    }
-  }
 
-  .attributes {
-    input.temphp {
-      width: 48%;
+      // Movement Configuration
+      .movement {
+        h4.attribute-name {
+          position: relative;
+        }
+        .config-button {
+          position: absolute;
+          display: none;
+          right: 0;
+          top: 1px;
+          font-size: 12px;
+          font-weight: normal;
+        }
+        &:hover .config-button {
+          display: block;
+        }
+      }
+
+      // Temporary HP
+      input.temphp {
+        width: 48%;
+      }
     }
   }
 
@@ -89,7 +105,9 @@
     margin: 4px 8px 2px;
     .modesto();
     font-size: 18px;
+    color: @colorOlive;
     border-bottom: 1px solid @colorFaint;
+    white-space: nowrap;
   }
 
   /* ----------------------------------------- */
@@ -139,9 +157,10 @@
         flex: 0 0 18px;
         margin-top: -1px;
         line-height: 18px;
-        font-family: "Signika", sans-serif;
+        font-family: 'Signika', sans-serif;
         font-size: 12px;
         font-weight: 400;
+        white-space: nowrap;
       }
     }
   }
@@ -290,6 +309,7 @@
         margin: 0;
         font-size: 13px;
         font-weight: bold;
+        color: @colorOlive;
       }
 
       .counter-value {
@@ -300,15 +320,15 @@
         }
       }
 
-      input[type="text"],
-      input[type="number"] {
+      input[type='text'],
+      input[type='number'] {
         height: 20px;
         max-width: 20px;
         margin: 0;
         padding: 0;
         text-align: center;
       }
-      input[type="checkbox"] {
+      input[type='checkbox'] {
         position: relative;
         width: 16px;
         height: 16px;
@@ -333,11 +353,12 @@
   }
 
   .traits {
-    .form-group, .form-group-stacked {
+    .form-group,
+    .form-group-stacked {
       margin: 0 0 3px 0;
       justify-content: space-between;
     }
-    .configure-flags {
+    .config-button {
       flex: 1;
     }
 
@@ -403,7 +424,7 @@
         line-height: 20px;
         color: @colorTan;
       }
-      input[type="text"] {
+      input[type='text'] {
         flex: 0 0 48px;
         text-align: center;
         margin-left: 8px;
@@ -412,6 +433,7 @@
     }
   }
 
+  // Inventory item lists
   .inventory-list {
     list-style: none;
     margin: 0;
@@ -425,7 +447,9 @@
       line-height: 30px;
       padding: 0 2px; // to align with the header border
       border-bottom: 1px solid @colorFaint;
-      &:last-child { border-bottom: none; }
+      &:last-child {
+        border-bottom: none;
+      }
 
       // Item Header Name
       .item-name {
@@ -447,14 +471,17 @@
         }
 
         &.rollable:hover .item-image {
-          background-image: url("../../icons/svg/d20-grey.svg") !important;
+          background-image: url('../../icons/svg/d20-grey.svg') !important;
         }
         &.rollable .item-image:hover {
-          background-image: url("../../icons/svg/d20-black.svg") !important;
+          background-image: url('../../icons/svg/d20-black.svg') !important;
         }
 
         i.attuned {
           color: @colorTan;
+        }
+        i.not-attuned {
+          color: @colorCrimson;
         }
       }
 
@@ -509,8 +536,15 @@
       word-break: break-word;
       white-space: nowrap;
       overflow: hidden;
-      &:last-child { border-right: none; }
-      &.item-action {flex: 0 0 100px}
+      &:last-child {
+        border-right: none;
+      }
+      &.item-action {
+        flex: 0 0 100px;
+      }
+      &.attunement {
+        flex: 0 0 24px;
+      }
     }
 
     .item-weight {
@@ -576,15 +610,19 @@
       font-size: 13px;
       line-height: 12px;
       text-align: right;
-      color: #EEE;
+      color: #eee;
       text-shadow: 0 0 5px #000;
     }
 
     .encumbrance-breakpoint {
       display: block;
       position: absolute;
-      &.encumbrance-33 { left: 33% }
-      &.encumbrance-66 { left: 66% }
+      &.encumbrance-33 {
+        left: 33%;
+      }
+      &.encumbrance-66 {
+        left: 66%;
+      }
     }
 
     .arrow-up {
@@ -606,8 +644,12 @@
     }
 
     &.encumbered {
-      .arrow-up { border-bottom: 4px solid #000; }
-      .arrow-down { border-top: 4px solid #000; }
+      .arrow-up {
+        border-bottom: 4px solid #000;
+      }
+      .arrow-down {
+        border-top: 4px solid #000;
+      }
     }
   }
 
@@ -618,26 +660,24 @@
   .spellcasting-ability {
     flex: 0 0 240px;
     margin: 0;
-
-    input, span {
-      flex: 0 0 32px;
+    label,
+    span {
+      flex: none;
+    }
+    input {
+      flex: 0 0 28px;
       text-align: center;
     }
     select {
       margin: 0 5px;
-      flex: 0 0 150px;
-    }
-    h3.spell-dc {
-      flex: 1;
-      text-align: right;
+      flex: 0 0 120px;
     }
   }
 
   .spell-slots,
   .spell-comps {
-    flex: 0 0 75px;
-    padding-right: 5px;
-    text-align: right;
+    flex: none;
+    padding: 0 5px;
     font-size: 12px;
     color: @colorTan;
     border-right: 1px solid @colorFaint;
@@ -655,11 +695,14 @@
   }
 
   .spell-uses {
-    padding-right: 8px;
-    text-align: right !important;
+    padding-right: 5px;
+    text-align: right;
+    color: @colorTan;
   }
 
-  .spell-school, .spell-action, .spell-target {
+  .spell-school,
+  .spell-action,
+  .spell-target {
     flex: 0 0 100px;
     font-size: 12px;
     color: @colorTan;
@@ -669,7 +712,8 @@
 
   .spell-component {
     line-height: 14px;
-    &.C, &.R {
+    &.C,
+    &.R {
       display: inline-block;
       text-align: center;
       padding-top: 1px;
@@ -682,44 +726,8 @@
   }
 
   // Empty spellbook controls
-  .spellbook-empty .item-controls { flex: 1; }
-
-  /* ----------------------------------------- */
-  /*  Active Effects                           */
-  /* ----------------------------------------- */
-
-  .effects {
-    .effect-name{
-      flex: 2;
-      align-items: center;
-      color: @colorDark;
-      h4 { margin: 0; }
-    }
-
-    .effect-icon {
-      flex: 0 0 30px;
-      height: 30px;
-      margin-right: 5px;
-      border: none;
-    }
-
-    .effect-source,
-    .effect-duration {
-      text-align: center;
-      border-left: 1px solid @colorFaint;
-      border-right: 1px solid @colorFaint;
-    }
-
-    .effect-controls {
-      flex: 0 0 60px;
-      text-align: right;
-    }
-
-    .effect {
-      align-items: center;
-      border-bottom: 1px solid @colorFaint;
-      &:last-child { border-bottom: none; }
-    }
+  .spellbook-empty .item-controls {
+    flex: 1;
   }
 
   /* ----------------------------------------- */
@@ -731,15 +739,30 @@
   }
 }
 
+#actor-flags {
+  .window-content {
+    overflow-y: hidden;
+  }
+  form {
+    height: 100%;
+  }
+  .form-body {
+    height: calc(100% - 40px);
+    padding-right: 8px;
+    margin-bottom: 4px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+}
+
 .dnd5e.sheet.actor-alternative {
   @borderSize: 3px;
   .alternative-styling();
-  
+
   .tab > * {
     margin-left: 1rem;
     margin-right: 1rem;
   }
-
 
   /* ----------------------------------------- */
   /*  Sheet Header                             */
@@ -754,7 +777,7 @@
       margin: 0 1rem;
       padding: 0;
       height: auto;
-      
+
       input {
         height: auto;
         font-size: 2rem;
@@ -765,13 +788,30 @@
 
     .attributes {
       flex: 1 1 2rem;
-
     }
   }
 
   .attributes {
     input.temphp {
       width: 48%;
+    }
+  }
+
+  // Movement Configuration
+  .movement {
+    h4.attribute-name {
+      position: relative;
+    }
+    .config-button {
+      position: absolute;
+      display: none;
+      right: 0;
+      top: 1px;
+      font-size: 12px;
+      font-weight: normal;
+    }
+    &:hover .config-button {
+      display: block;
     }
   }
 
@@ -783,7 +823,7 @@
   }
 
   .tag {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 
   /* ----------------------------------------- */
@@ -792,7 +832,7 @@
   .header-details {
     min-width: 40%;
   }
-  
+
   .character-image {
     min-width: 60%;
   }
@@ -831,8 +871,15 @@
           border-left: @borderSize solid @lightColor;
           border-color: @lightColor;
           background: #82a9c5;
-          background: rgb(3,17,33);
-          background: linear-gradient(180deg, rgba(3,17,33,1) 0%, rgba(3,17,33,1) 39%, rgba(12,84,123,1) 70%, rgba(53,178,215,1) 91%, rgba(59,193,229,1) 100%);
+          background: rgb(3, 17, 33);
+          background: linear-gradient(
+            180deg,
+            rgba(3, 17, 33, 1) 0%,
+            rgba(3, 17, 33, 1) 39%,
+            rgba(12, 84, 123, 1) 70%,
+            rgba(53, 178, 215, 1) 91%,
+            rgba(59, 193, 229, 1) 100%
+          );
           color: @colorWhite;
         }
       }
@@ -872,10 +919,9 @@
     }
   }
 
-
   .percentage-bar {
     display: block;
-    margin: .5rem 0 .25rem;
+    margin: 0.5rem 0 0.25rem;
     border: 1px solid @colorWhite;
     border-radius: 0 5px 5px 0;
     width: 100%;
@@ -908,10 +954,10 @@
       margin: 0 1rem 1rem 1rem;
 
       &:after {
-        content: "";
+        content: '';
         position: absolute;
         left: 0;
-        bottom: -.25rem;
+        bottom: -0.25rem;
         width: 100%;
         height: 1px;
         background: @secondaryColor;
@@ -923,17 +969,16 @@
         min-width: 2rem;
         max-width: 2rem;
       }
-    } 
+    }
 
     input {
       padding-top: 0;
       padding-bottom: 0;
-      
+
       &:not(.full-input) {
         max-width: 2rem;
       }
     }
-
 
     input.speed:not(.full-input) {
       max-width: 2.25rem;
@@ -953,7 +998,7 @@
       .flexrow();
       flex-wrap: nowrap;
       align-items: center;
-      margin-bottom: .2rem;
+      margin-bottom: 0.2rem;
 
       > * {
         align-items: center;
@@ -970,12 +1015,12 @@
       }
 
       .stat-modifiers {
-        margin-right: .5rem;
+        margin-right: 0.5rem;
       }
     }
 
     .small {
-      font-size: .8em;
+      font-size: 0.8em;
     }
   }
 
@@ -988,7 +1033,7 @@
       list-style: none;
 
       li {
-        margin-bottom: .2rem;
+        margin-bottom: 0.2rem;
 
         .stat-name {
           margin-bottom: 0;
@@ -1018,7 +1063,7 @@
 
   .tab.attributes {
     overflow: auto;
-    
+
     > * {
       margin: 0;
     }
@@ -1058,7 +1103,7 @@
         flex: 0 0 18px;
         margin-top: -1px;
         line-height: 18px;
-        font-family: "Signika", sans-serif;
+        font-family: 'Signika', sans-serif;
         font-size: 12px;
         font-weight: 400;
       }
@@ -1080,26 +1125,33 @@
     }
 
     .sith {
-      color: rgba(199,22,15,1);
+      color: rgba(199, 22, 15, 1);
     }
 
     .jedi {
-      color: rgba(59,193,229,1);
+      color: rgba(59, 193, 229, 1);
     }
 
-    input[type=range] {
+    input[type='range'] {
       width: 100%;
       margin: 11px -13px;
       background-color: transparent;
       -webkit-appearance: none;
     }
-    input[type=range]::-webkit-slider-runnable-track {
-      background: rgb(199,22,15);
-      background: linear-gradient(90deg, rgba(199,22,15,1) 0%, rgba(150,63,59,1) 35%, rgba(131,131,131,1) 50%, rgba(98,161,177,1) 65%, rgba(59,193,229,1) 100%);
+    input[type='range']::-webkit-slider-runnable-track {
+      background: rgb(199, 22, 15);
+      background: linear-gradient(
+        90deg,
+        rgba(199, 22, 15, 1) 0%,
+        rgba(150, 63, 59, 1) 35%,
+        rgba(131, 131, 131, 1) 50%,
+        rgba(98, 161, 177, 1) 65%,
+        rgba(59, 193, 229, 1) 100%
+      );
       width: 100%;
       height: 14px;
     }
-    input[type=range]::-webkit-slider-thumb {
+    input[type='range']::-webkit-slider-thumb {
       margin-top: -11.3px;
       width: 4px;
       height: 36px;
@@ -1107,13 +1159,20 @@
       -webkit-appearance: none;
       z-index: 1;
     }
-    input[type=range]::-moz-range-track {
-      background: rgb(199,22,15);
-      background: linear-gradient(90deg, rgba(199,22,15,1) 0%, rgba(150,63,59,1) 35%, rgba(131,131,131,1) 50%, rgba(98,161,177,1) 65%, rgba(59,193,229,1) 100%);
+    input[type='range']::-moz-range-track {
+      background: rgb(199, 22, 15);
+      background: linear-gradient(
+        90deg,
+        rgba(199, 22, 15, 1) 0%,
+        rgba(150, 63, 59, 1) 35%,
+        rgba(131, 131, 131, 1) 50%,
+        rgba(98, 161, 177, 1) 65%,
+        rgba(59, 193, 229, 1) 100%
+      );
       width: 100%;
       height: 14px;
     }
-    input[type=range]::-moz-range-thumb {
+    input[type='range']::-moz-range-thumb {
       width: 4px;
       height: 36px;
       background: @lightColor;
@@ -1129,7 +1188,7 @@
 
     .alignment-icons {
       max-width: 30px;
-    };
+    }
 
     .icon {
       position: relative;
@@ -1137,7 +1196,7 @@
       width: 30px;
       height: 30px;
 
-      input[type="radio"] {
+      input[type='radio'] {
         margin: 0;
         width: 100%;
         height: 100%;
@@ -1159,7 +1218,7 @@
         z-index: 0;
       }
 
-      input[type="radio"]:checked + .icon-img {
+      input[type='radio']:checked + .icon-img {
         color: @colorWhite;
       }
 
@@ -1177,10 +1236,10 @@
   .inspiration {
     position: absolute;
     top: 0;
-    right: .5rem;
+    right: 0.5rem;
     z-index: 10;
 
-    input[type="checkbox"] {
+    input[type='checkbox'] {
       position: absolute;
       top: 0;
       left: 0;
@@ -1203,7 +1262,7 @@
         height: auto;
         fill: #fff;
       }
-      
+
       /* diamond shape */
       .glow {
         position: relative;
@@ -1213,8 +1272,9 @@
         width: 9px;
         height: 140px;
         background: #35ea43;
-        box-shadow: 1px 1px 0 #1D8758, 0 0 20px 5px #35ea43, inset 2px 2px 0 #a8e4a0;
-        transition: height .3s ease;
+        box-shadow: 1px 1px 0 #1d8758, 0 0 20px 5px #35ea43,
+          inset 2px 2px 0 #a8e4a0;
+        transition: height 0.3s ease;
         animation: glow 2s infinite ease;
       }
       .glow:after {
@@ -1230,19 +1290,23 @@
         z-index: 5;
         animation: sheen 5s infinite;
       }
-      
+
       /* animates box shadow glow effect */
       @keyframes glow {
-        0%,100% {
-          box-shadow: 1px 1px #1D8758, 0 0 20px 5px #8FFFCF, inset 2px 2px #a8e4a0;
+        0%,
+        100% {
+          box-shadow: 1px 1px #1d8758, 0 0 20px 5px #8fffcf,
+            inset 2px 2px #a8e4a0;
         }
         50% {
-          box-shadow: 1px 1px #1D8758, 0 0 16px 8px #8FFFCF, inset 2px 2px #a8e4a0;
+          box-shadow: 1px 1px #1d8758, 0 0 16px 8px #8fffcf,
+            inset 2px 2px #a8e4a0;
         }
       }
       /* animates light across diamond */
       @keyframes sheen {
-        0%,100% {
+        0%,
+        100% {
           left: 0;
           opacity: 0;
         }
@@ -1252,14 +1316,15 @@
         10% {
           left: calc(100% - 4px);
         }
-        11%,98% {
+        11%,
+        98% {
           left: 100%;
           opacity: 0;
         }
       }
     }
-    
-    input[type="checkbox"]:not(:checked) ~ .lightsaber .glow {
+
+    input[type='checkbox']:not(:checked) ~ .lightsaber .glow {
       height: 0px;
       box-shadow: none;
       animation: none;
@@ -1278,7 +1343,16 @@
       padding: 10% 3%;
       background: @variationPrimaryColor;
       box-shadow: inset 0 0 30px #000000;
-      clip-path: polygon(10% 100%, 0 90%, 0% 10%, 10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%);
+      clip-path: polygon(
+        10% 100%,
+        0 90%,
+        0% 10%,
+        10% 0,
+        90% 0,
+        100% 10%,
+        100% 90%,
+        90% 100%
+      );
 
       &:after {
         position: absolute;
@@ -1286,7 +1360,7 @@
         left: 50%;
         width: 76%;
         height: 0.1px;
-        background: rgba(255, 255, 255, .19);
+        background: rgba(255, 255, 255, 0.19);
         box-shadow: 0px 0px 5px #fff;
         transform: translateX(-50%);
       }
@@ -1294,7 +1368,6 @@
 
     .equipped-items {
       max-width: 40px;
-
     }
 
     .equipped-items-list {
@@ -1311,13 +1384,13 @@
       .rollable {
         position: relative;
         cursor: pointer;
-  
+
         &:hover {
-          background-image: url("../../icons/svg/d20.svg") !important;
+          background-image: url('../../icons/svg/d20.svg') !important;
           background-size: 75%;
           background-repeat: no-repeat;
           background-position: center;
-  
+
           img {
             opacity: 0.25;
           }
@@ -1328,7 +1401,7 @@
         max-width: 75% !important;
       }
 
-      .tippy-box[data-theme="item"] .tippy-content {
+      .tippy-box[data-theme='item'] .tippy-content {
         max-height: 200px;
         background: @primaryColor;
 
@@ -1354,10 +1427,10 @@
     min-width: 560px;
 
     ul.skills-list {
-      margin: .5rem;
+      margin: 0.5rem;
       margin-top: 0;
       border-top: 3px solid #3bc1e56e;
-      padding: .5rem;
+      padding: 0.5rem;
       -webkit-columns: 3;
       -moz-columns: 3;
       columns: 3;
@@ -1366,36 +1439,36 @@
       column-rule: 3px solid #3bc1e56e;
       width: 100%;
       list-style: none;
-      
+
       li.skill {
-        margin: 0 .5rem;
+        margin: 0 0.5rem;
         padding: 0;
-        
+
         &:nth-child(even) {
           background: rgba(0, 0, 0, 0.05);
         }
-        
+
         h4 {
           flex: 1px;
           margin: 0;
           font-size: 11px;
           line-height: 18px;
         }
-        
+
         .skill-proficiency {
           flex: 0 0 16px;
           line-height: 18px;
         }
-        
+
         .skill-ability {
           flex: 0 0 26px;
           text-transform: capitalize;
         }
-        
+
         .skill-mod {
           flex: 0 0 20px;
         }
-        
+
         .skill-passive {
           flex: 0 0 26px;
           text-align: center;
@@ -1434,15 +1507,15 @@
         }
       }
 
-      input[type="text"],
-      input[type="number"] {
+      input[type='text'],
+      input[type='number'] {
         height: 20px;
         max-width: 20px;
         margin: 0;
         padding: 0;
         text-align: center;
       }
-      input[type="checkbox"] {
+      input[type='checkbox'] {
         position: relative;
         width: 16px;
         height: 16px;
@@ -1467,17 +1540,18 @@
   }
 
   .traits {
-    .form-group, .form-group-stacked {
+    .form-group,
+    .form-group-stacked {
       justify-content: space-between;
       margin: 0;
-      margin-bottom: .5rem;
+      margin-bottom: 0.5rem;
     }
 
     .traits-list {
-      margin-top: .25rem;
+      margin-top: 0.25rem;
     }
 
-    .configure-flags {
+    .config-button {
       flex: 1;
     }
 
@@ -1543,7 +1617,7 @@
         line-height: 20px;
         color: @colorTan;
       }
-      input[type="text"] {
+      input[type='text'] {
         flex: 0 0 48px;
         text-align: center;
         margin-left: 8px;
@@ -1576,7 +1650,7 @@
     // Inventory Item
     .item {
       line-height: 30px;
-      padding: .125rem 0px;
+      padding: 0.125rem 0px;
 
       &:hover {
         outline: 1px solid @colorYellow;
@@ -1607,7 +1681,7 @@
         }
 
         &.rollable:hover .item-image {
-          background-image: url("../../icons/svg/d20.svg") !important;
+          background-image: url('../../icons/svg/d20.svg') !important;
         }
 
         i.attuned {
@@ -1623,7 +1697,7 @@
 
       // Item Dropdown Properties
       .item-properties {
-        margin-top: .75rem;
+        margin-top: 0.75rem;
       }
 
       // Charged
@@ -1699,13 +1773,12 @@
     // Item Dropdown Summary
     .item-summary {
       flex: 0 0 100%;
-      font-size: .9rem;
+      font-size: 0.9rem;
       line-height: 1.3rem;
       padding: 0.5em 0.5em;
       color: @colorWhite;
       border-top: 1px solid @variationPrimaryColor;
     }
-
   }
 
   /* Encumbrance Bar */
@@ -1736,15 +1809,19 @@
       font-size: 13px;
       line-height: 12px;
       text-align: right;
-      color: #EEE;
+      color: #eee;
       text-shadow: 0 0 5px #000;
     }
 
     .encumbrance-breakpoint {
       display: block;
       position: absolute;
-      &.encumbrance-33 { left: 33% }
-      &.encumbrance-66 { left: 66% }
+      &.encumbrance-33 {
+        left: 33%;
+      }
+      &.encumbrance-66 {
+        left: 66%;
+      }
     }
 
     .arrow-up {
@@ -1766,8 +1843,12 @@
     }
 
     &.encumbered {
-      .arrow-up { border-bottom: 4px solid #000; }
-      .arrow-down { border-top: 4px solid #000; }
+      .arrow-up {
+        border-bottom: 4px solid #000;
+      }
+      .arrow-down {
+        border-top: 4px solid #000;
+      }
     }
   }
 
@@ -1780,7 +1861,7 @@
 
       .filter-list {
         max-width: none;
-        margin-bottom: .5rem;
+        margin-bottom: 0.5rem;
       }
 
       .subfilters {
@@ -1793,12 +1874,12 @@
     .item-list {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-      margin: .5rem 0 1rem 0;
+      margin: 0.5rem 0 1rem 0;
       padding: 0;
     }
 
     .item {
-      margin: 0 .5rem .5rem;
+      margin: 0 0.5rem 0.5rem;
       text-align: center;
 
       &:hover {
@@ -1811,7 +1892,7 @@
       cursor: pointer;
 
       &:hover {
-        background-image: url("../../icons/svg/d20.svg") !important;
+        background-image: url('../../icons/svg/d20.svg') !important;
         background-size: 75%;
         background-repeat: no-repeat;
         background-position: center;
@@ -1828,7 +1909,7 @@
       left: 0;
       z-index: 10;
     }
-    
+
     .item-add {
       position: absolute;
       top: 0;
@@ -1842,7 +1923,7 @@
         padding-right: 0;
       }
 
-      .uses-total  {
+      .uses-total {
         text-align: left;
         padding-left: 0;
       }
@@ -1859,9 +1940,9 @@
   /*  Tooltip styles                           */
   /* ----------------------------------------- */
 
-  .tippy-box[data-theme="item"] {
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-  
+  .tippy-box[data-theme='item'] {
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+
     .tippy-content {
       padding: 1rem;
       padding-top: 3rem;
@@ -1870,50 +1951,53 @@
       max-height: 500px;
       overflow: auto;
     }
-  
+
     .item-title {
       position: fixed;
       top: 0;
-      margin-bottom: .5rem;
+      margin-bottom: 0.5rem;
       padding-top: 1rem;
-      min-width: calc(100% ~"-" 2rem);
+      min-width: calc(100% ~'-' 2rem);
       background: @variationPrimaryColor;
       font-size: 1rem;
       color: @colorYellow;
     }
-  
-    .item-type, .item-weight, .item-uses {
+
+    .item-type,
+    .item-weight,
+    .item-uses {
       margin: 0;
     }
-  
+
     .item-type {
       text-transform: capitalize;
     }
-  
+
     .item-summary {
       margin-bottom: 1.5rem;
       padding: 0;
     }
-  
+
     .tags-list {
       .tag {
         display: inline-block;
-        margin: 0 .25rem 0 0;
+        margin: 0 0.25rem 0 0;
         padding: 0 3px;
-        font-size: .8rem;
+        font-size: 0.8rem;
         line-height: 16px;
         border: 1px solid @lightColor;
         border-radius: 3px;
-  
+
         &:last-of-type {
           margin-right: 0;
         }
       }
     }
-  
+
     .tippy-arrow {
       color: @variationPrimaryColor;
-      box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+      box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3),
+        0 15px 12px rgba(0, 0, 0, 0.22);
     }
   }
 
@@ -1925,7 +2009,8 @@
     flex: 0 0 240px;
     margin: 0;
 
-    input, span {
+    input,
+    span {
       flex: 0 0 32px;
       text-align: center;
     }
@@ -1963,7 +2048,9 @@
     text-align: right !important;
   }
 
-  .spell-school, .spell-action, .spell-target {
+  .spell-school,
+  .spell-action,
+  .spell-target {
     flex: 0 0 100px;
     font-size: 12px;
     text-align: center;
@@ -1971,7 +2058,8 @@
 
   .spell-component {
     line-height: 14px;
-    &.C, &.R {
+    &.C,
+    &.R {
       display: inline-block;
       text-align: center;
       padding-top: 1px;
@@ -1983,17 +2071,21 @@
   }
 
   // Empty spellbook controls
-  .spellbook-empty .item-controls { flex: 1; }
+  .spellbook-empty .item-controls {
+    flex: 1;
+  }
 
   /* ----------------------------------------- */
   /*  Active Effects                           */
   /* ----------------------------------------- */
 
   .effects {
-    .effect-name{
+    .effect-name {
       flex: 2;
       align-items: center;
-      h4 { margin: 0; }
+      h4 {
+        margin: 0;
+      }
     }
 
     .effect-icon {
@@ -2015,7 +2107,9 @@
 
     .effect {
       align-items: center;
-      &:last-child { border-bottom: none; }
+      &:last-child {
+        border-bottom: none;
+      }
     }
   }
 
@@ -2024,7 +2118,7 @@
   /* ----------------------------------------- */
 
   .editor {
-    padding: .5rem;
+    padding: 0.5rem;
     border: 1px solid @secondaryColor;
 
     .editor-edit {
