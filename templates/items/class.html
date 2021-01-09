@@ -95,7 +95,7 @@
                 <label>
                     {{localize "DND5E.ClassSkillsChosen"}}
                     {{#if editable }}
-                    <a class="trait-selector class-skills" data-edit="data.skills" data-options="skills">
+                    <a class="trait-selector class-skills" data-target="data.skills" data-options="skills">
                         <i class="fas fa-edit"></i></a>
                     {{/if}}
                 </label>
@@ -110,6 +110,7 @@
         </div>
     </section>
 
+    {{!-- Item Sheet Navigation --}}
     <footer class="sheet-footer">
         <nav class="sheet-navigation flexrow flex--unset tabs" data-group="primary">
             <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
