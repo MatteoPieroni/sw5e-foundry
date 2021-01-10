@@ -462,6 +462,7 @@ export default class Item5e extends Item {
       consumeUsage,
       consumeQuantity,
       ignoreLevel,
+      isPower,
       useWrongModifier
     });
     if ( !usage ) return;
@@ -507,6 +508,7 @@ export default class Item5e extends Item {
     consumeSpellSlot=false,
     consumeUsage=false,
     ignoreLevel = false,
+    isPower = false,
     useWrongModifier = false,
   }) {
 
@@ -560,7 +562,7 @@ export default class Item5e extends Item {
       actorUpdates[`data.${isTech ? 'techcasting' : 'forcecasting'}.points.value`] = resultingPoints;
     }
 
-    if ( !useWrongModifier ) {
+    if ( isPower && !useWrongModifier ) {
       // Update modifier used
       // check the modifier is correct for the alignment of the power
       const isWrongModifier = Power.computeModifierAlignment({
