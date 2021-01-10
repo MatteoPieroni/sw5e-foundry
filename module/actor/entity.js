@@ -1,7 +1,7 @@
 import { d20Roll, damageRoll } from "../dice.js";
 import ShortRestDialog from "../apps/short-rest.js";
 import LongRestDialog from "../apps/long-rest.js";
-import { Alignment, Power } from "../../domain/index.js";
+import { Alignment } from "../../domain/index.js";
 import {DND5E} from '../config.js';
 
 /**

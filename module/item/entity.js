@@ -1,6 +1,6 @@
 import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
-import { Power } from '../../domain/index.js';
+import { Alignment, Power } from '../../domain/index.js';
 
 /**
  * Override and extend the basic :class:`Item` implementation
@@ -297,7 +297,7 @@ export default class Item5e extends Item {
     }
 
     // Actor techpower-DC based scaling
-    else if ( save.scaling === "forcepower" ) {
+    else if ( save.scaling === "techpower" ) {
       save.dc = this.isOwned ? getProperty(this.actor.data, "data.attributes.techpowerdc") : null;
     }
 
@@ -575,9 +575,9 @@ export default class Item5e extends Item {
     }
 
     // Update Actor alignment
-    if (this.data.school) {
+    if (this.data.data.school) {
       const newAlignment = Alignment.computePowerToAlignment({
-        original: this.data.data.details.forceAlignment?.value || 0,
+        original: this.actor.data.data.details.forceAlignment?.value || 0,
         powerType: this.data.data.school
       });
       
