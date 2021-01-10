@@ -5,7 +5,7 @@
     <p class="notification error">{{this}}</p>
     {{/each}}
 
-    {{#if consumeSpellSlot}}
+    {{#if canUpcast}}
     <div class="form-group">
         <label>{{ localize "DND5E.PowerCastUpcast" }}</label>
         <div class="form-fields">
@@ -22,7 +22,7 @@
 
     {{#if powerCosts}}
     <div class="form-group">
-        <label class="checkbox"><input type="checkbox" name="consumeSlot" checked/>{{ localize "DND5E.PowerCastConsume" }}</label>
+        <label class="checkbox"><input type="checkbox" name="consumePowerPoints" checked/>{{ localize "DND5E.PowerCastConsume" }}</label>
     </div>
     {{/if}}
 

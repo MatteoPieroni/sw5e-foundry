@@ -416,7 +416,7 @@ export default class Item5e extends Item {
     let consumePowerPoints = isPower;
 
     // Display a configuration dialog to customize the usage
-    const needsConfiguration = createMeasuredTemplate || consumeRecharge || consumeResource || consumeSpellSlot || consumeUsage;
+    const needsConfiguration = createMeasuredTemplate || consumeRecharge || consumeResource || consumeSpellSlot || consumeUsage || consumePowerPoints;
     if (configureDialog && needsConfiguration) {
       const configuration = await AbilityUseDialog.create(this);
       if (!configuration) return;
@@ -427,7 +427,7 @@ export default class Item5e extends Item {
       consumeRecharge = Boolean(configuration.consumeRecharge);
       consumeResource = Boolean(configuration.consumeResource);
       consumeSpellSlot = Boolean(configuration.consumeSlot);
-      consumePowerPoints = Boolean(configuration.consumeSlot);
+      consumePowerPoints = Boolean(configuration.consumePowerPoints);
       ignoreLevel = Boolean(configuration.ignoreLevel);
       useWrongModifier = Boolean(configuration.useWrongModifier);
 
@@ -440,6 +440,16 @@ export default class Item5e extends Item {
           item = this.constructor.createOwned(upcastData, actor);  // Replace the item with an upcast version
         }
         if ( consumeSpellSlot ) consumeSpellSlot = slotLevel === "pact" ? "pact" : `spell${spellLevel}`;
+      }
+
+      // Handle power upcasting
+      if ( consumePowerPoints ) {
+        const requiredLevel = configuration.level;
+        const powerLevel = parseInt(requiredLevel) > id.level ? parseInt(requiredLevel) : id.level;
+        if (powerLevel !== id.level) {
+          const upcastData = mergeObject(this.data, {"data.level": powerLevel}, {inplace: false});
+          item = this.constructor.createOwned(upcastData, actor);  // Replace the item with an upcast version
+        }
       }
     }
 

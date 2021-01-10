@@ -172,7 +172,8 @@ export default class AbilityUseDialog extends Dialog {
     // If can't upcast, return early and don't bother calculating available spell slots
     if (!canUpcast) {
       mergeObject(data, {
-        isSpell: true, canUpcast,
+        isSpell: true,
+        canUpcast,
         hasSlots: remainingPoints - (lvl + 1) > 0,
         isHigherPower,
         isWrongModifier,
