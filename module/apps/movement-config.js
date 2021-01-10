@@ -8,7 +8,7 @@ export default class ActorMovementConfig extends BaseEntitySheet {
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
       classes: ["dnd5e"],
-      template: "systems/dnd5e/templates/apps/movement-config.html",
+      template: "systems/sw5efoundry/templates/apps/movement-config.html",
       width: 300,
       height: "auto"
     });

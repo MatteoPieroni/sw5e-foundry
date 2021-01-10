@@ -8,7 +8,7 @@ export default class ActorSensesConfig extends BaseEntitySheet {
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
       classes: ["dnd5e"],
-      template: "systems/dnd5e/templates/apps/senses-config.html",
+      template: "systems/sw5efoundry/templates/apps/senses-config.html",
       width: 300,
       height: "auto"
     });

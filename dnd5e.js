@@ -18,6 +18,7 @@ import { measureDistances, getBarAttribute } from "./module/canvas.js";
 // Import Entities
 import Actor5e from "./module/actor/entity.js";
 import Item5e from "./module/item/entity.js";
+import * as domain from "./domain/index.js";
 
 // Import Applications
 import AbilityTemplate from "./module/pixi/ability-template.js";

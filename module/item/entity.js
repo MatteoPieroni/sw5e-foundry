@@ -1,5 +1,6 @@
 import {simplifyRollFormula, d20Roll, damageRoll} from "../dice.js";
 import AbilityUseDialog from "../apps/ability-use-dialog.js";
+import { Power } from '../../domain/index.js';
 
 /**
  * Override and extend the basic :class:`Item` implementation
@@ -427,8 +428,8 @@ export default class Item5e extends Item {
       consumeResource = Boolean(configuration.consumeResource);
       consumeSpellSlot = Boolean(configuration.consumeSlot);
       consumePowerPoints = Boolean(configuration.consumeSlot);
-      ignoreLevel = Boolean(usage.get("ignoreLevel"));
-      useWrongModifier = Boolean(usage.get("useWrongModifier"));
+      ignoreLevel = Boolean(configuration.ignoreLevel);
+      useWrongModifier = Boolean(configuration.useWrongModifier);
 
       // Handle spell upcasting
       if ( requireSpellSlot ) {
@@ -530,10 +531,10 @@ export default class Item5e extends Item {
           this.actor?.data.data.techcasting?.points?.value :
           this.actor?.data.data.forcecasting?.points?.value
       );
-      const cost = parseInt(item.data.data.level + 1);
-      const resultingPoints = consumeSlot ? remainingPoints - cost : remainingPoints;
+      const cost = parseInt(this.data.data.level) === 0 ? 0 : parseInt(this.data.data.level + 1);
+      const resultingPoints = remainingPoints - cost;
 
-      if (!ignoreLevel && item.data.data.level > this.data.data[isTech ? 'techcasting' : 'forcecasting'].level) {
+      if (!ignoreLevel && this.data.data.level > this.actor.data.data[isTech ? 'techcasting' : 'forcecasting'].level) {
         return ui.notifications.error(game.i18n.localize("DND5E.PowerCastHigherLevel"));
       }
 
@@ -554,7 +555,7 @@ export default class Item5e extends Item {
       // check the modifier is correct for the alignment of the power
       const isWrongModifier = Power.computeModifierAlignment({
         itemType: this.data.type,
-        itemAlignment: this.data.school || "uni",
+        itemAlignment: this.data.data.school || "uni",
         currentModifier: this.abilityMod,
       });
 
@@ -564,13 +565,13 @@ export default class Item5e extends Item {
     }
 
     // Update Actor alignment
-    if (itemData.school) {
+    if (this.data.school) {
       const newAlignment = Alignment.computePowerToAlignment({
         original: this.data.data.details.forceAlignment?.value || 0,
-        powerType: itemData.school
+        powerType: this.data.data.school
       });
       
-      await this.actor.updateAlignment(newAlignment);
+      this.actor.updateAlignment(newAlignment);
     }
 
 
