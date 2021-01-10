@@ -411,8 +411,8 @@ export default class Item5e extends Item {
     let consumeSpellSlot = requireSpellSlot;    // Consume a spell slot
     let consumeUsage = !!uses.per;              // Consume limited uses
     let consumeQuantity = uses.autoDestroy;     // Consume quantity of the item in lieu of uses
-    let ignoreLevel = false;
-    let useWrongModifier = false;
+    let ignoreLevel = !isPower;
+    let useWrongModifier = !isPower;
     let consumePowerPoints = isPower;
 
     // Display a configuration dialog to customize the usage
