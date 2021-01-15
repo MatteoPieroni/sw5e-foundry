@@ -11,7 +11,7 @@
     <li class="attribute">
         <h4 class="attribute-name box-title">{{ localize "DND5E.PowerForceLevel" }}</h4>
         <div class="attribute-value">
-            <input name="data.forcecasting.level" type="text"
+            <input name="data.forcecasting.level" type="number"
                    value="{{data.forcecasting.level}}" placeholder="0"/>
         </div>
     </li>
@@ -35,13 +35,7 @@
 
 <div class="inventory-filters spellbook-filters flexrow">
     <div class="form-group spellcasting-ability">
-        {{#unless isNPC}}
         <label>{{localize "DND5E.PowerAbility"}}</label>
-        {{else}}
-        <label>{{localize "DND5E.Level"}}</label>
-        <input class="spellcasting-level" type="text" name="data.details.powerLevel"
-               value="{{data.details.powerLevel}}" data-dtype="Number" placeholder="0"/>
-        {{/unless}}
         <select name="data.attributes.forcecasting" data-type="String">
             {{#select data.attributes.forcecasting}}
             <option value="">{{localize "DND5E.None"}}</option>
