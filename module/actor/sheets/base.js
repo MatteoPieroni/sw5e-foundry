@@ -498,7 +498,7 @@ export default class ActorSheet5e extends ActorSheet {
     filterLists.on("click", ".filter-item", this._onToggleFilter.bind(this));
 
     // Item summaries
-    html.find('.item .item-name h4').each((_, el) => this._onItemSummary(el));
+    html.find('.item:not(.effect) .item-name h4').each((_, el) => this._onItemSummary(el));
     html.find('.equipped-items .item .item-preview-js').each((_, el) => this._onEquippedItemSummary(el));
 
     // Editable Only Listeners
