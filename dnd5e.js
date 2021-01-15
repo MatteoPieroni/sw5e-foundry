@@ -170,7 +170,7 @@ Hooks.once("ready", function() {
   if ( !game.user.isGM ) return;
   const currentVersion = game.settings.get("sw5efoundry", "systemMigrationVersion");
   const NEEDS_MIGRATION_VERSION = "0.051";
-  const COMPATIBLE_MIGRATION_VERSION = 0.10;
+  const COMPATIBLE_MIGRATION_VERSION = 0.010;
   const needsMigration = (currentVersion < NEEDS_MIGRATION_VERSION) || (currentVersion === null);
   if ( !needsMigration ) return;
 
