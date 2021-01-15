@@ -52,6 +52,13 @@
             </div>
 
             {{#unless isMountable}}
+            <div class="form-group">
+                <label>{{localize "DND5E.Attunement"}}</label>
+                <select name="data.attunement" data-dtype="Number">
+                    {{selectOptions config.attunements selected=data.attunement localize=true}}
+                </select>
+            </div>
+
             {{!-- Equipment Status --}}
             <div class="form-group stacked">
                 <label>{{ localize "DND5E.ItemEquipmentStatus" }}</label>
@@ -64,11 +71,7 @@
                 <label class="checkbox">
                     <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "DND5E.Identified" }}
                 </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="data.attuned" {{checked data.attuned}}/> {{ localize "DND5E.Attuned" }}
-                </label>
             </div>
-
 
             {{!-- Armour Properties --}}
             <div class="form-group stacked armour-properties weapon-properties">
@@ -137,12 +140,18 @@
             {{!-- Item Action Template --}}
             {{> "systems/sw5efoundry/templates/items/parts/item-action.html"}}
         </div>
+
+        {{!-- Effects Tab --}}
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> "systems/sw5efoundry/templates/actors/parts/active-effects.html"}}
+        </div>
     </section>
 
     <footer class="sheet-footer">
         <nav class="sheet-navigation flexrow flex--unset tabs" data-group="primary">
             <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
             <a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
+            <a class="item" data-tab="effects">{{ localize "DND5E.Effects" }}</a>
         </nav>
     </footer>
 </form>

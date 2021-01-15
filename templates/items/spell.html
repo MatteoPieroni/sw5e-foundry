@@ -32,6 +32,7 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
         <a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
+        <a class="item" data-tab="effects">{{ localize "DND5E.Effects" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
@@ -112,12 +113,7 @@
                         {{ localize "DND5E.SpellPrepared" }} <input type="checkbox" name="data.preparation.prepared" {{checked data.preparation.prepared}}/>
                     </label>
                     <select name="data.preparation.mode">
-                        {{#select data.preparation.mode}}
-                        <option value=""></option>
-                        {{#each config.spellPreparationModes as |name key|}}
-                        <option value="{{key}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
+                        {{ selectOptions config.spellPreparationModes selected=data.preparation.mode }}
                     </select>
                 </div>
             </div>
@@ -146,6 +142,11 @@
                     <input type="text" name="data.scaling.formula" value="{{data.scaling.formula}}" placeholder="{{ localize 'DND5E.ScalingFormula' }}"/>
                 </div>
             </div>
+        </div>
+
+        {{!-- Effects Tab --}}
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> "systems/sw5efoundry/templates/actors/parts/active-effects.html"}}
         </div>
     </section>
 </form>

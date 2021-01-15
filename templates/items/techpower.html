@@ -111,10 +111,16 @@
         </div>
     </section>
 
+    {{!-- Effects Tab --}}
+    <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+        {{> "systems/sw5efoundry/templates/actors/parts/active-effects.html"}}
+    </div>
+
     <footer class="sheet-footer">
         <nav class="sheet-navigation flexrow flex--unset tabs" data-group="primary">
             <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
             <a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
+            <a class="item" data-tab="effects">{{ localize "DND5E.Effects" }}</a>
         </nav>
     </footer>
 </form>
