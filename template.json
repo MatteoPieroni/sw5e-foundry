@@ -43,6 +43,15 @@
           "init": {
             "value": 0,
             "bonus": 0
+          },
+          "movement": {
+            "burrow": 0,
+            "climb": 0,
+            "fly": 0,
+            "swim": 0,
+            "walk": 30,
+            "units": "ft",
+            "hover": false
           }
         },
         "details": {
@@ -76,13 +85,17 @@
       },
       "creature": {
         "attributes": {
+          "senses": {
+            "darkvision": 0,
+            "blindsight": 0,
+            "tremorsense": 0,
+            "truesight": 0,
+            "units": "ft",
+            "special": ""
+          },
           "spellcasting": "int",
           "forcecasting": "wis",
-          "techcasting": "int",
-          "speed": {
-            "value": "30 ft",
-            "special": ""
-          }
+          "techcasting": "int"
         },
         "details": {
           "alignment": "",
@@ -167,7 +180,6 @@
           }
         },
         "traits": {
-          "senses": "",
           "languages": {
             "value": [],
             "custom": ""
@@ -333,6 +345,7 @@
         }
       }
     },
+    "htmlFields": ["details.biography.value", "details.biography.public"],
     "character": {
       "templates": ["common", "creature"],
       "attributes": {
@@ -458,8 +471,7 @@
         "capacity": {
           "creature": "",
           "cargo": 0
-        },
-        "speed": ""
+        }
       },
       "traits": {
         "size": "lg",
@@ -494,6 +506,7 @@
         "weight": 0,
         "price": 0,
         "attuned": false,
+        "attunement": 0,
         "equipped": false,
         "rarity": "",
         "identified": true
@@ -559,6 +572,7 @@
         }
       }
     },
+    "htmlFields": ["description.value", "description.chat", "description.unidentified"],
     "backpack": {
       "templates": ["itemDescription", "physicalItem"],
       "capacity": {

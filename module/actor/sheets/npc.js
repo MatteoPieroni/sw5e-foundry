@@ -48,13 +48,11 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
     }, [[], [], [], []]);
 
     // Apply item filters
-    spells = this._filterItems(spells, this._filters.spellbook);
     forcepowers = this._filterItems(forcepowers, this._filters.forcepowers);
     techpowers = this._filterItems(techpowers, this._filters.techpowers);
     other = this._filterItems(other, this._filters.features);
 
     // Organize Spellbook
-    const spellbook = this._prepareSpellbook(data, spells);
     const forcePowerBook = this._preparePowers(data, forcepowers, { mode: 'forcecasting' });
     const techPowerBook = this._preparePowers(data, techpowers, { mode: 'techcasting' });
 
@@ -70,7 +68,6 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
 
     // Assign and return
     data.features = Object.values(features);
-    data.spellbook = spellbook;
     data.forcePowerBook = forcePowerBook;
     data.techPowerBook = techPowerBook;
   }

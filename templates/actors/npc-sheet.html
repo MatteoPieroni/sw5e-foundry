@@ -61,15 +61,16 @@
                     </footer>
                 </li>
 
-                <li class="attribute">
-                    <h4 class="attribute-name box-title">{{ localize "DND5E.Speed" }}</h4>
+                <li class="attribute movement">
+                    <h4 class="attribute-name box-title">
+                        {{ localize "DND5E.Movement" }}
+                        <a class="config-button" data-action="movement" title="{{localize 'DND5E.MovementConfig'}}"><i class="fas fa-cog"></i></a>
+                    </h4>
                     <div class="attribute-value">
-                        <input name="data.attributes.speed.value" type="text"
-                               value="{{data.attributes.speed.value}}" placeholder="0"/>
+                        <span>{{movement.primary}}</span>
                     </div>
                     <footer class="attribute-footer">
-                        <input type="text" class="speed" name="data.attributes.speed.special"
-                               value="{{data.attributes.speed.special}}" placeholder="{{ localize 'DND5E.SpeedSpecial' }}"/>
+                        <span>{{movement.special}}</span>
                     </footer>
                 </li>
             </ul>
@@ -160,6 +161,11 @@
             {{> "systems/sw5efoundry/templates/actors/parts/actor-techpowers.html" powers=techPowerBook}}
         </div>
 
+        {{!-- Effects Tab --}}
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> "systems/sw5efoundry/templates/actors/parts/active-effects.html"}}
+        </div>
+
         {{!-- Biography Tab --}}
         <div class="tab biography flexcol" data-group="primary" data-tab="biography">
             {{editor content=data.details.biography.value target="data.details.biography.value" button=true owner=owner editable=editable}}
@@ -173,6 +179,7 @@
             <a class="item" data-tab="features">{{ localize "DND5E.Features" }}</a>
             <a class="item" data-tab="forcepowers">{{ localize "DND5E.ForcePowers" }}</a>
             <a class="item" data-tab="techpowers">{{ localize "DND5E.TechPowers" }}</a>
+            <a class="item" data-tab="effects">{{ localize "DND5E.Effects" }}</a>
             <a class="item" data-tab="biography">{{ localize "DND5E.Biography" }}</a>
         </nav>
     </footer>
