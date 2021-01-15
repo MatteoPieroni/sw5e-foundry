@@ -1,6 +1,6 @@
 {
   "name": "sw5e-foundry",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "The system to play SW5E for Foundry VTT",
   "main": "index.js",
   "dependencies": {

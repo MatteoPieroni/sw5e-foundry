@@ -169,7 +169,7 @@ Hooks.once("ready", function() {
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
   const currentVersion = game.settings.get("sw5efoundry", "systemMigrationVersion");
-  const NEEDS_MIGRATION_VERSION = "0.051";
+  const NEEDS_MIGRATION_VERSION = "0.060";
   const COMPATIBLE_MIGRATION_VERSION = 0.010;
   const needsMigration = (currentVersion < NEEDS_MIGRATION_VERSION) || (currentVersion === null);
   if ( !needsMigration ) return;
