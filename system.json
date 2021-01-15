@@ -2,7 +2,7 @@
   "name": "sw5efoundry",
   "title": "SW5e Foundry system - Based on DnD5e system",
   "description": "A system for playing the Star Wars 5e RPG based on the fifth edition system in the Foundry Virtual Tabletop environment.",
-  "version": 0.052,
+  "version": 0.060,
   "author": "Matteo Pieroni",
   "scripts": ["module/modules/popper-2.5.4.js", "module/modules/tippy-6.2.7.js"],
   "esmodules": ["dnd5e.js"],
