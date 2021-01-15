@@ -112,7 +112,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Apply active item filters
     items = this._filterItems(items, this._filters.inventory);
-    spells = this._filterItems(spells, this._filters.spellbook);
     forcepowers = this._filterItems(forcepowers, this._filters.forcepowers);
     techpowers = this._filterItems(techpowers, this._filters.techpowers);
     feats = this._filterItems(feats, this._filters.features);
@@ -126,7 +125,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     }
 
     // Organize Spellbook and count the number of prepared spells (excluding always, at will, etc...)
-    const spellbook = this._prepareSpellbook(data, spells);
     const forcePowerBook = this._preparePowers(data, forcepowers, { mode: 'forcecasting' });
     const techPowerBook = this._preparePowers(data, techpowers, { mode: 'techcasting' });
     const nPrepared = spells.filter(s => {
@@ -148,7 +146,6 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
     // Assign and return
     data.inventory = Object.values(inventory);
-    data.spellbook = spellbook;
     data.forcePowerBook = forcePowerBook;
     data.techPowerBook = techPowerBook;
     data.preparedSpells = nPrepared;

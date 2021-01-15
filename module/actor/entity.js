@@ -292,6 +292,13 @@ export default class Actor5e extends Actor {
     if ( data.attributes.spellcasting && !Number.isNumeric(data.details.spellLevel) ) {
       data.details.spellLevel = Math.max(data.details.cr, 1);
     }
+
+    if ( data.attributes.forcecasting && !Number.isNumeric(data.forcecasting.level) ) {
+      data.forcecasting.level = 0;
+    }
+    if ( data.attributes.techcasting && !Number.isNumeric(data.techcasting.level) ) {
+      data.techcasting.level = 0;
+    }
   }
 
   /* -------------------------------------------- */

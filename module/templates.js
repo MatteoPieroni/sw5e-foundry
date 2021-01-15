@@ -15,7 +15,6 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/sw5efoundry/templates/actors/parts/actor-inventory.html",
     "systems/sw5efoundry/templates/actors/parts/actor-inventory-alternative.html",
     "systems/sw5efoundry/templates/actors/parts/actor-features.html",
-    "systems/sw5efoundry/templates/actors/parts/actor-spellbook.html",
     "systems/sw5efoundry/templates/actors/parts/actor-forcepowers.html",
     "systems/sw5efoundry/templates/actors/parts/actor-techpowers.html",
 
