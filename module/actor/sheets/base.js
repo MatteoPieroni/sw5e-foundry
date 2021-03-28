@@ -119,9 +119,11 @@ export default class ActorSheet5e extends ActorSheet {
     // Update traits
     this._prepareTraits(data.actor.data.traits);
 
-    // Prepare casting capacity
-    this._prepareCasting(data.actor.data);
-
+    if (!data.isVehicle) {
+      // Prepare casting capacity
+      this._prepareCasting(data.actor.data);
+    }
+    
     // Prepare owned items
     this._prepareItems(data);
 
@@ -131,8 +133,10 @@ export default class ActorSheet5e extends ActorSheet {
     // Prepare active effects
     data.effects = prepareActiveEffectCategories(this.entity.effects);
 
-    // Prepare alignment
-    this._prepareAlignment(data);
+    if (data.isCharacter) {
+      // Prepare alignment
+      this._prepareAlignment(data);
+    }
 
     // Return data to the sheet
     return data

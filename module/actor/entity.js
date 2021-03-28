@@ -677,7 +677,11 @@ export default class Actor5e extends Actor {
 
     const ignoreAlignmentEffect = this.data.flags.sw5efoundry?.ignoreAlignmentEffects;
 
-    if (newTier && (!ignoreAlignmentEffect || this.data.type !== 'npc')) {
+    if (ignoreAlignmentEffect) {
+      return;
+    }
+
+    if (newTier && this.data.type === 'character') {
       let chatMessageContent = game.i18n.format(
         "DND5E.ChangedForceAlignmentTier",
         {
