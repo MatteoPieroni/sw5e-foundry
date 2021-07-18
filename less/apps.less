@@ -508,3 +508,87 @@
     margin: 2px;
   }
 }
+
+/* ----------------------------------------- */
+/*  Hit Dice Config Sheet Specifically       */
+/* ----------------------------------------- */
+
+.dnd5e.hd-config {
+  .form-group {
+    button.increment,
+    button.decrement {
+      flex: 0 0 1rem;
+      line-height: 1rem;
+    }
+
+    button.decrement {
+      margin-right: 0;
+    }
+
+    span.sep {
+      margin: 0;
+    }
+
+    input {
+      flex: 0 0 2rem;
+      text-align: center;
+      margin-left: 2px;
+      margin-right: 2px;
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Actor Type Config Sheet Specifically     */
+/* ----------------------------------------- */
+
+.actor-type {
+  .trait-list {
+    display: flex;
+    flex-wrap: wrap;
+    li {
+      flex-basis: 50%;
+      flex-grow: 1;
+    }
+    li.form-group {
+      flex-basis: 100%;
+    }
+  }
+  label.radio {
+    display: flex;
+    flex: auto;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: normal;
+    > input[type='radio'] {
+      margin: 0 5px 0 0;
+    }
+  }
+  li.custom-type input[type='radio'] {
+    display: none;
+  }
+}
+
+/* ----------------------------------------- */
+/*  Add Feature Prompt Specifically          */
+/* ----------------------------------------- */
+
+.dnd5e.select-items-prompt {
+  .dialog-content {
+    margin-bottom: 1em;
+  }
+
+  .items-list {
+    margin-top: 0.5em;
+  }
+
+  .item-name > label,
+  .item-image,
+  input {
+    cursor: pointer;
+  }
+
+  .item-name > label {
+    align-items: center;
+  }
+}

@@ -1,10 +1,6 @@
 {
   "Actor": {
-    "types": [
-      "character",
-      "npc",
-      "vehicle"
-    ],
+    "types": ["character", "npc", "vehicle"],
     "templates": {
       "common": {
         "abilities": {
@@ -343,21 +339,15 @@
             "save": "",
             "skill": ""
           },
-          "spell": {
+          "spell":  {
             "dc": ""
           }
         }
       }
     },
-    "htmlFields": [
-      "details.biography.value",
-      "details.biography.public"
-    ],
+    "htmlFields": ["details.biography.value", "details.biography.public"],
     "character": {
-      "templates": [
-        "common",
-        "creature"
-      ],
+      "templates": ["common", "creature"],
       "attributes": {
         "death": {
           "success": 0,
@@ -419,10 +409,7 @@
       }
     },
     "npc": {
-      "templates": [
-        "common",
-        "creature"
-      ],
+      "templates": ["common", "creature"],
       "details": {
         "type": "",
         "environment": "",
@@ -449,9 +436,7 @@
       }
     },
     "vehicle": {
-      "templates": [
-        "common"
-      ],
+      "templates": ["common"],
       "abilities": {
         "int": {
           "value": 0
@@ -492,23 +477,11 @@
         "size": "lg",
         "dimensions": "",
         "di": {
-          "value": [
-            "poison",
-            "psychic"
-          ]
+          "value": ["poison", "psychic"]
         },
         "ci": {
-          "value": [
-            "blinded",
-            "charmed",
-            "deafened",
-            "frightened",
-            "paralyzed",
-            "petrified",
-            "poisoned",
-            "stunned",
-            "unconscious"
-          ]
+          "value": ["blinded", "charmed", "deafened", "frightened", "paralyzed", "petrified", "poisoned", "stunned",
+            "unconscious"]
         }
       },
       "cargo": {
@@ -518,19 +491,7 @@
     }
   },
   "Item": {
-    "types": [
-      "weapon",
-      "equipment",
-      "consumable",
-      "tool",
-      "loot",
-      "class",
-      "spell",
-      "forcepower",
-      "techpower",
-      "feat",
-      "backpack"
-    ],
+    "types": ["weapon", "equipment", "consumable", "tool", "loot", "class", "spell", "forcepower", "techpower", "feat", "backpack"],
     "templates": {
       "itemDescription": {
         "description": {
@@ -611,16 +572,9 @@
         }
       }
     },
-    "htmlFields": [
-      "description.value",
-      "description.chat",
-      "description.unidentified"
-    ],
+    "htmlFields": ["description.value", "description.chat", "description.unidentified"],
     "backpack": {
-      "templates": [
-        "itemDescription",
-        "physicalItem"
-      ],
+      "templates": ["itemDescription", "physicalItem"],
       "capacity": {
         "type": "weight",
         "value": 0,
@@ -631,9 +585,7 @@
       }
     },
     "class": {
-      "templates": [
-        "itemDescription"
-      ],
+      "templates": ["itemDescription"],
       "levels": 1,
       "subclass": "",
       "hitDice": "d6",
@@ -646,25 +598,14 @@
       "spellcasting": "none"
     },
     "consumable": {
-      "templates": [
-        "itemDescription",
-        "physicalItem",
-        "activatedEffect",
-        "action"
-      ],
+      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
       "consumableType": "potion",
       "uses": {
         "autoDestroy": false
       }
     },
     "equipment": {
-      "templates": [
-        "itemDescription",
-        "physicalItem",
-        "activatedEffect",
-        "action",
-        "mountable"
-      ],
+      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "mountable"],
       "armor": {
         "type": "light",
         "value": 10,
@@ -680,11 +621,7 @@
       "proficient": true
     },
     "feat": {
-      "templates": [
-        "itemDescription",
-        "activatedEffect",
-        "action"
-      ],
+      "templates": ["itemDescription", "activatedEffect", "action"],
       "requirements": "",
       "recharge": {
         "value": null,
@@ -692,26 +629,16 @@
       }
     },
     "loot": {
-      "templates": [
-        "itemDescription",
-        "physicalItem"
-      ]
+      "templates": ["itemDescription", "physicalItem"]
     },
     "tool": {
-      "templates": [
-        "itemDescription",
-        "physicalItem"
-      ],
+      "templates": ["itemDescription", "physicalItem"],
       "ability": "int",
       "chatFlavor": "",
       "proficient": 0
     },
     "spell": {
-      "templates": [
-        "itemDescription",
-        "activatedEffect",
-        "action"
-      ],
+      "templates": ["itemDescription", "activatedEffect", "action"],
       "level": 1,
       "school": "",
       "components": {
@@ -738,11 +665,7 @@
       }
     },
     "forcepower": {
-      "templates": [
-        "itemDescription",
-        "activatedEffect",
-        "action"
-      ],
+      "templates": ["itemDescription", "activatedEffect", "action"],
       "level": 1,
       "materials": {
         "value": "",
@@ -754,7 +677,7 @@
         "mode": "none",
         "formula": null
       },
-      "school": "",
+      "alignment": "",
       "components": {
         "value": "",
         "vocal": false,
@@ -765,11 +688,7 @@
       }
     },
     "techpower": {
-      "templates": [
-        "itemDescription",
-        "activatedEffect",
-        "action"
-      ],
+      "templates": ["itemDescription", "activatedEffect", "action"],
       "level": 1,
       "materials": {
         "value": "",
@@ -783,13 +702,7 @@
       }
     },
     "weapon": {
-      "templates": [
-        "itemDescription",
-        "physicalItem",
-        "activatedEffect",
-        "action",
-        "mountable"
-      ],
+      "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action", "mountable"],
       "weaponType": "simpleM",
       "properties": {},
       "proficient": true
