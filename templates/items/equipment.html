@@ -72,16 +72,6 @@
                     <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{ localize "DND5E.Identified" }}
                 </label>
             </div>
-
-            {{!-- Armour Properties --}}
-            <div class="form-group stacked armour-properties weapon-properties">
-                <label>{{ localize "DND5E.ItemArmourProperties" }}</label>
-                {{#each config.armourProperties as |name prop|}}
-                <label class="checkbox">
-                    <input type="checkbox" name="data.armor.properties.{{prop}}" {{checked (lookup ../data.armor.properties prop)}}/> {{ name }}
-                </label>
-                {{/each}}
-            </div>
             {{/unless}}
 
             {{!-- Armor Class --}}

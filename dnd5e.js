@@ -13,11 +13,12 @@ import { DND5E } from "./module/config.js";
 import { registerSystemSettings } from "./module/settings.js";
 import { preloadHandlebarsTemplates } from "./module/templates.js";
 import { _getInitiativeFormula } from "./module/combat.js";
-import { measureDistances, getBarAttribute } from "./module/canvas.js";
+import { measureDistances } from "./module/canvas.js";
 
-// Import Entities
+// Import Documents
 import Actor5e from "./module/actor/entity.js";
 import Item5e from "./module/item/entity.js";
+import { TokenDocument5e, Token5e } from "./module/token.js";
 import * as domain from "./domain/index.js";
 
 // Import Applications
@@ -57,7 +58,8 @@ Hooks.once("init", function() {
       ItemSheet5e,
       ShortRestDialog,
       TraitSelector,
-      ActorMovementConfig
+      ActorMovementConfig,
+      ActorSensesConfig
     },
     canvas: {
       AbilityTemplate
@@ -68,6 +70,8 @@ Hooks.once("init", function() {
     entities: {
       Actor5e,
       Item5e,
+      TokenDocument5e,
+      Token5e,
     },
     macros: macros,
     migrations: migrations,
@@ -76,9 +80,14 @@ Hooks.once("init", function() {
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
-  CONFIG.Actor.entityClass = Actor5e;
-  CONFIG.Item.entityClass = Item5e;
+  CONFIG.Actor.documentClass = Actor5e;
+  CONFIG.Item.documentClass = Item5e;
+  CONFIG.Token.documentClass = TokenDocument5e;
+  CONFIG.Token.objectClass = Token5e;
   CONFIG.time.roundTime = 6;
+
+  CONFIG.Dice.DamageRoll = dice.DamageRoll;
+  CONFIG.Dice.D20Roll = dice.D20Roll;
 
   // 5e cone RAW should be 53.13 degrees
   CONFIG.MeasuredTemplate.defaults.angle = 53.13;
@@ -88,7 +97,11 @@ Hooks.once("init", function() {
 
   // Patch Core Functions
   CONFIG.Combat.initiative.formula = "1d20 + @attributes.init.mod + @attributes.init.prof + @attributes.init.bonus";
-  Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
+  Combatant.prototype._getInitiativeFormula = _getInitiativeFormula;
+
+  // Register Roll Extensions
+  CONFIG.Dice.rolls.push(dice.D20Roll);
+  CONFIG.Dice.rolls.push(dice.DamageRoll);
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -114,7 +127,7 @@ Hooks.once("init", function() {
   });
 
   // Preload Handlebars Templates
-  preloadHandlebarsTemplates();
+  return preloadHandlebarsTemplates();
 });
 
 
@@ -133,14 +146,14 @@ Hooks.once("setup", function() {
     "armorProficiencies", "armourProperties", "conditionTypes", "consumableTypes", "cover", "currencies", "damageResistanceTypes",
     "damageTypes", "distanceUnits", "equipmentTypes", "healingTypes", "itemActionTypes", "languages",
     "limitedUsePeriods", "movementTypes", "movementUnits", "polymorphSettings", "proficiencyLevels", "powerAlignments", "powerLevels", "powerPreparationModes", "senses", "skills",
-    "spellComponents", "spellScalingModes", "spellSchools", "targetTypes",
+    "spellComponents", "spellLevels", "spellPreparationModes", "spellScalingModes", "spellSchools", "targetTypes",
     "timePeriods", "toolProficiencies", "weaponProficiencies", "weaponProperties", "weaponTypes"
   ];
 
   // Exclude some from sorting where the default order matters
   const noSort = [
     "abilities", "alignments", "currencies", "distanceUnits", "movementUnits", "itemActionTypes", "proficiencyLevels",
-    "limitedUsePeriods", "spellComponents", "spellLevels", "weaponTypes"
+    "limitedUsePeriods", "spellComponents", "spellLevels", "spellPreparationModes", "weaponTypes"
   ];
 
   // Localize and sort CONFIG objects
@@ -169,8 +182,10 @@ Hooks.once("ready", function() {
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
   const currentVersion = game.settings.get("sw5efoundry", "systemMigrationVersion");
-  const NEEDS_MIGRATION_VERSION = "0.061";
+  const NEEDS_MIGRATION_VERSION = "0.070";
   const COMPATIBLE_MIGRATION_VERSION = 0.010;
+  const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
+  if ( !currentVersion && totalDocuments === 0 ) return game.settings.set("sw5efoundry", "systemMigrationVersion", game.system.data.version);
   const needsMigration = (currentVersion < NEEDS_MIGRATION_VERSION) || (currentVersion === null);
   if ( !needsMigration ) return;
 
@@ -179,7 +194,6 @@ Hooks.once("ready", function() {
     const warning = `Your DnD5e system data is from too old a Foundry version and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.`;
     ui.notifications.error(warning, {permanent: true});
   }
-
   migrations.migrateWorld();
 });
 
@@ -188,13 +202,9 @@ Hooks.once("ready", function() {
 /* -------------------------------------------- */
 
 Hooks.on("canvasInit", function() {
-
   // Extend Diagonal Measurement
   canvas.grid.diagonalRule = game.settings.get("sw5efoundry", "diagonalMovement");
   SquareGrid.prototype.measureDistances = measureDistances;
-
-  // Extend Token Resource Bars
-  Token.prototype.getBarAttribute = getBarAttribute;
 });
 
 
@@ -218,7 +228,7 @@ Hooks.on("renderChatLog", (app, html, data) => Item5e.chatListeners(html));
 Hooks.on("renderChatPopout", (app, html, data) => Item5e.chatListeners(html));
 Hooks.on('getActorDirectoryEntryContext', Actor5e.addDirectoryContextOptions);
 
-// TODO I should remove this
+// FIXME: This helper is needed for the vehicle sheet. It should probably be refactored.
 Handlebars.registerHelper('getProperty', function (data, property) {
   return getProperty(data, property);
 });
